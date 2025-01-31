@@ -23,6 +23,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     });
     alert("Message sent!");
   } catch (error) {
+    console.log("Error : ", error)
     alert("Error sending message");
   }
 };
