@@ -59,7 +59,7 @@ const HomeHero = () =>{
 
   return (
     <LandingHeroSection 
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-screen w-full overflow-hidden" id='home'
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

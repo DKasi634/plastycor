@@ -1,5 +1,5 @@
 import { achievements } from "@/constants/data"
-import { AchievementsContainer, SectionContainer } from "@/styles/globals.styles"
+import { GridContainerMd, SectionContainer } from "@/styles/globals.styles"
 
 
 const AchievementsSection = () => {
@@ -7,7 +7,7 @@ const AchievementsSection = () => {
     <section className="flex items-center justify-center gap-4 pb-8 pt-4 ">
         <SectionContainer>
             <h3 className="text-3xl text-dark w-full text-center my-4">Nos réalisations</h3>
-            <AchievementsContainer>
+            <GridContainerMd>
                 {
                     achievements.map((achievement, index) =>( 
                         <div className="flex flex-col items-center justify-center gap-3" key={index}>
@@ -18,7 +18,7 @@ const AchievementsSection = () => {
                      ))
                 }
 
-            </AchievementsContainer>
+            </GridContainerMd>
         </SectionContainer>
     </section>
   )

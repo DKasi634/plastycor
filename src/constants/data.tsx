@@ -4,6 +4,18 @@ import { FaRecycle, FaTree } from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
+import ActivityImage1 from "@/assets/products/product-1.jpg"
+import ActivityImage2 from "@/assets/products/product-2.jpg"
+import ActivityImage3 from "@/assets/products/product-3.jpg"
+import ActivityImage4 from "@/assets/products/product-4.jpg"
+import ActivityImage5 from "@/assets/products/product-5.jpg"
+
+import AvatarImage1 from "@/assets/avatars/man-1.jpg"
+import AvatarImage2 from "@/assets/avatars/man-2.jpg"
+import AvatarImage3 from "@/assets/avatars/woman-1.jpg"
+import AvatarImage4 from "@/assets/avatars/woman-2.jpg"
+import AvatarImage5 from "@/assets/avatars/woman-3.jpg"
+
 
 
 export type PrincipleData = {
@@ -29,7 +41,7 @@ export const teamMembers: TeamMember[] = [
     {
         name: "Élisabeth Kengo",
         position: "Directrice Générale",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=É.Kengo",
+        picture: AvatarImage4,
         socials: {
             linkedin: "https://linkedin.com/in/elise-kengo-recyclage",
             whatsapp: "https://wa.me/+33123456789",
@@ -39,7 +51,7 @@ export const teamMembers: TeamMember[] = [
     {
         name: "Marc Makusu",
         position: "Ingénieur Process Recyclage",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=M.Makusu",
+        picture: AvatarImage2,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
             whatsapp: "https://wa.me/+33123456789",
@@ -49,7 +61,7 @@ export const teamMembers: TeamMember[] = [
     {
         name: "Amina Mukendi",
         position: "Cheffe de Création",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=A.Mukendi",
+        picture: AvatarImage3,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
             whatsapp: "https://wa.me/+33123456789",
@@ -59,7 +71,7 @@ export const teamMembers: TeamMember[] = [
     {
         name: "Thomas Lukasu",
         position: "Responsable Collecte",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=T.Lukasu",
+        picture: AvatarImage1,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
             whatsapp: "https://wa.me/+33123456789",
@@ -69,23 +81,23 @@ export const teamMembers: TeamMember[] = [
     {
         name: "Léa Sitona",
         position: "Designer Produit",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=L.Sitona",
+        picture: AvatarImage5,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
             whatsapp: "https://wa.me/+33123456789",
             instagram: "https://instagram.com/amina_upcycle_art",
         }
     },
-    {
-        name: "Christian Akonkwa",
-        position: "Chargé Partenariats",
-        picture: "https://placehold.co/400x400/004aad/FFF?text=C.Akonkwa",
-        socials: {
-            linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/amina_upcycle_art",
-        }
-    }
+    // {
+    //     name: "Christian Akonkwa",
+    //     position: "Chargé Partenariats",
+    //     picture: "https://placehold.co/400x400/004aad/FFF?text=C.Akonkwa",
+    //     socials: {
+    //         linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
+    //         whatsapp: "https://wa.me/+33123456789",
+    //         instagram: "https://instagram.com/amina_upcycle_art",
+    //     }
+    // }
 ];
 
 export const corePrinciples: PrincipleData[] = [
@@ -111,26 +123,97 @@ export type Achievement = {
     number: number;
     label: string;
     icon: JSX.Element;
-  };
-  
-export  const achievements: Achievement[] = [
+};
+
+export const achievements: Achievement[] = [
     {
-      number: 5000,
-      label: "Arbres plantés",
-      icon: <FaTree  />,
+        number: 5000,
+        label: "Arbres plantés",
+        icon: <FaTree />,
     },
     {
-      number: 150,
-      label: "Communautés impactées",
-      icon: <BsPeopleFill />,
+        number: 150,
+        label: "Communautés impactées",
+        icon: <BsPeopleFill />,
     },
     {
-      number: 100,
-      label: "Tonnes de déchets recyclés",
-      icon: <FaRecycle  />,
+        number: 100,
+        label: "Tonnes de déchets recyclés",
+        icon: <FaRecycle />,
     },
-  ];
-  
-  
-  
+];
+
+
+export type Article = {
+    image: string;
+    title: string;
+    description: string;
+    published: Date;
+    views: number;
+};
+
+export const articles: Article[] = [
+    {
+        image: ActivityImage1,
+        title: "Le Voyage des Plastiques Recyclés",
+        description: "Découvrez comment les déchets plastiques se transforment en matériaux réutilisables grâce à des processus de recyclage innovants.",
+        published: new Date("2025-01-15"),
+        views: 1320,
+    },
+    {
+        image: ActivityImage2,
+        title: "Créer un Vase à partir de Déchets Plastiques",
+        description: "Apprenez à transformer des déchets plastiques en un magnifique vase ou une poterie durable, combinant artisanat et recyclage.",
+        published: new Date("2025-01-20"),
+        views: 1870,
+    },
+    {
+        image: ActivityImage3,
+        title: "Statistiques du Recyclage du Plastique : 2025",
+        description: "Tendances et chiffres clés mettant en lumière les progrès du recyclage du plastique dans le monde.",
+        published: new Date("2025-01-25"),
+        views: 980,
+    },
+    {
+        image: ActivityImage4,
+        title: "Produits Innovants en Plastique Recyclé",
+        description: "Explorez des produits uniques et durables créés à partir de matériaux plastiques recyclés.",
+        published: new Date("2025-01-28"),
+        views: 720,
+    },
+    {
+        image: ActivityImage5,
+        title: "Astuces pour le Recyclage à Domicile",
+        description: "Des moyens simples mais efficaces de contribuer aux efforts de recyclage des plastiques depuis votre foyer.",
+        published: new Date("2025-01-30"),
+        views: 1450,
+    },
+];
+
+
+export type routeType = {
+    path:string,
+    label:string,
+    id:string
+}
+
+export const LandingPageRoutes:routeType[] =  [
+    {
+        path:"/#home",
+        label:"Accueil",
+        id:'home'
+    },
+    {
+        path:"/#activities",
+        label:"Nos activités",
+        id:"activities"
+    },
+    {
+        path:"/#contact",
+        label:"Contactez-nous",
+        id:'contact'
+    }
+]
+
+
 

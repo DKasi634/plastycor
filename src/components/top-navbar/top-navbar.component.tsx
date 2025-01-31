@@ -5,10 +5,15 @@ import { CgMenuRightAlt } from "react-icons/cg";
 import { useState } from "react";
 import NavMenu from "../nav-menu/nav-menu.component";
 import NavBtn from "../nav-btn/nav-btn.component";
+import { LandingPageRoutes } from "@/constants/data";
+import { useActiveSection } from "@/hooks";
 
 
 
 const TopNavbar = () => {
+
+  const sectionIds = LandingPageRoutes.map((route) => route.id);
+  const activeSection = useActiveSection(sectionIds);
 
   const [drawerVisible, setDrawerVisible] = useState(false);
 
@@ -27,9 +32,16 @@ const TopNavbar = () => {
       </Link>
       <div className="flex items-center justify-center">
       <NavLinksWrapper className="hidden lg:flex items-center justify-center gap-4">
-        <li> <NavLink to={"/"} className={({isActive}) => `${isActive ? 'active':''}`} >Accueil</NavLink> </li>
-        <li> <NavLink to={"/activites"} className={({isActive}) => `${isActive ? 'active':''}`} >Nos activites</NavLink> </li>
-        <li> <NavLink to={"/contact"} className={({isActive}) => `${isActive ? 'active':''}`}>Contactez-nous</NavLink> </li>
+        {
+          LandingPageRoutes.map((route, index) => (
+            <li key={index}> <NavLink to={route.path} className={() => `${
+              activeSection === route.id ? "active" : ""
+            }`} >{route.label}</NavLink> </li>
+
+          ))
+        }
+        {/* <li> <NavLink to={"/activites"} className={({isActive}) => `${isActive ? 'active':''}`} >Nos activites</NavLink> </li>
+        <li> <NavLink to={"/contact"} className={({isActive}) => `${isActive ? 'active':''}`}>Contactez-nous</NavLink> </li> */}
       </NavLinksWrapper>
       { !drawerVisible &&
       <NavBtn className="inline-block lg:hidden ml-auto" onClick={showDrawer} icon={<CgMenuRightAlt />}/>

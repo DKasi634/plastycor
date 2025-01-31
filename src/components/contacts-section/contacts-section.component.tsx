@@ -11,6 +11,11 @@ export const ContactSection = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [toastMessage, setToastMessage] = useState("");
+    const initialFormData = {
+        name: '',
+        email: '',
+        message: ''
+    }
 
     useEffect(()=>{
         if(toastMessage){
@@ -27,11 +32,7 @@ export const ContactSection = () => {
         
     }, [isSubmitting])
 
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+    const [formData, setFormData] = useState(initialFormData);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -56,7 +57,7 @@ export const ContactSection = () => {
         try {
             await axios.post("/.netlify/functions/send-email", formData);
             setToastMessage("Message envoyé avec succès!");
-            setFormData({ name: '', email: '', message: '' }); // Reset form
+            setFormData(initialFormData); // Reset form
         } catch (error) {
             // console.error("Error : ", error);
             setToastMessage("Erreur lors de l'envoi du message");
@@ -67,7 +68,7 @@ export const ContactSection = () => {
     };
 
     return (
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-gray-50" id='contact'>
             <SectionContainer>
                 <h2 className="text-3xl font-bold text-center mb-12">Contactez-Nous</h2>
 

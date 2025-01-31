@@ -1,6 +1,7 @@
 import AboutSection from '@/components/about-section/about-section.component'
 import AchievementsSection from '@/components/achievements-section/achievements-section.component'
 import ActivitiesSection from '@/components/activities-section/activities-section.component'
+import ArticlesSection from '@/components/articles-section/articles-section.component'
 import { ContactSection } from '@/components/contacts-section/contacts-section.component'
 import { CTASection } from '@/components/cta-section/cta-section.component'
 import HomeHero from '@/components/home-hero/home-hero.component'
@@ -15,10 +16,11 @@ const LandingPage = () => {
     <div className="flex flex-col">
         <HomeHero />
         <AboutSection />
-        <TeamSection/>
         <AchievementsSection />
+        <ArticlesSection />
         <ActivitiesSection />
         <YouTubePlayer videoId={youtubeVideoId} />
+        <TeamSection/>
         <CTASection />
         <ContactSection />
     </div>

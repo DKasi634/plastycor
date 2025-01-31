@@ -17,9 +17,9 @@ const Footer = () => {
                 <div className="flex flex-col gap-4 items-start justify-start">
                     <h3 className="text-sm font-semibold text-light text-left">Liens rapides</h3>
                     <ul className="flex flex-col items-start justify-start gap-2 text-light">
-                        <li><NavLink to={"/"} className={({ isActive }) => `${isActive ? 'text-green' : ' hover:text-green'}`}>Accueil</NavLink></li>
-                        <li><NavLink to={"/activites"} className={({ isActive }) => `${isActive ? 'text-green' : ' hover:text-green'}`}>Nos activites</NavLink></li>
-                        <li><NavLink to={"/contact"} className={({ isActive }) => `${isActive ? 'text-green' : ' hover:text-green'}`}>Contactez-nous</NavLink></li>
+                        <li><NavLink to={"/"} className={ ' hover:text-green'}>Accueil</NavLink></li>
+                        <li><NavLink to={"/#activities"} className={`hover:text-green`}>Nos activites</NavLink></li>
+                        <li><NavLink to={"/#contact"} className={'hover:text-green'}>Contactez-nous</NavLink></li>
                     </ul>
                 </div>
 
@@ -39,7 +39,6 @@ const Footer = () => {
                         
                     </ul>
                 </div>
-
             </SectionContainer>
             <p className="text-sm text-light text-center w-full py-4 pt-8 border-t border-light">&copy; {new Date().getFullYear()} Plastycor, Tous droits réservés</p>
         </div>

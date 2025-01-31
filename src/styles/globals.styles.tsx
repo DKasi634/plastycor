@@ -39,25 +39,40 @@ export const LoaderSmWrapper = styled.div`
     border-top-color: rgb(245, 122, 30);
 `
 
-export const AboutCardsContainer = styled.div`
+// export const AboutCardsContainer = styled.div`
+//     display: grid;
+//     gap: 2rem 1rem;
+//     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+// `
+// export const TeamCardsContainer = styled.div`
+//     display: grid;
+//     gap: 2rem 1rem;
+//     grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+// `
+// export const AchievementsContainer = styled.div`
+//     display: grid;
+//     gap: 2rem 1rem;
+//     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+// `
+// export const ActivitiesContainer = styled.div`
+//     display: grid;
+//     gap: 2rem 1rem;
+//     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+// `
+export const GridContainerSm = styled.div`
     display: grid;
     gap: 2rem 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); 
 `
-export const TeamCardsContainer = styled.div`
+export const GridContainerMd = styled.div`
     display: grid;
     gap: 2rem 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); 
 `
-export const AchievementsContainer = styled.div`
+export const GridContainerLg = styled.div`
     display: grid;
     gap: 2rem 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-`
-export const ActivitiesContainer = styled.div`
-    display: grid;
-    gap: 2rem 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); 
 `
 
 export const ActivityImageWrapper = styled.div`

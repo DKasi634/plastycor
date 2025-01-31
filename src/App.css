@@ -1,8 +1,13 @@
 
+
+html{
+  scroll-behavior: smooth;
+}
 * {
   font-family: "Nunito", serif;
   transition: all 200ms ease-in;
 }
+
 
 textarea, input, * {
   resize: none;
