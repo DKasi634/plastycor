@@ -34,6 +34,10 @@ export const SectionContainer = styled.div`
     }
     
 `
+export const LoaderSmWrapper = styled.div`
+    border: 0.3rem solid rgb(16, 16, 16);
+    border-top-color: rgb(245, 122, 30);
+`
 
 export const AboutCardsContainer = styled.div`
     display: grid;
