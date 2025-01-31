@@ -1,0 +1,41 @@
+
+* {
+  font-family: "Nunito", serif;
+  transition: all 200ms ease-in;
+}
+
+textarea, input, * {
+  resize: none;
+  outline: none;
+  resize: none;
+}
+
+select{
+  cursor: pointer;
+}
+body{
+  overflow-x: hidden;
+}
+
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 1000ms;
+}
+
+
+@media screen and (max-width: 768px) {
+  html, body {
+    overflow: auto;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  html, body {
+    scrollbar-width: none; 
+  }
+}
