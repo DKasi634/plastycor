@@ -6,8 +6,26 @@ import { HiOutlineMail } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlinePhoneEnabled } from "react-icons/md";
 import BaseButton from "../base-button/base-button.component";
+import axios from "axios";
 
 export const ContactSection = () => {
+
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const formData = new FormData(e.currentTarget);
+
+  try {
+    await axios.post("/.netlify/functions/send-email", {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    });
+    alert("Message sent!");
+  } catch (error) {
+    alert("Error sending message");
+  }
+};
     return (
         <section className="py-16 px-4 bg-gray-50">
             <SectionContainer>
@@ -40,7 +58,7 @@ export const ContactSection = () => {
                     </aside>
 
                     <aside className="bg-white px-8 py-4 rounded-xl shadow-sm xl:w-full xl:max-w-[40rem]">
-                        <form className="space-y-2">
+                        <form className="space-y-2" onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="name" className="block text-gray-700 mb-2 text-sm font-semibold">
                                     Nom Complet
