@@ -25,7 +25,7 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
   return (
     <>
       {visible &&
-        <NavDrawerWrapper className={`flex lg:hidden fixed inset-0 bg-dark-variant w-screen h-screen`} onMouseDown={handleModalClick} ref={drawerModal}>
+        <NavDrawerWrapper className={`${className} flex lg:hidden fixed inset-0 bg-dark-variant w-screen h-screen`} onMouseDown={handleModalClick} ref={drawerModal}>
           <div className="absolute right-0 inset-y-0 w-screen max-w-[100vw] sm:max-w-[30rem] bg-slate-50 flex flex-col items-start justify-start" ref={drawerContent}>
             <ul className="flex flex-col items-start justify-start gap-3 p-4">
               <li><NavLink to={"/"} className={({ isActive }) => `${isActive ? 'text-green' : ' hover:text-green'}`}>Accueil</NavLink></li>
