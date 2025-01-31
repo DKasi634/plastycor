@@ -1,24 +1,24 @@
-import { NavLink } from "react-router-dom";
+
 import styled, { keyframes } from "styled-components";
 
-const green = "rgb(25, 122, 60)";
+// const green = "rgb(25, 122, 60)";
 const greenVariant = "rgb(25, 140, 70)";
 const greenSecondary = "rgb(25, 122, 60, 0.8)";
-const greenTransparent = "rgb(25, 122, 60, 0.1)";
-const blue = "rgb(36, 87, 230)";
-const blueVariant = "rgb(30, 90, 230)";
-const blueSecondary = "rgb(36, 87, 230, 0.8)";
-const blueTransparent = "rgb(36, 87, 230, 0.1)";
-const yellow = "rgb(234, 247, 20)";
-const yellowVariant = "rgb(230, 240, 30)";
-const yellowSecondary = "rgb(230, 240, 30, 0.8)";
-const yellowTransparent = "rgb(234, 247, 20, 0.2)";
+// const greenTransparent = "rgb(25, 122, 60, 0.1)";
+// const blue = "rgb(36, 87, 230)";
+// const blueVariant = "rgb(30, 90, 230)";
+// const blueSecondary = "rgb(36, 87, 230, 0.8)";
+// const blueTransparent = "rgb(36, 87, 230, 0.1)";
+// const yellow = "rgb(234, 247, 20)";
+// const yellowVariant = "rgb(230, 240, 30)";
+// const yellowSecondary = "rgb(230, 240, 30, 0.8)";
+// const yellowTransparent = "rgb(234, 247, 20, 0.2)";
 
-const light = "rgb(253, 253, 253)";
+// const light = "rgb(253, 253, 253)";
 const lightTransparent = "rgba(255, 255, 255, 0.1)";
-const gray = "rgb(143, 143, 143)";
-const grayTransparent = "rgba(143, 143, 143, 0.2)";
-const dark = "rgb(36, 36, 36)";
+// const gray = "rgb(143, 143, 143)";
+// const grayTransparent = "rgba(143, 143, 143, 0.2)";
+// const dark = "rgb(36, 36, 36)";
 const darkVariant = "rgb(52, 50, 51, 0.5)";
 const darkTransparent = "rgba(36, 36, 36, 0.2)";
 
