@@ -12,7 +12,7 @@ import ActivityImage5 from "@/assets/products/product-5.jpg"
 
 import AvatarImage1 from "@/assets/avatars/man-1.jpg"
 import AvatarImage2 from "@/assets/avatars/man-2.jpg"
-import AvatarImage3 from "@/assets/avatars/woman-1.jpg"
+import AvatarImage3 from "@/assets/avatars/woman3.jpg"
 import AvatarImage4 from "@/assets/avatars/woman-2.jpg"
 import AvatarImage5 from "@/assets/avatars/woman-3.jpg"
 
@@ -199,21 +199,84 @@ export type routeType = {
 
 export const LandingPageRoutes:routeType[] =  [
     {
-        path:"/#home",
+        path:"/",
         label:"Accueil",
         id:'home'
     },
     {
-        path:"/#activities",
-        label:"Nos activités",
-        id:"activities"
+        path:"/#products",
+        label:"Nos produits",
+        id:'products'
+    },
+    {
+        path:"/blog",
+        label:"Blog",
+        id:'blog'
     },
     {
         path:"/#contact",
         label:"Contactez-nous",
         id:'contact'
-    }
+    },
+    
 ]
+
+type ProductOwner = {
+    name:string,
+    image:string
+}
+
+export type Product = {
+    name: string;
+    image: string;
+    category:string,
+    owner:ProductOwner,
+    description: string;
+    price: number;
+}
+
+export const products: Product[] = [
+    {
+      name: "Recycled Plastic Chair",
+      image: ActivityImage1,
+      category:"Mobilier",
+      owner:{ name:"John Tshibangu", image:AvatarImage1 },
+      description: "Ergonomic outdoor chair made from 100% recycled plastic bottles. Weather-resistant and durable.",
+      price: 89.99
+    },
+    {
+      name: "Upcycled Art Sculpture",
+      image: ActivityImage2,
+      category:"Mobilier",
+      owner:{ name:"John Tshibangu", image:AvatarImage2 },
+      description: "Unique wall art crafted from reclaimed plastic waste. Each piece is one-of-a-kind.",
+      price: 149.99
+    },
+    {
+      name: "Eco-Friendly Side Table",
+      image: ActivityImage3,
+      category:"Mobilier",
+      owner:{ name:"John Tshibangu", image:AvatarImage3 },
+      description: "Modern side table made from recycled HDPE plastic. Lightweight yet sturdy.",
+      price: 129.99
+    },
+    {
+      name: "Recycled Plastic Lumber",
+      image: ActivityImage4,
+      category:"Mobilier",
+      owner:{ name:"John Tshibangu", image:AvatarImage4 },
+      description: "Durable building material made from post-consumer plastic. Perfect for outdoor projects.",
+      price: 24.99
+    },
+    {
+      name: "Ocean Plastic Bird Feeder",
+      image: ActivityImage5,
+      category:"Mobilier",
+      owner:{ name:"John Tshibangu", image:AvatarImage5 },
+      description: "Eco-friendly bird feeder made from collected ocean plastics. Helps support marine cleanup.",
+      price: 39.99
+    },
+  ];
 
 
 

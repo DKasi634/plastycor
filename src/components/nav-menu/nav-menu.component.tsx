@@ -1,10 +1,11 @@
 import { NavDrawerWrapper } from "@/styles/globals.styles";
 import React, { useRef } from "react";
 import { IoClose } from "react-icons/io5"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import NavBtn from "../nav-btn/nav-btn.component";
 import { LandingPageRoutes } from "@/constants/data";
-import { useActiveSection } from "@/hooks";
+import BaseButton, { buttonType } from "../base-button/base-button.component";
+import { FiLogIn } from "react-icons/fi";
 
 
 type NavMenuProps = {
@@ -14,8 +15,7 @@ type NavMenuProps = {
 }
 
 const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
-  const sectionIds = LandingPageRoutes.map((route) => route.id);
-  const activeSection = useActiveSection(sectionIds);
+  const location = useLocation();
 
   const drawerModal = useRef<HTMLDivElement | null>(null);
   const drawerContent = useRef<HTMLDivElement | null>(null);
@@ -44,7 +44,7 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
                   <NavLink
                     to={route.path}
                     className={() =>
-                      `${activeSection === route.id ? "text-green" : "hover:text-green"}`
+                      `${location.pathname === route.path ? "text-green" : "hover:text-green"}`
                     }
                     onClick={() => {
                       // Ensure smooth scrolling
@@ -60,6 +60,10 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
                 </li>
               ))}
             </ul>
+            <div className="flex flex-col items-start justify-start gap-4 px-4">
+              <BaseButton>Univartize</BaseButton>
+              <BaseButton type={buttonType.clear}> <FiLogIn/> &nbsp; Se connecter</BaseButton>
+            </div>
             <NavBtn
               className="fixed top-3 right-6"
               onClick={hideCallback}

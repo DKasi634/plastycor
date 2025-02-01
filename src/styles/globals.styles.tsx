@@ -1,7 +1,7 @@
 
 import styled, { keyframes } from "styled-components";
 
-// const green = "rgb(25, 122, 60)";
+const green = "rgb(25, 122, 60)";
 const greenVariant = "rgb(25, 140, 70)";
 const greenSecondary = "rgb(25, 122, 60, 0.8)";
 // const greenTransparent = "rgb(25, 122, 60, 0.1)";
@@ -79,6 +79,7 @@ export const NavLinksWrapper = styled.ul`
     font-size: 0.9rem;
     font-weight: 600;
     &.active{
+        color: ${green};
         &::before{
         content: '';
         position: absolute;
