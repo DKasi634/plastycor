@@ -10,11 +10,12 @@ import ActivityImage3 from "@/assets/products/product-3.jpg"
 import ActivityImage4 from "@/assets/products/product-4.jpg"
 import ActivityImage5 from "@/assets/products/product-5.jpg"
 
-import AvatarImage1 from "@/assets/avatars/man-1.jpg"
-import AvatarImage2 from "@/assets/avatars/man-2.jpg"
-import AvatarImage3 from "@/assets/avatars/woman3.jpg"
-import AvatarImage4 from "@/assets/avatars/woman-2.jpg"
-import AvatarImage5 from "@/assets/avatars/woman-3.jpg"
+
+
+import TeamMember1 from "@/assets/team/team--woman-1.jpg"
+import TeamMember2 from "@/assets/team/team--woman-2.jpg"
+import TeamMember3 from "@/assets/team/team--woman--3.jpg"
+import TeamMember4 from "@/assets/team/team--man-4.jpg"
 
 
 
@@ -26,8 +27,6 @@ export type PrincipleData = {
 
 type TeamMemberSocials = {
     linkedin: string,
-    instagram: string,
-    whatsapp: string,
 }
 
 export type TeamMember = {
@@ -39,65 +38,37 @@ export type TeamMember = {
 
 export const teamMembers: TeamMember[] = [
     {
-        name: "Élisabeth Kengo",
-        position: "Directrice Générale",
-        picture: AvatarImage4,
+        name: "Neuville KAHIMBA",
+        position: "Responsable Artistique et Technique(Kinshasa)",
+        picture: TeamMember4,
         socials: {
             linkedin: "https://linkedin.com/in/elise-kengo-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/elisabeth_kengo",
         }
     },
     {
-        name: "Marc Makusu",
-        position: "Ingénieur Process Recyclage",
-        picture: AvatarImage2,
+        name: "Médiatrice NSOKANO",
+        position: "Responsable des opérations et partenariats(Bukavu)",
+        picture: TeamMember1,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/amina_upcycle_art",
         }
     },
     {
-        name: "Amina Mukendi",
-        position: "Cheffe de Création",
-        picture: AvatarImage3,
+        name: "Marie Baluku",
+        position: "Responsable des opérations et partenariats (Lubumbashi)",
+        picture: TeamMember2,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/amina_upcycle_art",
         }
     },
     {
-        name: "Thomas Lukasu",
-        position: "Responsable Collecte",
-        picture: AvatarImage1,
+        name: "Abonda ENKOTENA",
+        position: "Responsable des opérations et partenariats(Bukavu)",
+        picture: TeamMember3,
         socials: {
             linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/amina_upcycle_art",
         }
     },
-    {
-        name: "Léa Sitona",
-        position: "Designer Produit",
-        picture: AvatarImage5,
-        socials: {
-            linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-            whatsapp: "https://wa.me/+33123456789",
-            instagram: "https://instagram.com/amina_upcycle_art",
-        }
-    },
-    // {
-    //     name: "Christian Akonkwa",
-    //     position: "Chargé Partenariats",
-    //     picture: "https://placehold.co/400x400/004aad/FFF?text=C.Akonkwa",
-    //     socials: {
-    //         linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
-    //         whatsapp: "https://wa.me/+33123456789",
-    //         instagram: "https://instagram.com/amina_upcycle_art",
-    //     }
-    // }
 ];
 
 export const corePrinciples: PrincipleData[] = [
@@ -240,7 +211,7 @@ export const products: Product[] = [
       name: "Recycled Plastic Chair",
       image: ActivityImage1,
       category:"Mobilier",
-      owner:{ name:"John Tshibangu", image:AvatarImage1 },
+      owner:{ name:"John Tshibangu", image:TeamMember1 },
       description: "Ergonomic outdoor chair made from 100% recycled plastic bottles. Weather-resistant and durable.",
       price: 89.99
     },
@@ -248,7 +219,7 @@ export const products: Product[] = [
       name: "Upcycled Art Sculpture",
       image: ActivityImage2,
       category:"Mobilier",
-      owner:{ name:"John Tshibangu", image:AvatarImage2 },
+      owner:{ name:"John Tshibangu", image:TeamMember2 },
       description: "Unique wall art crafted from reclaimed plastic waste. Each piece is one-of-a-kind.",
       price: 149.99
     },
@@ -256,7 +227,7 @@ export const products: Product[] = [
       name: "Eco-Friendly Side Table",
       image: ActivityImage3,
       category:"Mobilier",
-      owner:{ name:"John Tshibangu", image:AvatarImage3 },
+      owner:{ name:"John Tshibangu", image:TeamMember3 },
       description: "Modern side table made from recycled HDPE plastic. Lightweight yet sturdy.",
       price: 129.99
     },
@@ -264,7 +235,7 @@ export const products: Product[] = [
       name: "Recycled Plastic Lumber",
       image: ActivityImage4,
       category:"Mobilier",
-      owner:{ name:"John Tshibangu", image:AvatarImage4 },
+      owner:{ name:"John Tshibangu", image:TeamMember4 },
       description: "Durable building material made from post-consumer plastic. Perfect for outdoor projects.",
       price: 24.99
     },
@@ -272,7 +243,7 @@ export const products: Product[] = [
       name: "Ocean Plastic Bird Feeder",
       image: ActivityImage5,
       category:"Mobilier",
-      owner:{ name:"John Tshibangu", image:AvatarImage5 },
+      owner:{ name:"John Tshibangu", image:TeamMember3 },
       description: "Eco-friendly bird feeder made from collected ocean plastics. Helps support marine cleanup.",
       price: 39.99
     },

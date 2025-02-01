@@ -10,7 +10,6 @@ import BaseButton, { buttonType } from "../base-button/base-button.component";
 import { FiLogIn } from "react-icons/fi";
 
 
-
 const TopNavbar = () => {
 
   const location = useLocation();
