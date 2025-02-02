@@ -15,7 +15,7 @@ const ActivitiesSection = () => {
                 <div className="flex flex-col gap-12">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start justify-start">
                         <div className="px-8 w-full aspect-square max-h-[60svh] overflow-hidden rounded-sm">
-                            <img src={ActivitImage1} className="w-full h-full object-cover object-center" alt="" />
+                            <img loading="lazy" src={ActivitImage1} className="w-full h-full object-cover object-center" alt="" />
                         </div>
                         <div className="flex flex-col gap-4 px-6 py-4">
                             <h3 className="text-xl font-bold w-full text-left uppercase">Recyclage des déchets plastiques</h3>
@@ -29,12 +29,12 @@ const ActivitiesSection = () => {
                             <p className="text-sm text-dark w-full text-left">Nous formons les jeunes et les femmes aux techniques durables de recyclage, créant ainsi des opportunités d'emploi tout en protégeant l'environnement.</p>
                         </div>
                         <div className="px-8 w-full aspect-square max-h-[60svh] overflow-hidden rounded-sm">
-                            <img src={ActivitImage2} className="w-full h-full object-cover object-center" alt="" />
+                            <img loading="lazy" src={ActivitImage2} className="w-full h-full object-cover object-center" alt="" />
                         </div>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start justify-start">
                         <div className="px-8 w-full aspect-square max-h-[60svh] overflow-hidden rounded-sm">
-                            <img src={ActivitImage3} className="w-full h-full object-cover object-center" alt="" />
+                            <img loading="lazy" src={ActivitImage3} className="w-full h-full object-cover object-center" alt="" />
                         </div>
                         <div className="flex flex-col gap-4 px-6 py-4">
                             <h3 className="text-xl font-bold w-full text-left uppercase">Évacuation des déchets ménagers et urbains</h3>
@@ -46,7 +46,7 @@ const ActivitiesSection = () => {
                     {
                         images.map((image, index) =>( 
                             <ActivityImageWrapper className="flex opacity-90" key={index}>
-                                <img src={image} className="" alt="" />
+                                <img loading="lazy" src={image} className="" alt="" />
                             </ActivityImageWrapper>
                          ))
                     }

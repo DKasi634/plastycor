@@ -13,7 +13,7 @@ const ProductCard = ({ product, className = '', onAddToCart }: ProductCardProps)
     return (
         <div className={`group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] cursor-pointer shadow-dark-transparent p-[2px]   ${className}`}>
             <div className="aspect-square bg-gray-transparent rounded-t-lg overflow-hidden border-gray-transparent border-[1px]">
-                <img
+                <img loading="lazy"
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover object-center"
@@ -26,7 +26,7 @@ const ProductCard = ({ product, className = '', onAddToCart }: ProductCardProps)
                 <p className="text-sm font-normal text-slate-900 mb-2 line-clamp-3">{product.description}</p>
                 <div className="flex items-center justify-start gap-4 mb-4">
                     <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
-                        <img src={product.owner.image} className="object-cover object-center w-full h-full" alt="" />
+                        <img loading="lazy" src={product.owner.image} className="object-cover object-center w-full h-full" alt="" />
                     </div>
                     <span className="text-sm font-bold text-gray text-left">{product.owner.name}</span>
                 </div>

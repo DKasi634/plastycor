@@ -11,7 +11,7 @@ const Footer = () => {
             <SectionContainer className="grid grid-cols-1 md:grid-cols-2 lg:flex flex-row justify-between items-start gap-[3rem] md:gap-4 py-8">
                 <div className="flex flex-col items-start justify-start">
                     <Link to={"/"} className="h-[4rem] w-fit inline-block">
-                        <img src={FooterLogoImage} className="h-full object-cover object-center" alt="Logo" />
+                        <img loading="lazy" src={FooterLogoImage} className="h-full object-cover object-center" alt="Logo" />
                     </Link>
                 </div>
                 <div className="flex flex-col gap-4 items-start justify-start">

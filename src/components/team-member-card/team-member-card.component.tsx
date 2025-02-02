@@ -10,7 +10,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ className = "", member,
     return (
         <div className={`${className} flex flex-col items-start justify-center border border-dark-transparent rounded-md px-6 py-4 gap-1 rounded-tl-none rounded-br-none shadow-sm shadow-dark-transparent hover:shadow-md hover: cursor-pointer`} {...rest} >
             <div className="w-full rounded-md rounded-tl-none rounded-br-none overflow-hidden aspect-square p-4">
-                <img src={member.picture} className="w-full h-full object-center object-cover" alt="" />
+                <img loading="lazy" src={member.picture} className="w-full h-full object-center object-cover" alt="" />
             </div>
             <div className="relative flex flex-col justify-center items-center w-full">
 

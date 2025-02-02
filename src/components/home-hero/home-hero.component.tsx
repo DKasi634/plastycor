@@ -1,7 +1,7 @@
 import  { useState, useEffect, useCallback, TouchEvent } from 'react';
-import image1 from "@/assets/hero/hero-bins-street.jpg"
-import image2 from "@/assets/hero/hero-bottles.jpg"
-import image3 from "@/assets/hero/hero-red-covered-bottles.jpg"
+import image1 from "@/assets/hero-min/hero-bins-street.jpg"
+import image2 from "@/assets/hero-min/hero-bottles.jpg"
+import image3 from "@/assets/hero-min/hero-red-covered-bottles.jpg"
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import BaseButton, { buttonType } from '../base-button/base-button.component';
 import { GoArrowUpRight } from 'react-icons/go';

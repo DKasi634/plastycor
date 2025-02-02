@@ -4,11 +4,11 @@ import { FaRecycle, FaTree } from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
-import ActivityImage1 from "@/assets/products/product-1.jpg"
-import ActivityImage2 from "@/assets/products/product-2.jpg"
-import ActivityImage3 from "@/assets/products/product-3.jpg"
-import ActivityImage4 from "@/assets/products/product-4.jpg"
-import ActivityImage5 from "@/assets/products/product-5.jpg"
+import ActivityImage1 from "@/assets/products-min/product-1.jpg"
+import ActivityImage2 from "@/assets/products-min/product-2.jpg"
+import ActivityImage3 from "@/assets/products-min/product-3.jpg"
+import ActivityImage4 from "@/assets/products-min/product-4.jpg"
+import ActivityImage5 from "@/assets/products-min/product-5.jpg"
 
 
 
