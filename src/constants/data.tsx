@@ -12,6 +12,7 @@ import ActivityImage5 from "@/assets/products-min/product-5.jpg"
 
 
 
+import TeamMember0 from "@/assets/team/team-ceo-resized.jpg"
 import TeamMember1 from "@/assets/team/team--woman-1.jpg"
 import TeamMember2 from "@/assets/team/team--woman-2.jpg"
 import TeamMember3 from "@/assets/team/team--woman--3.jpg"
@@ -38,11 +39,19 @@ export type TeamMember = {
 
 export const teamMembers: TeamMember[] = [
     {
+        name: "Nicole MENEMENE",
+        position: "CEO (Ashoka Fellow)",
+        picture: TeamMember0,
+        socials: {
+            linkedin: "https://www.linkedin.com/in/nicole-menemene-80046612a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        }
+    },
+    {
         name: "Neuville KAHIMBA",
         position: "Responsable Artistique et Technique(Kinshasa)",
         picture: TeamMember4,
         socials: {
-            linkedin: "https://linkedin.com/in/elise-kengo-recyclage",
+            linkedin: "",
         }
     },
     {
@@ -50,7 +59,7 @@ export const teamMembers: TeamMember[] = [
         position: "Responsable des opérations et partenariats(Bukavu)",
         picture: TeamMember1,
         socials: {
-            linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
+            linkedin: "",
         }
     },
     {
@@ -58,7 +67,7 @@ export const teamMembers: TeamMember[] = [
         position: "Responsable des opérations et partenariats (Lubumbashi)",
         picture: TeamMember2,
         socials: {
-            linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
+            linkedin: "",
         }
     },
     {
@@ -66,7 +75,7 @@ export const teamMembers: TeamMember[] = [
         position: "Responsable des opérations et partenariats(Bukavu)",
         picture: TeamMember3,
         socials: {
-            linkedin: "https://linkedin.com/in/elise-dubois-recyclage",
+            linkedin: "",
         }
     },
 ];

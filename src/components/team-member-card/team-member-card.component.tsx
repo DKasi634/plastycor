@@ -16,7 +16,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ className = "", member,
 
                 <h3 className="text-xl text-center font-bold text-dark w-full">{member.name}</h3>
                 <p className="text-sm text-center font-semibold text-dark w-full">{member.position}</p>
-                <Link to={member.socials.linkedin} className="text-lg p-2 rounded-full bg-light text-blue cursor-pointer hover:text-green border border-gray absolute -top-10 "><SlSocialLinkedin /></Link>
+                <a href="http://" target="" rel="noopener noreferrer"></a>
+                <Link to={member.socials.linkedin} rel="noopener noreferrer" className={`text-lg p-2 rounded-full bg-light text-blue hover:text-green border border-gray absolute -top-10 ${member.socials.linkedin.trim() === "" ? "cursor-not-allowed":"cursor-pointer"} `}><SlSocialLinkedin /></Link>
             </div>
         </div>
     )
