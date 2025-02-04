@@ -1,4 +1,4 @@
-import { SectionContainer, GridContainerSm, GridContainerMd } from '@/styles/globals.styles'
+import { SectionContainer, GridContainerMd } from '@/styles/globals.styles'
 import ArticleCard from '../article-card/arcticle-card.component'
 import { articles } from '@/constants/data'
 import BaseButton from '../base-button/base-button.component'
