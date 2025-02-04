@@ -49,7 +49,7 @@ const ActivitiesCarousel: React.FC<ActivitiesCarouselCardProps> = ({ activities,
     }, [currentIndex, autoScrollInterval]);
 
     return (
-        <CarouselContainer className="relative min-w-[100%] w-fit overflow-hidden flex flex-col">
+        <CarouselContainer className="relative min-w-[100%] max-w-full w-fit overflow-hidden flex flex-col">
             {/* Left arrow */}
             <button onClick={handlePrev}
                 className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-light/80 p-3 hover:bg-light z-10 border-[1px] border-dark-transparent shadow-md shadow-dark-transparent"
@@ -60,10 +60,10 @@ const ActivitiesCarousel: React.FC<ActivitiesCarouselCardProps> = ({ activities,
             {/* Carousel content */}
             <CarouselContent
                 ref={containerRef}
-                className="flex transition-transform ease-linear duration-300 gap-4 py-4 overflow-x-auto scroll-smooth min-w-[100%] w-fit"
+                className="flex transition-transform ease-linear duration-300 gap-4 py-4 overflow-x-auto scroll-smooth min-w-[100%] !max-w-full w-fit"
             >
                 {activities.map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-center w-full min-w-[100%]" >
+                    <div key={activity.id} className="flex items-center justify-center w-full min-w-[100%] px-4" >
                         <Card className="!w-full !max-w-[28rem]">
                             <img
                                 src={activity.image}
