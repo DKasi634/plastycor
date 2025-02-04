@@ -5,11 +5,10 @@ import { IoEyeOutline } from "react-icons/io5";
 
 type UnivartizeCardProps = {
     product: Product,
-    className?: string,
-    onAddToCart?: () => void
+    className?: string
 }
 
-const UnivartizeCard = ({ product, className = '', onAddToCart }: UnivartizeCardProps) => {
+const UnivartizeCard = ({ product, className = '' }: UnivartizeCardProps) => {
     return (
         <div className={`relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] cursor-pointer shadow-dark-transparent p-[2px] min-h-full  ${className}`}>
             <div className="aspect-square bg-gray-transparent rounded-t-lg overflow-hidden border-gray-transparent border-[1px]">
