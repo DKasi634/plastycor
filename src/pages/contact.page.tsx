@@ -1,15 +1,15 @@
-import ArticlesSection from "@/components/articles-section/articles-section.component"
+import { ContactSection } from "@/components/contacts-section/contacts-section.component"
 import { SectionContainer } from "@/styles/globals.styles"
 
 
-const BlogPage = () => {
+const ContactPage = () => {
   return (
     <div className="flex flex-col">
       <SectionContainer>
-        <ArticlesSection />
+        <ContactSection />
       </SectionContainer>
     </div>
   )
 }
 
-export default BlogPage
+export default ContactPage

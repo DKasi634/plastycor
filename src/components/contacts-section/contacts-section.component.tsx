@@ -17,19 +17,19 @@ export const ContactSection = () => {
         message: ''
     }
 
-    useEffect(()=>{
-        if(toastMessage){
+    useEffect(() => {
+        if (toastMessage) {
             alert(toastMessage);
-            const timer = setTimeout(()=>{
+            const timer = setTimeout(() => {
                 setToastMessage("")
             }, 3000)
-            return ()=> clearTimeout(timer);
+            return () => clearTimeout(timer);
         }
     }, [toastMessage]);
 
-    useEffect(()=>{
-            console.log("Is submitting : ", isSubmitting)
-        
+    useEffect(() => {
+        console.log("Is submitting : ", isSubmitting)
+
     }, [isSubmitting])
 
     const [formData, setFormData] = useState(initialFormData);
@@ -44,14 +44,14 @@ export const ContactSection = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
 
         // Basic validation
         if (!formData.name || !formData.email || !formData.message) {
             alert('Veuillez remplir tous les champs');
             return;
         }
-        if(isSubmitting){return}
+        if (isSubmitting) { return }
         setIsSubmitting(true)
 
         try {
@@ -62,7 +62,7 @@ export const ContactSection = () => {
             // console.error("Error : ", error);
             setToastMessage("Erreur lors de l'envoi du message");
         }
-        finally{
+        finally {
             setIsSubmitting(false)
         }
     };
@@ -70,10 +70,11 @@ export const ContactSection = () => {
     return (
         <section className="py-16 px-4 bg-gray-50" id='contact'>
             <SectionContainer>
-                <h2 className="text-3xl font-bold text-center mb-12">Contactez-Nous</h2>
+                <h3 className="text-4xl font-bold text-center my-[2rem]">Nous Contacter</h3>
+                <p className="text-lg w-full text-center mb-[1rem]">Une question ? N'hésitez pas à nous contacter</p>
 
                 <ContactSectionWrapper className="grid grid-cols-1 lg:grid-cols-[30%_60%] xl:flex items-start justify-start gap-4 lg:gap-8">
-                    
+
                     <aside className="py-4 px-8 md:px-4 xl:w-full xl:max-w-[30rem] flex flex-col items-start justify-start gap-4">
 
                         <div className="flex flex-col items-start justify-start gap-2">
@@ -90,13 +91,13 @@ export const ContactSection = () => {
                             </p>
                         </div>
 
-                        <div className="flex flex-col items-start justify-start gap-2">
+                        <div className="flex flex-col items-start justify-start gap-2 ">
                             <div className="flex items-center justify-start gap-4"><HiOutlineMail className="text-xl text-blue-secondary" /> <h3 className="text-lg font-semibold">Email</h3></div>
                             <p className="text-dark-variant text-xs font-semibold">
                                 plastycor.rdc@gmail.com &nbsp; &nbsp;
                             </p>
                         </div>
-
+                        
                     </aside>
                     <aside className="bg-white px-8 py-4 rounded-xl shadow-sm xl:w-full xl:max-w-[40rem]">
                         <form className="space-y-2" onSubmit={handleSubmit}>
@@ -149,10 +150,15 @@ export const ContactSection = () => {
                                 Envoyer le Message
                             </BaseButton>
                         </form>
+                        <div className="w-full mt-8">
+                            <iframe  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2252.2177311758155!2d28.858240031269876!3d-2.501837160913621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1snderere%20Bukavu%20Drc!5e0!3m2!1sfr!2sug!4v1738707734403!5m2!1sfr!2sug" width="600" height="400" className='border-none w-full' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </aside>
                 </ContactSectionWrapper>
+
+
             </SectionContainer>
-            {isSubmitting && <LoaderLayout /> }
+            {isSubmitting && <LoaderLayout />}
         </section>
     );
 };

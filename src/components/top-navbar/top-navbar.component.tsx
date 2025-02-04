@@ -32,7 +32,7 @@ const TopNavbar = () => {
         </Link>
         <div className="flex items-center justify-start">
           <div className="hidden lg:flex items-center justify-center gap-8">
-            <NavLinksWrapper className="flex items-center justify-center gap-4">
+            <NavLinksWrapper className="flex items-center justify-center gap-5 xl:gap-6">
               {
                 LandingPageRoutes.map((route, index) => (
                   <li key={index}> <NavLink to={route.path} className={({isActive}) => `${isActive && route.path === location.pathname ? "active" : ""
@@ -42,8 +42,7 @@ const TopNavbar = () => {
               }
             </NavLinksWrapper>
             <div className="flex items-center justify-center gap-4 px-4">
-              <BaseButton>Univartize</BaseButton>
-              <BaseButton type={buttonType.clear}> <FiLogIn/> &nbsp; Se connecter</BaseButton>
+              <BaseButton type={buttonType.clear} className="!px-3"> <FiLogIn/> <span className="hidden xl:inline-block"> Se connecter </span></BaseButton>
             </div>
           </div>
           {!drawerVisible &&

@@ -1,15 +1,15 @@
 import { Product } from "@/constants/data";
-import BaseButton, { buttonType } from "../base-button/base-button.component";
-import { LuShoppingCart } from "react-icons/lu";
+import { CiLocationOn } from "react-icons/ci";
+import { FaRegHeart } from "react-icons/fa";
+import { IoEyeOutline } from "react-icons/io5";
 
-
-type ProductCardProps = {
-    className?: string;
-    product: Product;
-    onAddToCart?: () => void;
+type UnivartizeCardProps = {
+    product: Product,
+    className?: string,
+    onAddToCart?: () => void
 }
 
-const ProductCard = ({ product, className = '', onAddToCart }: ProductCardProps) => {
+const UnivartizeCard = ({ product, className = '', onAddToCart }: UnivartizeCardProps) => {
     return (
         <div className={`relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] cursor-pointer shadow-dark-transparent p-[2px] min-h-full  ${className}`}>
             <div className="aspect-square bg-gray-transparent rounded-t-lg overflow-hidden border-gray-transparent border-[1px]">
@@ -28,21 +28,25 @@ const ProductCard = ({ product, className = '', onAddToCart }: ProductCardProps)
                     <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
                         <img loading="lazy" src={product.owner.image} className="object-cover object-center w-full h-full" alt="" />
                     </div>
-                    <span className="text-sm font-bold text-gray text-left">{product.owner.name}</span>
+                    <div className="flex flex-col justify-start">
+                        <span className="text-xs font-bold text-dark text-left">{product.owner.name}</span>
+                        <span className="text-xs font-bold text-dark/80 text-left">{product.owner.organisation}</span>
+                    </div>
                 </div>
 
                 <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold text-dark">
-                        ${product.price.toFixed(2)}
-                    </span>
-                    <BaseButton clickHandler={onAddToCart} rounded={false} type={buttonType.green} className="!px-3 !py-[0.4rem] !text-xs flex items-end justify-start gap-2">
-                        <LuShoppingCart className="!text-xl" /> <span>Ajouter</span>
-                    </BaseButton>
+                    <div className="flex items-center justify-start gap-3 text-xs font-bold text-dark ">
+                        <div className="flex items-center justify-start gap-1"> <FaRegHeart /> <span>135</span> </div>
+                        <div className="flex items-center justify-start gap-1"> <IoEyeOutline /> <span>135</span> </div>
+                        
+                    </div>
+                    <div className="flex items-center justify-start text-xs font-bold text-dark gap-1">
+                        <span><CiLocationOn /></span> <span>{product.owner.location.city}, {product.owner.location.country}</span> 
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-
-export default ProductCard;
+export default UnivartizeCard

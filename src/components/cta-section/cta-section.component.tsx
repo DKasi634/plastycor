@@ -5,10 +5,10 @@ import { GoArrowUpRight } from "react-icons/go";
 
 export const CTASection = ()=>{
     return (
-      <section className="relative isolate min-h-[20svh] max-h-[80svh] sm:max-h-[60svh] overflow-hidden">
+      <section className="relative isolate min-h-[20svh] max-h-[80svh] sm:max-h-[60svh] py-4 overflow-hidden">
         {/* Fond flouté */}
         <div 
-          className={`absolute inset-0 -z-10 bg-cover bg-center backdrop-blur-sm`}
+          className={`absolute inset-0 -z-10 bg-cover bg-center backdrop-blur-xl`}
           aria-hidden="true"
           style={{ backgroundImage: `url(${CtaImage})` }}
         >

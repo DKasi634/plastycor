@@ -7,7 +7,7 @@ import { FaXTwitter } from "react-icons/fa6"
 
 const Footer = () => {
     return (
-        <div className="flex flex-col w-full bg-slate-800 min-h-[40svh] py-4">
+        <div className="flex flex-col w-full bg-green/90 min-h-[40svh] py-4">
             <SectionContainer className="grid grid-cols-1 md:grid-cols-2 lg:flex flex-row justify-between items-start gap-[3rem] md:gap-4 py-8">
                 <div className="flex flex-col items-start justify-start">
                     <Link to={"/"} className="h-[4rem] w-fit inline-block">
@@ -16,10 +16,10 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-4 items-start justify-start">
                     <h3 className="text-sm font-semibold text-light text-left">Liens rapides</h3>
-                    <ul className="flex flex-col items-start justify-start gap-2 text-light">
-                        <li><NavLink to={"/"} className={ ' hover:text-green'}>Accueil</NavLink></li>
-                        <li><NavLink to={"/#activities"} className={`hover:text-green`}>Nos activites</NavLink></li>
-                        <li><NavLink to={"/#contact"} className={'hover:text-green'}>Contactez-nous</NavLink></li>
+                    <ul className="flex flex-col items-start justify-start gap-2 text-light/80">
+                        <li><NavLink to={"/"} className={ ' hover:text-light'}>Accueil</NavLink></li>
+                        <li><NavLink to={"/#activities"} className={`hover:text-light`}>Nos activites</NavLink></li>
+                        <li><NavLink to={"/#contact"} className={'hover:text-light'}>Contactez-nous</NavLink></li>
                     </ul>
                 </div>
 
