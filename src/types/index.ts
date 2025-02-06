@@ -18,3 +18,8 @@ export type Creator = {
     skills: string[],
     phoneNumber: string
 }
+
+export type Testimonial = {
+    name: string;
+    content: string;
+};

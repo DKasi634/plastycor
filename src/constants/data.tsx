@@ -4,7 +4,7 @@ import { FaRecycle, FaTree } from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
-import { Activity, Creator } from "@/types";
+import { Activity, Creator, Testimonial } from "@/types";
 
 import ProductImage1 from "@/assets/products-min/product-1.jpg"
 import ProductImage2 from "@/assets/products-min/product-2.jpg"
@@ -15,10 +15,12 @@ import ProductImage5 from "@/assets/products-min/product-5.jpg"
 import ActivityImage1 from "@/assets/activities/activity-1.jpg"
 import ActivityImage2 from "@/assets/activities/activity-2.jpg"
 import ActivityImage3 from "@/assets/activities/activity-3.jpg"
+import ActivityImage4 from "@/assets/activities/activity-4.jpg"
+import ActivityImage5 from "@/assets/activities/activity-5.jpg"
 
 
 
-import TeamMember0 from "@/assets/team/team-ceo-resized.jpg"
+import TeamMember0 from "@/assets/team/team-ceo-1.jpg"
 import TeamMember1 from "@/assets/team/team--woman-1.jpg"
 import TeamMember2 from "@/assets/team/team--woman-2.jpg"
 import TeamMember3 from "@/assets/team/team--woman--3.jpg"
@@ -325,22 +327,39 @@ export const activities: Activity[] = [
     {
         id: "1",
         title: "Recyclage des déchets plastiques",
-        description: "Nous transformons les bouteilles plastiques en objets utiles et esthétiques, donnant une seconde vie aux déchets tout en créant de la valeur",
-        image: ActivityImage1
+        description:
+            "Nous transformons les bouteilles plastiques en objets utiles et esthétiques, donnant une seconde vie aux déchets tout en créant de la valeur. Grâce à nos processus innovants, nous contribuons à réduire significativement l'empreinte écologique des plastiques et encourageons une économie circulaire durable.",
+        image: ActivityImage1,
     },
     {
         id: "2",
         title: "Formation en techniques durables de recyclage",
-        description: "Nous formons les jeunes et les femmes aux techniques durables de recyclage, créant ainsi des opportunités d'emploi tout en protégeant l'environnement",
-        image: ActivityImage2
+        description:
+            "Nous formons les jeunes et les femmes aux techniques durables de recyclage, leur offrant des compétences pratiques et professionnelles pour réussir dans le domaine de l'économie verte. En créant des opportunités d'emploi tout en protégeant l'environnement, nous aidons nos communautés à prospérer tout en respectant notre planète.",
+        image: ActivityImage4,
     },
     {
         id: "3",
-        title: "Évacuation des déchets ménagers et urbains",
-        description: "Notre service d'évacuation utilise un système digital innovant pour le monitoring et la gestion efficace du circuit des déchets",
-        image: ActivityImage3
+        title: "Sensibilisation sur la gestion des déchets",
+        description:
+            "Nous organisons des campagnes éducatives pour sensibiliser les individus et les entreprises à l'importance de la bonne gestion des déchets. En enseignant des pratiques responsables telles que le tri sélectif, le compostage et le recyclage, nous encourageons une prise de conscience collective pour un avenir plus propre et plus sain.",
+        image: ActivityImage2,
     },
-]
+    {
+        id: "4",
+        title: "Évacuation des déchets ménagers et lutte contre l'insalubrité",
+        description:
+            "Notre service d'évacuation des déchets ménagers utilise un système digital innovant pour optimiser le monitoring et la gestion du circuit des déchets. En garantissant une collecte et un traitement efficaces, nous contribuons à améliorer la salubrité publique et à préserver la qualité de vie dans nos communautés.",
+        image: ActivityImage3,
+    },
+    {
+        id: "5",
+        title: "Accompagnement des startup écologiques",
+        description:
+            "Nous soutenons les startups écologiques en leur fournissant un accompagnement stratégique, des ressources techniques et un réseau de partenaires dédiés. En aidant ces entreprises innovantes à grandir, nous renforçons l'écosystème de l'économie circulaire et favorisons des solutions durables pour un futur plus vert.",
+        image: ActivityImage5,
+    },
+];
 
 
 export const creators: Creator[] = [
@@ -392,4 +411,59 @@ export const creators: Creator[] = [
 ];
 
 
+export const productsTestimonials: Testimonial[] = [
+    {
+        name: "Nathalie KAYEMBE",
+        content:
+            "Les paniers fabriqués à partir de bouteilles plastiques recyclées sont non seulement beaux, mais aussi incroyablement durables. Merci pour votre engagement envers l'environnement !",
+    },
+    {
+        name: "Jordan KIBASU",
+        content:
+            "Les décorations murales que j'ai achetées sont magnifiques et ajoutent une touche unique à ma maison. Je suis fier de soutenir une entreprise qui lutte contre la pollution plastique.",
+    },
+    {
+        name: "Jeanne MUNYERENKANA",
+        content:
+            "Construire avec des bouteilles plastiques recyclées est une idée géniale ! Votre entreprise montre qu'il est possible de créer des structures solides tout en protégeant notre planète.",
+    },
+    {
+        name: "Alice BASEME",
+        content:
+            "J'adore les produits que vous proposez. Ils sont non seulement écologiques, mais aussi très esthétiques. Continuez votre excellent travail !",
+    },
+    {
+        name: "Modeste IMANI",
+        content:
+            "Acheter vos produits me donne l'impression de contribuer, à ma manière, à la lutte contre la pollution plastique. Merci pour votre dévouement et votre créativité.",
+    },
+];
+
+export const trainingTestimonials: Testimonial[] = [
+    {
+        name: "Jackson KABAMBA",
+        content:
+            "Grâce à la formation, j'ai appris des techniques précieuses de recyclage des déchets plastiques. Je suis maintenant capable de créer des objets utiles tout en aidant à réduire la pollution.",
+    },
+    {
+        name: "Yvan BAKOLO",
+        content:
+            "Votre formation m'a ouvert les yeux sur l'importance du recyclage. Je suis reconnaissant pour les compétences que j'ai acquises et je suis déterminé à faire ma part pour un monde meilleur.",
+    },
+    {
+        name: "Daniel KIRUSHA",
+        content:
+            "Participer à votre programme de formation a été une expérience transformative. J'ai non seulement appris à recycler, mais aussi à sensibiliser ma communauté à l'importance de cette cause.",
+    },
+    {
+        name: "Anasthasie MUSAVYO",
+        content:
+            "En tant que femme, j'ai trouvé votre formation incroyablement inspirante. Vous m'avez donné les outils nécessaires pour contribuer activement à la lutte contre la pollution plastique.",
+    },
+    {
+        name: "Colette TSHEGERA",
+        content:
+            "Je suis tellement reconnaissante pour la formation que j'ai reçue. Elle m'a permis de développer de nouvelles compétences et de participer à un mouvement important pour la protection de notre environnement.",
+    },
+];
 

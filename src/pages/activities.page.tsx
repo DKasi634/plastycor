@@ -1,4 +1,5 @@
-import { activities } from "@/constants/data"
+import TestimonialsSection from "@/components/testimonials-section/testimonials-section.component"
+import { activities, trainingTestimonials } from "@/constants/data"
 import { SectionContainer } from "@/styles/globals.styles"
 
 
@@ -43,6 +44,7 @@ const ActivitiesPage = () => {
                     }
                 </div>
             </SectionContainer>
+            <TestimonialsSection sectionLabel="Ce que disent nos apprenants" testimonials={trainingTestimonials} />
         </div>
     )
 

@@ -1,21 +1,23 @@
+
+import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import LogoImage from "@/assets/logo/icon_header.png"
-import { NavLinksWrapper } from "@/styles/globals.styles";
-import { CgMenuRightAlt } from "react-icons/cg";
-import { useState } from "react";
+import {disablePageScroll, enablePageScroll} from '@fluejs/noscroll';
 import NavMenu from "../nav-menu/nav-menu.component";
 import NavBtn from "../nav-btn/nav-btn.component";
-import { LandingPageRoutes } from "@/constants/data";
 import BaseButton, { buttonType } from "../base-button/base-button.component";
+import { LandingPageRoutes } from "@/constants/data";
+import { NavLinksWrapper } from "@/styles/globals.styles";
+import { CgMenuRightAlt } from "react-icons/cg";
 import { FiLogIn } from "react-icons/fi";
+import LogoImage from "@/assets/logo/icon_header.png"
 
 
 const TopNavbar = () => {
 
-  const location = useLocation();
+const location = useLocation();
   
-
-  const [drawerVisible, setDrawerVisible] = useState(false);
+const [drawerVisible, setDrawerVisible] = useState(false);
+  
 
   const hideDrawer = () => {
     setDrawerVisible(false)
@@ -23,6 +25,14 @@ const TopNavbar = () => {
   const showDrawer = () => {
     setDrawerVisible(true)
   }
+
+  useEffect(()=>{
+    if(drawerVisible){
+      disablePageScroll()
+    }else{
+      enablePageScroll();
+    }
+  }, [drawerVisible])
 
   return (
     <nav className="h-[5rem] px-8 py-2 flex items-center justify-between fixed top-0 left-0 w-full bg-light-variant backdrop-blur-3xl z-10 border-b border-gray-transparent" >

@@ -30,7 +30,7 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
     <>
       {visible && (
         <NavDrawerWrapper
-          className={`${className} flex lg:hidden fixed inset-0 bg-dark-variant w-screen h-screen`}
+          className={`${className} flex lg:hidden fixed inset-0 bg-dark-variant w-screen h-screen z-50`}
           onMouseDown={handleModalClick}
           ref={drawerModal}
         >
