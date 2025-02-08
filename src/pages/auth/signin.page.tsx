@@ -55,7 +55,7 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md p-8 space-y-3 lg:rounded-xl bg-white lg:shadow-lg">
         <h2 className="text-2xl font-bold text-center">Se connecter</h2> {/* Sign In */}
         <form onSubmit={handleSubmit} className="space-y-4">
