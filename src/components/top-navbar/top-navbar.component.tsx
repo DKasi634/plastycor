@@ -52,7 +52,7 @@ const [drawerVisible, setDrawerVisible] = useState(false);
               }
             </NavLinksWrapper>
             <div className="flex items-center justify-center gap-4 px-4">
-              <BaseButton type={buttonType.clear} className="!px-3"> <FiLogIn/> <span className="hidden xl:inline-block"> Se connecter </span></BaseButton>
+              <BaseButton type={buttonType.clear} href="/signin" className="!px-3"> <FiLogIn/> <span className="hidden xl:inline-block"> Se connecter </span></BaseButton>
             </div>
           </div>
           {!drawerVisible &&

@@ -12,7 +12,7 @@ const ProductsSection = () => {
         <SectionContainer id="products" >
           <h2 className="text-3xl font-bold text-dark my-8 w-full text-center">Notre Boutique</h2>
           <ProductsCarousel products={products} />
-          <div className="w-full flex items-center justify-center py-4 "> <BaseButton href="/activities" type={buttonType.green}> Voir plus ... </BaseButton> </div>
+          <div className="w-full flex items-center justify-center py-4 "> <BaseButton href="/shop" type={buttonType.green}> Voir plus ... </BaseButton> </div>
         </SectionContainer>
         </div>
       );

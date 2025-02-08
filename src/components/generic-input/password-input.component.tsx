@@ -1,0 +1,58 @@
+import React, { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi"; // For show/hide password icons
+
+interface PasswordInputProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string; // Optional prop for error message
+}
+
+const PasswordInput: React.FC<PasswordInputProps> = ({ label, value, onChange, error }) => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  // Custom password visibility toggle
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  // Disable default browser password visibility toggle
+  const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div>
+      <label htmlFor="password" className="block text-xs font-bold text-dark/80">
+        {label}
+      </label>
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={`Enter your ${label.toLowerCase()}`}
+          className={`mt-1 block w-full px-3 py-[0.4rem] pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-blue/80 focus:border-blue/80 sm:text-sm ${
+            error ? "border-red-500" : "border-gray/80"
+          }`}
+        />
+        <button
+          type="button"
+          onMouseDown={handleMouseDown}
+          onClick={togglePasswordVisibility}
+          className="absolute inset-y-0 right-0 flex items-center pr-3"
+        >
+          {showPassword ? (
+            <FiEyeOff className="h-5 w-5 text-gray-400" />
+          ) : (
+            <FiEye className="h-5 w-5 text-gray-400" />
+          )}
+        </button>
+      </div>
+      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+    </div>
+  );
+};
+
+export default PasswordInput;

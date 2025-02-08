@@ -34,11 +34,11 @@ const BaseButton = ({ className = "", children, rounded = true, type = buttonTyp
       } transition duration-300`;
 
     return href ? (
-      <Link className={classNameValue} to={href}>
+      <Link className={classNameValue} to={href} onClick={clickHandler}>
         {children}
       </Link>
     ) : (
-      <button className={classNameValue} type={submitType} onMouseDown={clickHandler}>
+      <button className={classNameValue} type={submitType} onClick={clickHandler}>
         {children}
       </button>
     );

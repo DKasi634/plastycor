@@ -61,7 +61,7 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
               ))}
             </ul>
             <div className="flex flex-col items-start justify-start gap-4 px-4">
-              <BaseButton type={buttonType.clear}> <FiLogIn/> &nbsp; Se connecter</BaseButton>
+              <BaseButton clickHandler={hideCallback} type={buttonType.clear} href="/signin"> <FiLogIn/> &nbsp; Se connecter</BaseButton>
             </div>
             <NavBtn
               className="fixed top-3 right-6"
