@@ -5,8 +5,7 @@ import ProductsCarousel from "../cards-carousel/products-card-carousel.component
 
 
 const ProductsSection = () => {
-    
-    
+  
       return (
         <div className="flex flex-col py-4">
         <SectionContainer id="products" >
