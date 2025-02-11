@@ -4,11 +4,12 @@ import { FiEye, FiEyeOff } from "react-icons/fi"; // For show/hide password icon
 interface PasswordInputProps {
   label: string;
   value: string;
+  id?:string
   onChange: (value: string) => void;
   error?: string; // Optional prop for error message
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ label, value, onChange, error }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ label, value, onChange, error, id="" }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   // Custom password visibility toggle
@@ -29,7 +30,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ label, value, onChange, e
       <div className="relative">
         <input
           type={showPassword ? "text" : "password"}
-          id="password"
+          id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={`${label.toLowerCase()}`}

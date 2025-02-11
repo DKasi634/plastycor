@@ -5,7 +5,7 @@ export enum ADMIN_STATUS {
     NONE="NONE"
 }
 
-export type User = {
+export type IUser = {
     email:string,
     firstName:string,
     lastName:string,

@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PasswordInput from "@/components/generic-input/password-input.component";
 import { FcGoogle } from "react-icons/fc"; // For the Google icon
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { emailSignInStart, googleSignInStart } from "@/store/auth/auth.actions";
+import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
+import LoaderLayout from "@/components/loader/loader-layout.component";
 
 const SignInPage: React.FC = () => {
+
+  const currentUser = useSelector(selectCurrentUser);
+  const authLoading = useSelector(selectAuthLoading);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
+
+  useEffect(()=>{
+    if(currentUser){
+      navigate("/")
+    }
+  }, [currentUser])
   // Handle email input change and validate
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -50,9 +66,10 @@ const SignInPage: React.FC = () => {
       setErrors({ email: emailError, password: passwordError });
       return;
     }
-
-    alert("Connexion réussie!"); // Login successful!
+    dispatch(emailSignInStart(email, password))
   };
+
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -85,15 +102,6 @@ const SignInPage: React.FC = () => {
             error={errors.password}
           />
 
-          {/* Continue with Google Button */}
-          <BaseButton rounded={false} type={buttonType.green}
-            className="flex items-center justify-center !w-full !px-4 py-2 gap-2 text-sm font-medium "
-          >
-            <FcGoogle className="h-5 w-5" />
-            <span>Continuer avec Google</span> {/* Continue with Google */
-            }
-          </BaseButton>
-
           <p className="w-full text-xs !mt-8">Vous n'avez pas encore de compte ? <Link to={"/signup"} className="text-green font-bold px-2 underline-offset-2 underline">S'inscrire</Link> </p>
 
           {/* Sign In Button */}
@@ -104,8 +112,18 @@ const SignInPage: React.FC = () => {
             Se connecter {/* Sign In */
             }
           </BaseButton>
+
+          {/* Continue with Google Button */}
+          <BaseButton rounded={false} type={buttonType.green} clickHandler={()=>{ dispatch(googleSignInStart()) }}
+            className="flex items-center justify-center !w-full !px-4 py-2 gap-2 text-sm font-medium "
+          >
+            <FcGoogle className="h-5 w-5" />
+            <span>Continuer avec Google</span> 
+          </BaseButton>
         </form>
       </div>
+
+      {authLoading && <LoaderLayout/> }
     </div>
   );
 };

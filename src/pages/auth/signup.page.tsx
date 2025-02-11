@@ -1,28 +1,55 @@
 import GenericInput from "@/components/generic-input/generic-input.component";
 import PhoneNumberInput from "@/components/phone-number-input/phone-number-input.component";
 import PasswordInput from "@/components/generic-input/password-input.component"; // Import the reusable PasswordInput
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAuthError, clearNavigateToSignIn, googleSignInStart, registerStart } from "@/store/auth/auth.actions";
+import { selectAuthError, selectAuthLoading, selectNavigateToSignIn } from "@/store/auth/auth.selector";
+import { AuthError } from "@/utils/errors.utils";
+import LoaderLayout from "@/components/loader/loader-layout.component";
+import { FcGoogle } from "react-icons/fc";
+// import { store } from "@/store/store";
 
 const SignUpPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const initialFormData = {firstName: "", lastName: "", email: "", phoneNumber: "", password: "", confirmPassword: ""}
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authLoading = useSelector(selectAuthLoading);
+  const authError = useSelector(selectAuthError);
+  const navigateToSignin = useSelector(selectNavigateToSignIn);
+
+
+  const [signupError, setSignupError] = useState<AuthError | null>(authError);
+  const [formData, setFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(initialFormData);
+
+
+
+  useEffect(() => {
+    if (navigateToSignin) {
+      setFormData(initialFormData);
+      const timer = setTimeout(() => {
+        navigate("/signin");
+        dispatch(clearNavigateToSignIn())
+      }, 4000);
+      return () => clearTimeout(timer)
+    }
+  }, [navigateToSignin, navigate, dispatch])
+
+  useEffect(() => {
+    setSignupError(authError)
+  }, [authError])
+
+  useEffect(() => {
+    if (signupError) {
+      const timer = setTimeout(() => { dispatch(clearAuthError()) }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [signupError])
 
   const validateField = (field: keyof typeof formData, value: string) => {
     let error = "";
@@ -93,12 +120,13 @@ const SignUpPage: React.FC = () => {
     setErrors(formErrors);
 
     if (Object.values(formErrors).every((err) => !err)) {
-      alert("Formulaire soumis avec succès!"); // Form submitted successfully!
+      dispatch(registerStart(formData.firstName, formData.lastName, formData.email, formData.password, formData.phoneNumber))
+      // alert("Formulaire soumis avec succès!"); // Form submitted successfully!
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-16 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-16 px-4">  
       <div className="w-full max-w-md p-8 space-y-3 lg:rounded-xl bg-white lg:shadow-lg">
         <h2 className="text-2xl font-bold text-center">S'inscrire</h2> {/* Sign Up */}
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -106,13 +134,13 @@ const SignUpPage: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-4 md:space-x-4">
             <div className="md:w-1/2 md:pr-2">
               <GenericInput
-                label="Prénom" 
+                label="Prénom"
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleChange(e)}
                 error={errors.firstName}
                 name="firstName"
-                placeholder="Entrez votre prénom" 
+                placeholder="Entrez votre prénom"
               />
             </div>
             <div className="md:w-1/2 md:pl-2">
@@ -123,7 +151,7 @@ const SignUpPage: React.FC = () => {
                 onChange={(e) => handleChange(e)}
                 error={errors.lastName}
                 name="lastName"
-                placeholder="Entrez votre nom" 
+                placeholder="Entrez votre nom"
               />
             </div>
           </div>
@@ -149,6 +177,7 @@ const SignUpPage: React.FC = () => {
           {/* Password */}
           <PasswordInput
             label="Mot de passe"
+            id="password"
             value={formData.password}
             onChange={(value) => handlePasswordChange("password", value)}
             error={errors.password}
@@ -156,7 +185,8 @@ const SignUpPage: React.FC = () => {
 
           {/* Confirm Password */}
           <PasswordInput
-            label="Confirmez le mot de passe" 
+            label="Confirmez le mot de passe"
+            id="confirm_password"
             value={formData.confirmPassword}
             onChange={(value) => handlePasswordChange("confirmPassword", value)}
             error={errors.confirmPassword}
@@ -166,14 +196,22 @@ const SignUpPage: React.FC = () => {
 
           {/* Submit Button */}
           <BaseButton
-            type={buttonType.green} submitType="submit" rounded={false}
+            type={buttonType.blue} submitType="submit" rounded={false}
             className="w-full !px-4 !py-2 !mt-4 text-sm font-medium"
           >
             S'inscrire {/* Sign Up */
             }
           </BaseButton>
+
+          <BaseButton rounded={false} type={buttonType.green} clickHandler={()=>{ dispatch(googleSignInStart()) }}
+            className="flex items-center justify-center !w-full !px-4 py-2 gap-2 text-sm font-medium "
+          >
+            <FcGoogle className="h-5 w-5" />
+            <span>Continuer avec Google</span> 
+          </BaseButton>
         </form>
       </div>
+      {authLoading && <LoaderLayout />}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import Footer from "@/components/footer/footer.component"
 import TopNavbar from "@/components/top-navbar/top-navbar.component"
+import { RECAPTCHA_CONTAINER_ID } from "@/utils/firebase/firebase.auth";
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom"
 
@@ -29,6 +30,7 @@ const MainNavigation = () => {
         <Outlet />
         <Footer />
       </main>
+      <div id={RECAPTCHA_CONTAINER_ID}></div>
     </div>
   )
 }
