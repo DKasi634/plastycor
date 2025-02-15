@@ -20,6 +20,7 @@ import {
   getFirestoreUserByEmail,
 } from "@/utils/firebase/firestore.utils";
 import { setErrorToast, setSuccessToast } from "../toast/toast.actions";
+import { getAuthError } from "@/utils/errors.utils";
 
 function* registerUser({
   payload: { firstName, lastName, email, password, phoneNumber },
@@ -58,9 +59,8 @@ function* registerUser({
     
   } catch (error) {
     yield put(registerFailure(error));
-    yield put(
-      setErrorToast("Échec de l'inscription ! Quelque chose s'est mal passé")
-    );
+    // yield put(setErrorToast("Échec de l'inscription ! Quelque chose s'est mal passé"));
+    yield put(setErrorToast(getAuthError(error).message));
   }
 }
 
@@ -89,7 +89,8 @@ function* emailSignIn({
     yield put(signInSuccess(firestoreUser));
   } catch (error) {
     yield put(signInFailure(error));
-    yield put(setErrorToast("Échec de connexion ! Quelque chose s'est mal passé"))
+    // yield put(setErrorToast("Échec de connexion ! Quelque chose s'est mal passé"))
+    yield put(setErrorToast(getAuthError(error).message))
   }
 }
 
@@ -122,7 +123,8 @@ function* googleSignIn() {
     yield put(signInSuccess(firestoreUser));
   } catch (error) {
     yield put(signInFailure(error));
-    yield put(setErrorToast("Échec de connexion ! Quelque chose s'est mal passé"))
+    // yield put(setErrorToast("Échec de connexion ! Quelque chose s'est mal passé"))
+    yield put(setErrorToast(getAuthError(error).message))
   }
 }
 

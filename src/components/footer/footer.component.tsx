@@ -19,7 +19,7 @@ const Footer = () => {
                     <ul className="flex flex-col items-start justify-start gap-2 lg:flex-row lg:items-center lg:justify-center lg:gap-6 text-light/80">
                         <li><NavLink to={"/"} className={ ' hover:text-light'}>Accueil</NavLink></li>
                         <li><NavLink to={"/#activities"} className={`hover:text-light`}>Nos activites</NavLink></li>
-                        <li><NavLink to={"/#contact"} className={'hover:text-light'}>Contactez-nous</NavLink></li>
+                        <li><NavLink to={"/#contact"} className={'hover:text-light'}>Nous contacter</NavLink></li>
                     </ul>
                 </div>
 

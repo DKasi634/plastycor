@@ -4,7 +4,7 @@ import { FaRecycle, FaTree } from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
-import { Activity, Creator, Testimonial } from "@/types";
+import { Activity, Creator, MenuItem, Testimonial } from "@/types";
 
 import ProductImage1 from "@/assets/products-min/product-1.jpg"
 import ProductImage2 from "@/assets/products-min/product-2.jpg"
@@ -25,6 +25,9 @@ import TeamMember1 from "@/assets/team/team--woman-1.jpg"
 import TeamMember2 from "@/assets/team/team--woman-2.jpg"
 import TeamMember3 from "@/assets/team/team--woman--3.jpg"
 import TeamMember4 from "@/assets/team/team--man-4.jpg"
+import { FiUser, FiPackage, FiBarChart } from "react-icons/fi";
+import { HiOutlineLightBulb } from "react-icons/hi";
+import { Category } from "@/api/types";
 
 
 
@@ -467,3 +470,20 @@ export const trainingTestimonials: Testimonial[] = [
     },
 ];
 
+
+export const userMenuItems:MenuItem[] = [
+    { label: "Profile", icon: <FiUser />, path:"profile" },
+    { label: "Products", icon: <FiPackage />, path:"products" },
+    { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations" },
+    { label: "Dashboard", icon: <FiBarChart />, path:"dashboard" },
+  ];
+
+
+  export const categories:Category[] = [
+    {categoryId:"1", categoryName:"Category 1"},
+    {categoryId:"2", categoryName:"Category 2"},
+    {categoryId:"3", categoryName:"Category 3"},
+    {categoryId:"4", categoryName:"Category 4"},
+    {categoryId:"5", categoryName:"Category 5"},
+    {categoryId:"6", categoryName:"Category 6"},
+  ]

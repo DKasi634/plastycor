@@ -16,7 +16,7 @@ export type IUser = {
     disabled:boolean
 }
 
-export type Product = {
+export type ApiProduct = {
     id:string,
     ownerEmail:string,
     categoryId:string,
@@ -60,4 +60,9 @@ export type Blog = {
     content:string,
     createdAt:string,
     views:number
+}
+
+export type Category = {
+    categoryId:string,
+    categoryName:string
 }

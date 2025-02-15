@@ -3,7 +3,7 @@ import React from "react";
 interface InputProps {
   label: string;
   type: string;
-  value: string;
+  value: any;
   name:string,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
@@ -28,7 +28,7 @@ const GenericInput: React.FC<InputProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         name={name}
-        className={`mt-1 block w-full px-3 py-[0.4rem] border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+        className={`mt-1 block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm ${
           error ? "border-red-500" : "border-gray/70"
         }`}
       />

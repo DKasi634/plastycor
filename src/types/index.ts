@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export interface ISection extends React.HTMLAttributes<HTMLDivElement>{}
 
@@ -23,3 +23,14 @@ export type Testimonial = {
     name: string;
     content: string;
 };
+
+export type MenuItem = {
+    label: string,
+    icon: ReactNode,
+    path: string
+  }
+
+export type SelectedImage = {
+    file:File,
+    url:string;
+}

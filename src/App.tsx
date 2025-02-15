@@ -12,11 +12,15 @@ import UnivartizePage from './pages/univartize.page'
 import SignInPage from './pages/auth/signin.page'
 import SignUpPage from './pages/auth/signup.page'
 import Toast from './components/toast/toast.component'
-import ProfilePage from './pages/profile/profile.page'
+import ProfilePage from './pages/user/profile.page'
 import { useEffect } from 'react'
 import { onAuthStateChangedListener } from './utils/firebase/firebase.auth'
 import { setCurrentUser } from './store/auth/auth.actions'
 import { useDispatch } from 'react-redux'
+import UserProfileNavigation from './routes/user-navigation/user-navigation.route'
+import AuthProtectedRoute from './routes/auth-protected.route'
+import PostProductPage from './pages/user/post-product.page'
+import SingleProductPage from './pages/single-product.page'
 
 const App = () => {
 
@@ -45,8 +49,13 @@ const App = () => {
           <Route path='univartize' element={<UnivartizePage />} />
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
-          <Route path='profile' element={<ProfilePage />} />
+          <Route path='product/:productId' element={<SingleProductPage />} />
         </Route>
+          <Route path='/me' element={<AuthProtectedRoute> <UserProfileNavigation /></AuthProtectedRoute>}>
+            <Route index element={<ProfilePage/>} />
+            <Route path='profile' element={<ProfilePage/>} />
+            <Route path='post' element={<PostProductPage/>} />
+          </Route>
       </Routes>
       <Toast />
     </>
