@@ -6,11 +6,15 @@ import { MdOutlinePhoneEnabled } from "react-icons/md";
 import BaseButton from "../base-button/base-button.component";
 import axios from "axios";
 import LoaderLayout from '../loader/loader-layout.component';
+import { clearToast, setErrorToast, setSuccessToast, ToastMessage } from '@/store/toast/toast.actions';
+import { useDispatch } from 'react-redux';
 
 export const ContactSection = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [toastMessage, setToastMessage] = useState("");
+    const dispatch = useDispatch();
+
+    const [toastMessage, setToastMessage] = useState<ToastMessage|null>(null);
     const initialFormData = {
         name: '',
         email: '',
@@ -19,9 +23,10 @@ export const ContactSection = () => {
 
     useEffect(() => {
         if (toastMessage) {
-            alert(toastMessage);
+            dispatch(toastMessage.type === "error"? setErrorToast(toastMessage.message):setSuccessToast(toastMessage.message))
             const timer = setTimeout(() => {
-                setToastMessage("")
+                setToastMessage(null)
+                dispatch(clearToast())
             }, 3000)
             return () => clearTimeout(timer);
         }
@@ -52,11 +57,11 @@ export const ContactSection = () => {
 
         try {
             await axios.post("/.netlify/functions/send-email", formData);
-            setToastMessage("Message envoyé avec succès!");
+            setToastMessage({message:"Message envoyé avec succès!", type:"success"});
             setFormData(initialFormData); // Reset form
         } catch (error) {
             // console.error("Error : ", error);
-            setToastMessage("Erreur lors de l'envoi du message");
+            setToastMessage({message:"Erreur lors de l'envoi du message", type:"error"});
         }
         finally {
             setIsSubmitting(false)
@@ -93,7 +98,6 @@ export const ContactSection = () => {
                                 plastycor.rdc@gmail.com &nbsp; &nbsp;
                             </p>
                         </div>
-                        
                     </aside>
                     <aside className="bg-white px-8 py-4 rounded-xl shadow-sm xl:w-full xl:max-w-[40rem]">
                         <form className="space-y-2" onSubmit={handleSubmit}>
@@ -151,7 +155,6 @@ export const ContactSection = () => {
                         </div>
                     </aside>
                 </ContactSectionWrapper>
-
 
             </SectionContainer>
             {isSubmitting && <LoaderLayout />}

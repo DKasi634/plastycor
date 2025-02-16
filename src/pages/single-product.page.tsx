@@ -56,7 +56,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
     return (
         <>
             {product &&
-                <div className={`${className} min-h-screen flex justify-center items-center bg-gray-100 py-8`}>
+                <div className={`${className} min-h-screen flex justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.name}</h1>
 
