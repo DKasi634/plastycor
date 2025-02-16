@@ -18,7 +18,8 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
     const { productId } = useParams<{ productId: string }>(); // Extract productId from URL params
     const [product, setProduct] = useState<ApiProduct | null>(null);
     const [loading, setLoading] = useState(true);
-    const [productOwner, setProductOwner] = useState<IUser | null>(null)
+    const [productOwner, setProductOwner] = useState<IUser | null>(null);
+    const [productFound, setProductFound] = useState(true);
     // const [error, setError] = useState<string | null>(null);
 
     const dispatch = useDispatch();
@@ -28,9 +29,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
 
     const setErrorMessage = (error: string) => dispatch(setErrorToast(error));
 
-
-
-    // Simulated API call to fetch product data
+    // Call to fetch product data
     const fetchProduct = async (id: string) => {
         setLoading(true);
         try {
@@ -41,6 +40,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
             setProductOwner(owner)
         } catch (err) {
             setErrorMessage("Failed to load product details.");
+            setProductFound(false)
         } finally {
             setLoading(false);
         }
@@ -81,6 +81,9 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
                         }
                     </div>
                 </div>
+            }
+            { (!productFound && !loading) &&
+            <></>
             }
             {
                 (loading || userLoading) && <LoaderLayout />

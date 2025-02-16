@@ -4,11 +4,14 @@ import { ActionWithPayload } from "@/utils/reducer/reducer.utils";
 // import { UserCredential } from "firebase/auth"
 import {
   createAuthUser,
+  logout,
   siginWithEmail,
   signInWithGoogle,
 } from "@/utils/firebase/firebase.auth";
 import { IUser } from "@/api/types";
 import {
+  logoutFailure,
+  logoutSuccess,
   registerFailure,
   registerSuccess,
   signInFailure,
@@ -123,7 +126,6 @@ function* googleSignIn() {
     yield put(signInSuccess(firestoreUser));
   } catch (error) {
     yield put(signInFailure(error));
-    // yield put(setErrorToast("Échec de connexion ! Quelque chose s'est mal passé"))
     yield put(setErrorToast(getAuthError(error).message))
   }
 }
@@ -137,7 +139,6 @@ function* setUser({payload:userEmail}:ActionWithPayload<AUTH_ACTION_TYPES.SET_CU
           yield put(signInSuccess(userDoc))
       }
   } catch(error){
-      // console.log("Got an error dispatching user : ", error)
       yield put(signInFailure(error))
   }
 }
@@ -160,10 +161,27 @@ export function* watchGoogleSignIn() {
   yield takeLatest(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START, googleSignIn);
 }
 
+
+function* logUserOut(){
+
+  try {
+    // console.log("Logout started !")
+    yield logout();
+    yield put(logoutSuccess())
+  } catch (error) {
+    yield put(logoutFailure(error))
+  }
+}
+
+export function* watchLogout(){
+  yield takeLatest(AUTH_ACTION_TYPES.LOGOUT_START, logUserOut)
+}
+
 export function* authSaga() {
   yield all([
     call(watchRegistration),
     call(watchEmailSignin),
     call(watchGoogleSignIn),
+    call(watchLogout)
   ]);
 }

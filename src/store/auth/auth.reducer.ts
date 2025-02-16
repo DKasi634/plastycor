@@ -26,6 +26,7 @@ export const authReducer = (
     case AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START:
     case AUTH_ACTION_TYPES.REGISTER_START:
     case AUTH_ACTION_TYPES.UPDATE_USER_START:
+    case AUTH_ACTION_TYPES.LOGOUT_START:
       return { ...state, isLoading: true };
 
     case AUTH_ACTION_TYPES.REGISTER_SUCCESS:
@@ -46,6 +47,9 @@ export const authReducer = (
         isLoading: false,
         currentUser: action.payload as IUser,
       };
+
+    case AUTH_ACTION_TYPES.LOGOUT_SUCCESS:
+      return {...state, currentUser:null, isLoading:false}
 
     case AUTH_ACTION_TYPES.CLEAR_AUTH_ERROR:
       return { ...state, error: null };

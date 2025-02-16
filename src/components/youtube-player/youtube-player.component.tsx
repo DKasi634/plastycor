@@ -16,6 +16,10 @@ export const YouTubePlayer = ({ videoId, className = "" }: YouTubePlayerProps) =
         },
     };
 
+    const onError = (event: any) => {
+        console.error("YouTube Player Error:", event.data);
+    };
+
     return (
         <section className="flex flex-col my-4">
             <SectionContainer>
@@ -25,6 +29,7 @@ export const YouTubePlayer = ({ videoId, className = "" }: YouTubePlayerProps) =
                         opts={opts}
                         className="h-full w-full"
                         iframeClassName="h-full w-full"
+                        onError={onError}
                     />
                 </div>
             </SectionContainer>

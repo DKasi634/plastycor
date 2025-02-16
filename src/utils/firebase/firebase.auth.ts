@@ -72,7 +72,18 @@ export const siginWithEmail = async (
 };
 
 export const logout = async (): Promise<void> => {
-  return await signOut(auth);
+
+  return new Promise((resolve, reject)=>{
+    try {
+      setTimeout(()=>{
+        resolve(signOut(auth))
+      }, 3000)
+    } catch (error) {
+      reject(error)
+    }
+    
+  })
+  // return await signOut(auth);
 };
 
 export const signInWithGoogle = async (): Promise<UserCredential> => {

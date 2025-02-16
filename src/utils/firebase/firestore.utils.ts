@@ -40,13 +40,14 @@ export const getProductById = async (productId: string): Promise<ApiProduct | nu
   }
 
 export const createOrUpdateProduct = async (newProduct: ApiProduct): Promise<ApiProduct | null> => {
+  
     try {
       const existingProduct = await getProductById(newProduct.id)
       const updatedProduct = { ...existingProduct, ...newProduct, createdAt: existingProduct ? existingProduct.createdAt : new Date().toISOString()} as ApiProduct
       await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION, updatedProduct.id), updatedProduct)
       return updatedProduct
     } catch (error) {
-      // // console.log("Error when creating product : ", error)
+      // console.log("Error when creating product : ", error)
       return null
     }
   

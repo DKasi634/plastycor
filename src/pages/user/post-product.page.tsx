@@ -21,16 +21,7 @@ const PostProductPage = () => {
         }
     }, [authLoading, currentUser])
 
-    const productInitialValues: ApiProduct = { name: "", id: (new Date().getFullYear().toString()), categoryId: "", ownerEmail: currentUser?.email || '', createdAt: "", images: [], description: "", price: 0, disabled: false };
-
-    // const [thisProduct, setThisProduct] = useState<ApiProduct>(productInitialValues);
-
-    // const imagesUploadRef = useRef<{ uploadImages: () => Promise<string[]>, hasSelectedImages: () => boolean }>(null);
-
-    // const setName = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, name: e.target.value })) }
-    // const setPrice = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, price: e.target.value as unknown as number })) }
-    // const setDescription = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, description: e.target.value })) }
-    // const setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => { setThisProduct(prev => ({...prev, categoryId:e.target.value})); console.log("\nNew category Id : ", thisProduct.categoryId) }
+    const productInitialValues: ApiProduct = { name: "", id: (new Date().getTime().toString()), categoryId: "", ownerEmail: currentUser?.email || '', createdAt: "", images: [], description: "", price: 0, disabled: false };
 
     return (
         <div className="flex flex-col pb-[5rem]">

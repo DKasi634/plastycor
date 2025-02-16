@@ -21,10 +21,12 @@ import UserProfileNavigation from './routes/user-navigation/user-navigation.rout
 import AuthProtectedRoute from './routes/auth-protected.route'
 import PostProductPage from './pages/user/post-product.page'
 import SingleProductPage from './pages/single-product.page'
+import NotFoundPage from './pages/errors/not-found.page'
+import EditProductPage from './pages/user/edit-product.page'
 
 const App = () => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = () => {
@@ -41,6 +43,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<MainNavigation />}>
           <Route index element={<LandingPage />} />
+          <Route path='*' element={<NotFoundPage />} />
           <Route path='blog' element={<BlogPage />} />
           <Route path='contact' element={<ContactPage />} />
           <Route path='activities' element={<ActivitiesPage />} />
@@ -50,12 +53,16 @@ const App = () => {
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
           <Route path='product/:productId' element={<SingleProductPage />} />
+          
         </Route>
-          <Route path='/me' element={<AuthProtectedRoute> <UserProfileNavigation /></AuthProtectedRoute>}>
-            <Route index element={<ProfilePage/>} />
-            <Route path='profile' element={<ProfilePage/>} />
-            <Route path='post' element={<PostProductPage/>} />
-          </Route>
+        <Route path='/me' element={<AuthProtectedRoute> <UserProfileNavigation /></AuthProtectedRoute>}>
+          <Route index element={<ProfilePage />} />
+          <Route path='*' element={<NotFoundPage />} />
+          <Route path='profile' element={<ProfilePage />} />
+          <Route path='post' element={<PostProductPage />} />
+          <Route path='edit-product/:productId' element={<EditProductPage />} />
+        </Route>
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
       <Toast />
     </>

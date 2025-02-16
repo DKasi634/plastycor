@@ -41,7 +41,9 @@ export const LoaderSmWrapper = styled.div`
 
 export const GridContainerSm = styled.div`
     display: grid;
-    gap: 2rem 1rem;
+    align-items: start;
+    justify-content: start;
+    gap:1rem;
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); 
 `
 export const GridContainerMd = styled.div`
@@ -115,4 +117,17 @@ export const LandingHeroSection = styled.section`
     background: linear-gradient(${darkTransparent}, ${lightTransparent})
 `
 
+export const shimer = keyframes`
+    from{
+        background-position: -200px -100px;
+    }to {
+        background-position: 200px 100px;
+    }
+`
+
+export const ShimerEffect = styled.div`
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 30%);
+    background-size: 800px 100%;
+    animation: ${shimer} 1.5s infinite;
+`
 

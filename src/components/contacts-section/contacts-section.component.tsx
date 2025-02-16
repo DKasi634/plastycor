@@ -27,10 +27,6 @@ export const ContactSection = () => {
         }
     }, [toastMessage]);
 
-    useEffect(() => {
-        console.log("Is submitting : ", isSubmitting)
-
-    }, [isSubmitting])
 
     const [formData, setFormData] = useState(initialFormData);
 

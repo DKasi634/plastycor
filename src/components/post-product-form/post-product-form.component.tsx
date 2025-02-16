@@ -14,15 +14,15 @@ import { getSingleProductPath } from "@/utils/index.utils";
 
 type PostFormProps = {
     className?: string,
-    initialProduct: ApiProduct | null,
+    initialProduct: ApiProduct,
     currentUser: IUser,
 }
 
-const PostProductForm = ({ className = "", initialProduct = null, currentUser }: PostFormProps) => {
+const PostProductForm = ({ className = "", initialProduct }: PostFormProps) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const productInitialValues: ApiProduct = { name: "", id: (new Date().getTime().toString()), categoryId: "", ownerEmail: currentUser?.email || '', createdAt: new Date().toISOString(), images: [], description: "", price: 0, disabled: false };
+    
 
     const [thisProduct, setThisProduct] = useState<ApiProduct | null>(initialProduct);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,11 +31,9 @@ const PostProductForm = ({ className = "", initialProduct = null, currentUser }:
     const imagesUploadRef = useRef<{ uploadImages: () => Promise<string[]>, hasSelectedImages: () => boolean }>(null);
 
     const setName = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, name: e.target.value } as ApiProduct)) }
-    const setPrice = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, price: Number(e.target.value) } as ApiProduct)) }
+    const setPrice = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, price: e.target.value as unknown as number } as ApiProduct)) }
     const setDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => { setThisProduct(prev => ({ ...prev, description: e.target.value } as ApiProduct)) }
     const setCategory = (e: React.ChangeEvent<HTMLSelectElement>) => { setThisProduct(prev => ({ ...prev, categoryId: e.target.value } as ApiProduct)); }
-
-    // const setError = (error: string) => 
 
     useEffect(()=>{
         if(error){
@@ -46,7 +44,10 @@ const PostProductForm = ({ className = "", initialProduct = null, currentUser }:
     useEffect(() => {
         const createProduct = async () => {
             if (!thisProduct) { return };
+            console.log("\nThe product to create or update : ", thisProduct);
+            setIsSubmitting(false);
             const createdProduct = await createOrUpdateProduct(thisProduct);
+            console.log("The created or updated product : ", createdProduct)
             setIsSubmitting(false);
             if (!createdProduct) { dispatch(setErrorToast("Failed to create product")) }
             else {
@@ -62,21 +63,19 @@ const PostProductForm = ({ className = "", initialProduct = null, currentUser }:
         if (isSubmitting || !thisProduct) { return }
         setIsSubmitting(true)
         try {
-
             if (!thisProduct.categoryId) { setError("Please choose a category"); return }
             if (thisProduct.name.trim().length < 3) { setError("Posting name must have at least 3 characters"); return }
-            if (!thisProduct.price) { setError("Posting must have a price"); return }
+            if (!Number(thisProduct.price)) { setError("Posting must have a price"); return }
             if (thisProduct.description.trim().length < 30) { setError("Description too short, must have at least 30 characters") }
             if (imagesUploadRef.current) {
-                if (!imagesUploadRef.current.hasSelectedImages()) { setError("Choose at least one image, max 3"); return }
+                if (!imagesUploadRef.current.hasSelectedImages() &&!initialProduct.images.length) { setError("Choose at least one image, max 3"); return }
                 const uploadedImagesUrls = await imagesUploadRef.current.uploadImages();
-                if (!uploadedImagesUrls.length) { setError("Failed to upload images. Check your network and try again"); return }
-                setThisProduct(prev => ({ ...prev, images: uploadedImagesUrls, id: new Date().getTime().toString() } as ApiProduct));
+                if (!uploadedImagesUrls.length && !initialProduct.images.length) { setError("Failed to upload images. Check your network and try again"); return }
+                setThisProduct(prev => ({ ...prev, images: [...prev?.images || [], ...uploadedImagesUrls], id:initialProduct.id || new Date().getTime().toString(), price:Number(thisProduct.price) } as ApiProduct));
                 setCanSubmitPost(true);
             }
-
-
         } catch (error) {
+            // console.log("\nEncountered an error : ", error)
             setIsSubmitting(false);
         }
 
@@ -96,12 +95,12 @@ const PostProductForm = ({ className = "", initialProduct = null, currentUser }:
 
                 <div className="flex flex-col gap-1 mt-1 w-full">
                     <label className="text-xs font-bold text-dark/80 w-full text-left pl-1" htmlFor="categories">Categorie</label>
-                    <select name="categories" className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" onChange={setCategory} >
+                    <select name="categories" className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" value={initialProduct.categoryId} onChange={(e) => setCategory(e)} >
                         {categories.map((cat, idx) => (<option key={idx} value={cat.categoryId} >{cat.categoryName}</option>))}
                     </select>
                 </div>
 
-                <ImageUploadFormGroup label='Chosir une image' initialImages={productInitialValues.images} imagesLimit={1} folderPath='Product'
+                <ImageUploadFormGroup label='Chosir une image' initialImages={initialProduct.images} imagesLimit={1} folderPath='Product'
                     ref={imagesUploadRef} />
                 <BaseButton submitType="submit" className="mt-6 ">Confirmer</BaseButton>
             </form>

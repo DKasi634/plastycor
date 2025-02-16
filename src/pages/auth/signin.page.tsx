@@ -22,7 +22,7 @@ const SignInPage: React.FC = () => {
 
   useEffect(()=>{
     if(currentUser){
-      navigate("/")
+      navigate("/me/profile")
     }
   }, [currentUser])
   // Handle email input change and validate
@@ -50,7 +50,6 @@ const SignInPage: React.FC = () => {
     } else if (value.length < 6) {
       error = "Le mot de passe doit contenir au moins 6 caractères."; // Password must be at least 6 characters.
     }
-
     setErrors((prevErrors) => ({ ...prevErrors, password: error }));
   };
 
