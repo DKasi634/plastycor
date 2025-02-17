@@ -1,5 +1,4 @@
 import { ApiProduct, IUser } from "@/api/types";
-import { categories } from "@/constants/data";
 import { useState, useRef, useEffect } from "react";
 import BaseButton from "../base-button/base-button.component";
 import GenericInput from "../generic-input/generic-input.component";
@@ -7,9 +6,10 @@ import ImageUploadFormGroup from "../image-upload-input/image-upload-input.compo
 import LoaderLayout from "../loader/loader-layout.component";
 import { useNavigate } from "react-router-dom";
 import { createOrUpdateProduct } from "@/utils/firebase/firestore.utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setErrorToast } from "@/store/toast/toast.actions";
 import { getSingleProductPath } from "@/utils/index.utils";
+import { selectCategories } from "@/store/categories/categories.selector";
 
 
 type PostFormProps = {
@@ -29,6 +29,8 @@ const PostProductForm = ({ className = "", initialProduct }: PostFormProps) => {
     const [canSubmitPost, setCanSubmitPost] = useState(false);
     const [error, setError] = useState("");
     const imagesUploadRef = useRef<{ uploadImages: () => Promise<string[]>, hasSelectedImages: () => boolean }>(null);
+
+    const categories = useSelector(selectCategories);
 
     const setName = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, name: e.target.value } as ApiProduct)) }
     const setPrice = (e: React.ChangeEvent<HTMLInputElement>) => { setThisProduct(prev => ({ ...prev, price: e.target.value as unknown as number } as ApiProduct)) }

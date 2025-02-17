@@ -28,7 +28,7 @@ const Toast: React.FC = () => {
 
     return (
         <ToastWrapper
-            className={`fixed bottom-8 inset-x-0 font-semibold text-sm p-4 w-full flex items-center justify-center`} role="alert" >
+            className={`fixed bottom-8 inset-x-0 font-semibold text-sm p-4 w-full flex items-center justify-center z-50`} role="alert" >
 
             <p className={`p-4 w-full max-w-[20rem] rounded-md shadow-lg ${toastClasses}`}>{toastState.message}</p>
         </ToastWrapper>

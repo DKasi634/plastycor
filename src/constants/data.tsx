@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { Activity, Creator, MenuItem, Testimonial } from "@/types";
 import { Category } from "@/api/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
 export type PrincipleData = {
     title: string,
@@ -445,17 +445,17 @@ export const trainingTestimonials: Testimonial[] = [
 
 
 export const userMenuItems:MenuItem[] = [
-    { label: "Profil", icon: <FiUser />, path:"profile" },
+    { label: "Profil", icon: <FiUser />, path:"profile", restricted:false},
+    { label: "Admin", icon: <FiBarChart />, path:"admin", restricted:true },
     // { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations" },
-    // { label: "Admin", icon: <FiBarChart />, path:"dashboard" },
   ];
 
 
   export const categories:Category[] = [
-    {categoryId:"1", categoryName:"Category 1"},
-    {categoryId:"2", categoryName:"Category 2"},
-    {categoryId:"3", categoryName:"Category 3"},
-    {categoryId:"4", categoryName:"Category 4"},
-    {categoryId:"5", categoryName:"Category 5"},
-    {categoryId:"6", categoryName:"Category 6"},
+    {categoryId:"1", categoryName:"Category 1", disabled:false, createdAt:""},
+    {categoryId:"2", categoryName:"Category 2", disabled:false, createdAt:""},
+    {categoryId:"3", categoryName:"Category 3", disabled:false, createdAt:""},
+    {categoryId:"4", categoryName:"Category 4", disabled:false, createdAt:""},
+    {categoryId:"5", categoryName:"Category 5", disabled:false, createdAt:""},
+    {categoryId:"6", categoryName:"Category 6", disabled:false, createdAt:""},
   ]

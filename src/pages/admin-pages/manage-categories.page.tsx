@@ -1,0 +1,190 @@
+
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createCategoryStart,
+  updateCategoryStart,
+  deleteCategoryStart,
+} from "@/store/categories/categories.actions";
+import { Category } from "@/api/types";
+import { selectCategories, selectCategoriesLoading } from "@/store/categories/categories.selector";
+import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
+import GenericInput from "@/components/generic-input/generic-input.component";
+import LoaderLayout from "@/components/loader/loader-layout.component";
+import { setErrorToast } from "@/store/toast/toast.actions";
+
+type FormState = {
+  categoryName: string;
+  disabled: boolean;
+};
+
+const ManageCategoriesPage: React.FC = () => {
+  const dispatch = useDispatch();
+  // Assumes that your Redux state has a "categories" slice with a "data" array.
+  const categories = useSelector(selectCategories);
+  const categoriesLoading = useSelector(selectCategoriesLoading);
+
+  // State for modal visibility and whether we’re creating or editing.
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [formData, setFormData] = useState<FormState>({
+    categoryName: "",
+    disabled: false,
+  });
+
+
+
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const openCreateModal = () => {
+    setFormData({ categoryName: "", disabled: false });
+    setIsEditing(false);
+    setSelectedCategory(null);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (category: Category) => {
+    setSelectedCategory(category);
+    setFormData({ categoryName: category.categoryName, disabled: category.disabled });
+    setIsEditing(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Started submit with data : ", formData);
+    if(!formData.categoryName){
+      console.log("Submit failed !");
+      dispatch(setErrorToast("The category name can not be empty !"))
+      ; return
+    }
+
+    console.log("Submit continued !")
+    if (isEditing && selectedCategory) {
+      // For editing, send the complete category.
+      const updatedCategory: Category = {
+        ...selectedCategory,
+        categoryName: formData.categoryName,
+        disabled: formData.disabled,
+      };
+      dispatch(updateCategoryStart(updatedCategory));
+    } else {
+      // For creation, saga will set createdAt and categoryId.
+      const newCategory: Category = {
+        categoryId: "", // will be set by the saga
+        categoryName: formData.categoryName,
+        disabled: formData.disabled,
+        createdAt: "", // will be set by the saga
+      };
+      dispatch(createCategoryStart(newCategory));
+    }
+    setIsModalOpen(false);
+  };
+
+  const handleDelete = (category: Category) => {
+    // Dispatch the delete action. (Make sure your saga is watching for DELETE_CATEGORY_START.)
+    dispatch(deleteCategoryStart(category));
+  };
+
+  return (
+    <div className="container mx-auto py-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Categories</h1>
+        <BaseButton
+          clickHandler={openCreateModal}
+          className="!px-4 !py-2"
+        >
+          Create Category
+        </BaseButton>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:flex xl:flex-wrap xl:items-center justify-start">
+        {categories && categories.length > 0 ? (
+          categories.map((category) => (
+            <div key={category.categoryId} className="bg-white shadow-dark-transparent shadow-md w-full max-w-[32rem] xl:max-w-[24rem] rounded-lg border border-dark-variant p-4 flex flex-col gap-2 items-start">
+              <h2 className="text-2xl text-dark/70 text-left font-semibold mb-2">{category.categoryName}</h2>
+              {/* <p className="text-gray-600 mb-2">
+                Disabled: <span className="font-medium">{category.disabled ? "Yes" : "No"}</span>
+              </p> */}
+              <p className="text-dark text-sm">
+                Created: {new Date(category.createdAt).toLocaleDateString()}
+              </p>
+              <div className="flex items-center justify-between gap-2 p-2 w-full">
+                <BaseButton
+                  clickHandler={() => openEditModal(category)}
+                  type={buttonType.green}
+                  rounded={false}
+                  className="!px-3 !py-1"
+                >
+                  Edit
+                </BaseButton>
+                <BaseButton
+                  clickHandler={() => handleDelete(category)}
+                  rounded={false}
+                  type={buttonType.clear}
+                  className="!bg-red-500 !border-red-400  text-white !px-3 !py-1"
+                >
+                  Delete
+                </BaseButton>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">No categories found.</p>
+        )}
+      </div>
+
+      {/* Modal for Create/Edit Category */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
+          <div className="bg-white rounded px-6 py-4 w-full max-w-[24rem]">
+            <h2 className="text-xl font-bold mb-4">
+              {isEditing ? "Edit Category" : "Create Category"}
+            </h2>
+            <form onSubmit={handleSubmit}>
+
+              <GenericInput
+              label="Category Name" 
+               type="text"
+               id="categoryName"
+               name="categoryName"
+               value={formData.categoryName}
+               onChange={handleNameChange}
+              />
+              
+              <div className="flex items-center justify-between px-2 py-4">
+                <BaseButton
+                  clickHandler={closeModal}
+                  type={buttonType.clear}
+                  submitType="button"
+                  className="!px-4 !py-[0.4rem]"
+                >
+                  Cancel
+                </BaseButton>
+                <BaseButton submitType="submit" className="!px-4 !py-[0.4rem]">
+                  {isEditing ? "Update" : "Create"}
+                </BaseButton>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {
+        categoriesLoading && <LoaderLayout/>
+      }
+    </div>
+  );
+};
+
+export default ManageCategoriesPage;

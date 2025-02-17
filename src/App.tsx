@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import {  Route, Routes } from 'react-router-dom'
 import MainNavigation from './routes/main-navigation/main-navigation.route'
 import LandingPage from './pages/landing.page'
 import BlogPage from './pages/blog.page'
@@ -25,6 +25,9 @@ import NotFoundPage from './pages/errors/not-found.page'
 import EditProductPage from './pages/user/edit-product.page'
 import AdminProtectedRoute from './routes/admin-protected.route'
 import { ADMIN_STATUS } from './api/types'
+import ManageCategoriesPage from './pages/admin-pages/manage-categories.page'
+import { fetchCategoriesStart } from './store/categories/categories.actions'
+import DashboardPage from './pages/admin-pages/dashboard.page'
 
 const App = () => {
 
@@ -40,6 +43,11 @@ const App = () => {
       } catch (error) { }
     }; return unsubscribe;
   })
+
+    // Fetch categories when the component mounts.
+    useEffect(() => {
+      dispatch(fetchCategoriesStart());
+    }, [dispatch]);
 
 
 
@@ -66,6 +74,9 @@ const App = () => {
           <Route path='profile' element={<ProfilePage />} />
           <Route path='post' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}> <PostProductPage /> </AdminProtectedRoute>} />
           <Route path='edit-product/:productId' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}><EditProductPage /></AdminProtectedRoute>} />
+          <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}><DashboardPage/></AdminProtectedRoute>}>
+          </Route>
+          <Route path='manage-categories' element={<ManageCategoriesPage />} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

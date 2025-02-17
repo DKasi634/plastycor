@@ -27,7 +27,8 @@ export type Testimonial = {
 export type MenuItem = {
     label: string,
     icon: ReactNode,
-    path: string
+    path: string,
+    restricted:boolean
   }
 
 export type SelectedImage = {
