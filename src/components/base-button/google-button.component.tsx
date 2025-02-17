@@ -3,12 +3,15 @@ import { signInWithGoogle } from '@/utils/firebase/firebase.auth'
 import BaseButton, { buttonType } from './base-button.component'
 import { FcGoogle } from '@/assets'
 import { useDispatch } from 'react-redux'
-import { googleSignInComplete, googleSignInStart } from '@/store/auth/auth.actions'
+import { googleSignInComplete, googleSignInStart, signInFailure } from '@/store/auth/auth.actions'
+import { setErrorToast } from '@/store/toast/toast.actions'
+import { getAuthError } from '@/utils/errors.utils'
 
 const GoogleSigninButton = () => {
     const dispatch = useDispatch();
     const continueWithGoogle = () => {
-        signInWithGoogle().then((userAuth) => { if (userAuth) { dispatch(googleSignInComplete(userAuth.user)) } });
+        signInWithGoogle().then((userAuth) => { if (userAuth && userAuth.user) { dispatch(googleSignInComplete(userAuth.user)) } })
+            .catch((error)=> {dispatch(signInFailure(error)); dispatch(setErrorToast(getAuthError(error).message))}) ;
         dispatch(googleSignInStart())
     }
     return (

@@ -15,7 +15,7 @@ const BottomNav = ({className=""}:BottomNavItemProps) => {
         <NavLink
           key={index}
           to={item.path}
-          className={ ({isActive}) => `${isActive && 'bg-gray-transparent !text-blue'} flex flex-col items-center py-2 space-y-1 text-gray hover:text-blue transition duration-200 hover:bg-gray-transparent w-full rounded-xl`}
+          className={ ({isActive}) => `${isActive && 'bg-gray-transparent !text-blue'} flex flex-col items-center py-2 space-y-1 text-gray hover:text-blue transition duration-200 hover:bg-gray-transparent w-full max-w-[10rem] rounded-xl`}
         >
           <span>{item.icon}</span>
           <span className="text-xs">{item.label}</span>

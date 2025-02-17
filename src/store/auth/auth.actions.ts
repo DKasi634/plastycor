@@ -35,7 +35,7 @@ type RegisterSuccess = ActionWithPayload<
 type GoogleSignInStart = Action<AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START>;
 type GoogleSignInComplete = ActionWithPayload<
   AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE,
-  User | null
+  {email:string, displayName:string, phoneNumber:string, photoURL:string}
 >;
 type EmailSignInStart = ActionWithPayload<
   AUTH_ACTION_TYPES.EMAIL_SIGNIN_START,
@@ -119,9 +119,9 @@ export const registerFailure = (error: unknown): RegisterFailure =>
   createAction(AUTH_ACTION_TYPES.REGISTER_FAILURE, getAuthError(error));
 
 export const googleSignInComplete = (
-  user: User | null
+  user: User 
 ): GoogleSignInComplete =>
-  createAction(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, user);
+  createAction(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, {email:user.email||'', displayName:user.displayName||'', phoneNumber:user.phoneNumber||'', photoURL:user.photoURL||'' });
 
 export const googleSignInStart = (): GoogleSignInStart =>
   createAction(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START);

@@ -38,7 +38,8 @@ export const getAuthError = (error: unknown): AuthError => {
 
             case "auth/popup-closed-by-user":
                 return { code: error.code, message: "Popup closed before completing sign-in." };
-
+            case "auth/popup-blocked":
+                return { code: error.code, message: "Popup blocked by the browser." };
             case "auth/operation-not-allowed":
                 return { code: error.code, message: "This operation is not allowed. Please contact support." };
 
