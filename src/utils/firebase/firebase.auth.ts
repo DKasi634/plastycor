@@ -11,6 +11,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   PhoneAuthProvider,
+  signInWithRedirect,
 } from "firebase/auth";
 
 export const RECAPTCHA_CONTAINER_ID = "recaptcha-container";
@@ -60,6 +61,11 @@ export const createAuthUser = async (
   if (!email.trim().length || !password.trim().length) return null;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
+
+export const signInWithGoogleRedirect = async () =>{
+  const googleAuthProvider = new GoogleAuthProvider();
+  return await signInWithRedirect(auth, googleAuthProvider)
+}
 
 export const siginWithEmail = async (
   email: string,

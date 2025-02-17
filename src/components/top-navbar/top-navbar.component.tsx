@@ -43,7 +43,7 @@ const TopNavbar = () => {
     <nav className="h-[5rem] px-8 py-2 flex items-center justify-between fixed top-0 left-0 w-full bg-light-variant backdrop-blur-3xl z-50 border-b border-gray-transparent" >
       <div className="flex justify-between gap-4 items-center w-full">
         <Link to={"/"} className="h-[4rem] w-fit inline-block">
-          <GenericImage loading="lazy" src={LogoImage} className="h-full object-cover object-center" alt="Logo" />
+          <img loading="lazy" src={LogoImage} className="h-full object-cover object-center" alt="Logo" />
         </Link>
         <div className="flex items-center justify-start">
           <div className="hidden lg:flex items-center justify-center gap-8">

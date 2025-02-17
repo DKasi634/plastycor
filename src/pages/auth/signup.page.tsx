@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAuthError, clearNavigateToSignIn, googleSignInStart, registerStart } from "@/store/auth/auth.actions";
+import { clearAuthError, clearNavigateToSignIn, registerStart } from "@/store/auth/auth.actions";
 import { selectAuthError, selectAuthLoading, selectNavigateToSignIn } from "@/store/auth/auth.selector";
 import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
-import { FcGoogle } from "@/assets";
+import GoogleSigninButton from "@/components/base-button/google-button.component";
 // import { store } from "@/store/store";
 
 const SignUpPage: React.FC = () => {
@@ -203,12 +203,7 @@ const SignUpPage: React.FC = () => {
             }
           </BaseButton>
 
-          <BaseButton rounded={false} type={buttonType.green} clickHandler={()=>{ dispatch(googleSignInStart()) }}
-            className="flex items-center justify-center !w-full !px-4 py-2 gap-2 text-sm font-medium "
-          >
-            <FcGoogle className="h-5 w-5" />
-            <span>Continuer avec Google</span> 
-          </BaseButton>
+          <GoogleSigninButton />
         </form>
       </div>
       {authLoading && <LoaderLayout />}

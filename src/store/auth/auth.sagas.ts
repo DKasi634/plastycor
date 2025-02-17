@@ -1,12 +1,11 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import { AUTH_ACTION_TYPES } from "./auth.types";
 import { ActionWithPayload } from "@/utils/reducer/reducer.utils";
-// import { UserCredential } from "firebase/auth"
 import {
   createAuthUser,
   logout,
   siginWithEmail,
-  signInWithGoogle,
+  signInWithGoogleRedirect,
 } from "@/utils/firebase/firebase.auth";
 import { IUser } from "@/api/types";
 import {
@@ -17,7 +16,7 @@ import {
   signInFailure,
   signInSuccess,
 } from "./auth.actions";
-import { UserCredential } from "firebase/auth";
+import { User, UserCredential } from "firebase/auth";
 import {
   createOrUpdateFirestoreUser,
   getFirestoreUserByEmail,
@@ -98,27 +97,35 @@ function* emailSignIn({
 }
 
 
-function* googleSignIn() {
+function* googleSignIn(){
   try {
-    const user: UserCredential | null = yield call(signInWithGoogle);
-    if (!user || !user.user.email) {
+    yield call(signInWithGoogleRedirect)
+  } catch (error) {
+    yield put(signInFailure(error));
+    yield put(setErrorToast(getAuthError(error).message))
+  }
+}
+
+function* googleSignInComplete({payload:user}:ActionWithPayload<AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, User | null>) {
+  try {
+    if (!user || !user.email) {
       throw new Error("Signin failed, something went wrong !");
     }
-    const existingUser: IUser | null = yield call( getFirestoreUserByEmail, user.user.email);
-    const firstName = user.user.displayName?.split(" ")[0] || `User@${new Date().getTime()}`;
+    const existingUser: IUser | null = yield call( getFirestoreUserByEmail, user.email);
+    const firstName = user.displayName?.split(" ")[0] || `User@${new Date().getTime()}`;
 
-    const lastName = user.user.displayName?.split(" ")[1] || ``;
+    const lastName = user.displayName?.split(" ")[1] || ``;
 
     const newUser: IUser = {
-      email: user.user.email,
+      email: user.email,
       firstName,
       lastName,
       disabled: false,
       createdAt: new Date().toISOString(),
-      phoneNumber: user.user.phoneNumber || "",
+      phoneNumber: user.phoneNumber || "",
       profilePicture:
-        user.user.photoURL ||
-        `https://placehold.co/200x200/207fff/FFF?text=${ user.user.email.at(0)?.toUpperCase()}`,
+        user.photoURL ||
+        `https://placehold.co/200x200/207fff/FFF?text=${ user.email.at(0)?.toUpperCase()}`,
     };
     const firestoreUser: IUser = { ...existingUser, ...newUser };
 
@@ -157,7 +164,10 @@ export function* watchEmailSignin() {
   yield takeLatest(AUTH_ACTION_TYPES.EMAIL_SIGNIN_START, emailSignIn);
 }
 
-export function* watchGoogleSignIn() {
+export function* watchGoogleSignInCompletion() {
+  yield takeLatest(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, googleSignInComplete);
+}
+export function* watchGoogleSignInStart() {
   yield takeLatest(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START, googleSignIn);
 }
 
@@ -181,7 +191,9 @@ export function* authSaga() {
   yield all([
     call(watchRegistration),
     call(watchEmailSignin),
-    call(watchGoogleSignIn),
-    call(watchLogout)
+    call(watchGoogleSignInCompletion),
+    call(watchGoogleSignInStart),
+    call(watchLogout),
+    call(watchSetCurrentUser)
   ]);
 }

@@ -11,6 +11,7 @@ import {
   getCustomError,
 } from "@/utils/errors.utils";
 import { IUser } from "@/api/types";
+import { User } from "firebase/auth";
 
 type RegisterStart = ActionWithPayload<
   AUTH_ACTION_TYPES.REGISTER_START,
@@ -31,8 +32,11 @@ type RegisterSuccess = ActionWithPayload<
   IUser
 >;
 
-
 type GoogleSignInStart = Action<AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START>;
+type GoogleSignInComplete = ActionWithPayload<
+  AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE,
+  User | null
+>;
 type EmailSignInStart = ActionWithPayload<
   AUTH_ACTION_TYPES.EMAIL_SIGNIN_START,
   { email: string; password: string }
@@ -78,6 +82,7 @@ export type AuthAction =
   | RegisterStart
   | RegisterSuccess
   | GoogleSignInStart
+  | GoogleSignInComplete
   | EmailSignInStart
   | SignInFailure
   | SignInSuccess
@@ -90,7 +95,7 @@ export type AuthAction =
   | GetCurrentUser
   | SetCurrentUser
   | ClearAuthError
-  | ClearNavigateToSignIn
+  | ClearNavigateToSignIn;
 
 export const registerStart = (
   firstName: string,
@@ -112,6 +117,11 @@ export const registerSuccess = (createdUser: IUser): RegisterSuccess =>
 
 export const registerFailure = (error: unknown): RegisterFailure =>
   createAction(AUTH_ACTION_TYPES.REGISTER_FAILURE, getAuthError(error));
+
+export const googleSignInComplete = (
+  user: User | null
+): GoogleSignInComplete =>
+  createAction(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, user);
 
 export const googleSignInStart = (): GoogleSignInStart =>
   createAction(AUTH_ACTION_TYPES.GOOGLE_SIGNIN_START);
@@ -155,6 +165,8 @@ export const setCurrentUser = (userEmail: string): SetCurrentUser =>
 export const clearAuthError = (): ClearAuthError =>
   createAction(AUTH_ACTION_TYPES.CLEAR_AUTH_ERROR);
 
+// export const resetAuthLoading = (): ClearAuthError =>
+//   createAction(AUTH_ACTION_TYPES.CLEAR_AUTH_ERROR);
+
 export const clearNavigateToSignIn = (): ClearNavigateToSignIn =>
   createAction(AUTH_ACTION_TYPES.CLEAR_NAVIGATE_TO_SIGN_IN);
-

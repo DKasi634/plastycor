@@ -11,7 +11,7 @@ type SideBarNavProps = {
 
 const SidebarNav = ({ className = "" }: SideBarNavProps) => {
   return (
-    <nav className={`${className}hidden lg:flex flex-col justify-between fixed left-0 top-[5rem] max-h-screen h-[calc(100svh-5rem)] w-64 bg-white border-r border-gray/80 py-6 shadow-md max-w-[16rem]`}>
+    <nav className={`${className}hidden lg:flex flex-col justify-between fixed left-0 top-[5rem] max-h-screen min-h-[calc(100svh-5rem)] w-64 border-r border-gray/80 py-6 shadow-md max-w-[16rem]`}>
       <div>
         {userMenuItems.map((item, index) => (
 
@@ -24,7 +24,7 @@ const SidebarNav = ({ className = "" }: SideBarNavProps) => {
           </NavLink>
         ))}
       </div>
-      <div className="px-6 pb-6 text-sm text-gray-500">
+      <div className="px-6 text-sm text-gray-500">
         &copy; {new Date().getFullYear()} Plastycor
       </div>
     </nav>

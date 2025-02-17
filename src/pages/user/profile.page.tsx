@@ -29,7 +29,7 @@ const ProfilePage = () => {
     }
   }, [authLoading, currentUser])
 
-  const logout = () => {dispatch(logoutStart())}
+  const logout = () => { dispatch(logoutStart()) }
 
 
   return (
@@ -48,7 +48,9 @@ const ProfilePage = () => {
                 <div className="flex flex-col pb-4 w-fit items-start">
                   <div className="flex items-center justify-start gap-4">
                     <h2 className="text-lg md:text-3xl font-bold w-fit pr-4">{`${currentUser.firstName} ${currentUser.lastName}`}</h2>
-                    <span className="px-3 py-[0.15rem] md:py-1 rounded-[0.3rem] text-xs bg-green-secondary text-light w-fit">{currentUser.adminStatus || "Admin"}</span>
+                    {currentUser.adminStatus &&
+                      <span className="px-3 py-[0.15rem] md:py-1 rounded-[0.3rem] text-xs bg-green-secondary text-light w-fit">{currentUser.adminStatus}</span>
+                    }
                     <BaseButton type={buttonType.clear} clickHandler={logout} className="!bg-light fixed right-[2rem] bottom-[8rem] z-40 shadow-lg lg:bottom-[5rem] flex items-center gap-2 !px-11 md:!px-4"><span className="hidden md:inline-block">Logout</span> <FiLogOut className="text-lg" /> </BaseButton>
                   </div>
                   <div className="flex items-center justify-start gap-4 ">
@@ -69,12 +71,16 @@ const ProfilePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col py-2">
-                <h2 className="font-bold text-dark text-2xl md:text-3xl my-4 ">My Products</h2>
-                <ProductsContainer OwnerView />
-                
-              </div>
-              <BaseButton href="/me/post" type={buttonType.green} className="fixed right-[2rem] bottom-[5rem] z-40 shadow-lg lg:bottom-[2rem] font-semibold !text-sm">Post <BiPlus /></BaseButton>
+
+              {(currentUser && currentUser.adminStatus) &&
+                <>
+                  <div className="flex flex-col py-2">
+                    <h2 className="font-bold text-dark text-2xl md:text-3xl my-4 ">Mes Produits</h2>
+                    <ProductsContainer OwnerView />
+                  </div>
+                  <BaseButton href="/me/post" type={buttonType.green} className="fixed right-[2rem] bottom-[5rem] z-40 shadow-lg lg:bottom-[2rem] font-semibold !text-sm">Post <BiPlus /></BaseButton>
+                </>
+              }
             </>
           }
         </main>

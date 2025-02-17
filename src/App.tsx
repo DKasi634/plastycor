@@ -23,6 +23,8 @@ import PostProductPage from './pages/user/post-product.page'
 import SingleProductPage from './pages/single-product.page'
 import NotFoundPage from './pages/errors/not-found.page'
 import EditProductPage from './pages/user/edit-product.page'
+import AdminProtectedRoute from './routes/admin-protected.route'
+import { ADMIN_STATUS } from './api/types'
 
 const App = () => {
 
@@ -32,11 +34,14 @@ const App = () => {
     const unsubscribe = () => {
       try {
         onAuthStateChangedListener(async (userAuth) => {
+          // console.log("\nAuth state changed : ", userAuth)
           if (userAuth && userAuth.email) { dispatch(setCurrentUser(userAuth.email)) }
         })
       } catch (error) { }
     }; return unsubscribe;
   })
+
+
 
   return (
     <>
@@ -53,14 +58,14 @@ const App = () => {
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
           <Route path='product/:productId' element={<SingleProductPage />} />
-          
+
         </Route>
         <Route path='/me' element={<AuthProtectedRoute> <UserProfileNavigation /></AuthProtectedRoute>}>
           <Route index element={<ProfilePage />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='profile' element={<ProfilePage />} />
-          <Route path='post' element={<PostProductPage />} />
-          <Route path='edit-product/:productId' element={<EditProductPage />} />
+          <Route path='post' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}> <PostProductPage /> </AdminProtectedRoute>} />
+          <Route path='edit-product/:productId' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}><EditProductPage /></AdminProtectedRoute>} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

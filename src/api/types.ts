@@ -1,8 +1,7 @@
 
 export enum ADMIN_STATUS {
     MAIN_ADMIN="MAIN_ADMIN",
-    CO_ADMIN="CO_ADMIN",
-    NONE="NONE"
+    CO_ADMIN="CO_ADMIN"
 }
 
 export type IUser = {

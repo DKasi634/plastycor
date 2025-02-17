@@ -1,11 +1,8 @@
 import { ReactElement } from "react";
 
 import { Activity, Creator, MenuItem, Testimonial } from "@/types";
-
 import { Category } from "@/api/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiPackage, FiUser, HiOutlineLightBulb, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
-
-
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
 export type PrincipleData = {
     title: string,
@@ -448,10 +445,9 @@ export const trainingTestimonials: Testimonial[] = [
 
 
 export const userMenuItems:MenuItem[] = [
-    { label: "Profile", icon: <FiUser />, path:"profile" },
-    { label: "Products", icon: <FiPackage />, path:"products" },
-    { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations" },
-    { label: "Dashboard", icon: <FiBarChart />, path:"dashboard" },
+    { label: "Profil", icon: <FiUser />, path:"profile" },
+    // { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations" },
+    // { label: "Admin", icon: <FiBarChart />, path:"dashboard" },
   ];
 
 
