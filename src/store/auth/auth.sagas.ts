@@ -97,15 +97,6 @@ function* emailSignIn({
 }
 
 
-// function* googleSignIn(){
-//   try {
-//     yield call(signInWithGoogleRedirect)
-//   } catch (error) {
-//     yield put(signInFailure(error));
-//     yield put(setErrorToast(getAuthError(error).message))
-//   }
-// }
-
 function* googleSignInComplete({payload:{email, displayName, phoneNumber, photoURL}}:ActionWithPayload<AUTH_ACTION_TYPES.GOOGLE_SIGNIN_COMPLETE, {email:string, displayName:string, createdAt:string, phoneNumber:string, photoURL:string}>) {
   try {
     if (!email) {
@@ -123,7 +114,7 @@ function* googleSignInComplete({payload:{email, displayName, phoneNumber, photoU
       disabled: false,
       createdAt: new Date().toISOString(),
       phoneNumber: phoneNumber || "",
-      adminStatus:null,
+      adminStatus:existingUser?.adminStatus || null,
       profilePicture:
         photoURL ||
         `https://placehold.co/200x200/207fff/FFF?text=${ email.at(0)?.toUpperCase()}`,

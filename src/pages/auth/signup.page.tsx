@@ -6,7 +6,7 @@ import BaseButton, { buttonType } from "@/components/base-button/base-button.com
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAuthError, clearNavigateToSignIn, registerStart } from "@/store/auth/auth.actions";
-import { selectAuthError, selectAuthLoading, selectNavigateToSignIn } from "@/store/auth/auth.selector";
+import { selectAuthError, selectAuthLoading, selectCurrentUser, selectNavigateToSignIn } from "@/store/auth/auth.selector";
 import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
@@ -18,6 +18,7 @@ const SignUpPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
   const authLoading = useSelector(selectAuthLoading);
   const authError = useSelector(selectAuthError);
   const navigateToSignin = useSelector(selectNavigateToSignIn);
@@ -28,7 +29,12 @@ const SignUpPage: React.FC = () => {
   const [errors, setErrors] = useState(initialFormData);
 
 
-
+  useEffect(()=>{
+      if(currentUser){
+        navigate("/me/profile")
+      }
+    }, [currentUser])
+    
   useEffect(() => {
     if (navigateToSignin) {
       setFormData(initialFormData);
