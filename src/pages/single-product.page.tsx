@@ -76,7 +76,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
                             </div>
                             <span className="text-xs font-bold text-gray text-left">{productOwner?.firstName} {productOwner?.lastName}</span>
                         </div>
-                        {(currentUser && productOwner) &&
+                        {(currentUser && productOwner && productOwner.phoneNumber) &&
                             <BaseButton href={`tel:${productOwner.phoneNumber}`} > Contact Owner</BaseButton>
                         }
                     </div>

@@ -49,6 +49,7 @@ function* registerUser({
       email,
       firstName,
       lastName,
+      adminStatus:null,
       phoneNumber,
       disabled: false,
       createdAt: new Date().toISOString(),
@@ -122,6 +123,7 @@ function* googleSignInComplete({payload:{email, displayName, phoneNumber, photoU
       disabled: false,
       createdAt: new Date().toISOString(),
       phoneNumber: phoneNumber || "",
+      adminStatus:null,
       profilePicture:
         photoURL ||
         `https://placehold.co/200x200/207fff/FFF?text=${ email.at(0)?.toUpperCase()}`,

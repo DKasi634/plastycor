@@ -16,7 +16,7 @@ import { rootSaga } from "./rootSaga";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [""],
+  blacklist: [""],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -42,6 +42,6 @@ export type AppDispatch = typeof store.dispatch;
 
 store.subscribe(()=>{
   const state = store.getState();
-  console.log("\nAuth slice", state.auth)  
+  // console.log("\nAuth slice", state.auth)  
   // console.log("\n Toast slice", state.toast)  
 })

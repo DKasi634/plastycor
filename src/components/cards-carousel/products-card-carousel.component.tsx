@@ -26,7 +26,7 @@ const ProductsCarousel = React.memo(({ className = '' }: ProductsCarouselProps) 
   const [loading, setLoading] = useState(false);
   const carouselProductsLimit = 5;
 
-  // // console.log("\nProductsCarousel rendered at ", new Date().toISOString());
+  // console.log("\nProductsCarousel rendered at ", new Date().toISOString());
 
   useEffect(() => {
     fetchCarouselProducts();

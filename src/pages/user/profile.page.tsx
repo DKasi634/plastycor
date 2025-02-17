@@ -56,9 +56,11 @@ const ProfilePage = () => {
                   <div className="flex items-center justify-start gap-4 ">
                     <CiMail className="text-sm md:text-lg" /> <p className="text-dark/80 text-xs md:text-sm w-fit font-bold">{currentUser.email}</p>
                   </div>
-                  <div className="flex items-center justify-start gap-4 mb-2 md:mb-3">
-                    <MdOutlinePhone className="text-sm md:text-lg" /> <p className="text-dark/80 text-xs md:text-sm w-fit font-bold">{currentUser.phoneNumber}</p>
-                  </div>
+                  {currentUser.phoneNumber &&
+                    <div className="flex items-center justify-start gap-4 mb-2 md:mb-3">
+                      <MdOutlinePhone className="text-sm md:text-lg" /> <p className="text-dark/80 text-xs md:text-sm w-fit font-bold">{currentUser.phoneNumber}</p>
+                    </div>
+                  }
                   <div className="flex items-center justify-start gap-4">
                     <div className="flex flex-col items-start w-fit">
                       <span className="text-xs text-dark/70 font-semibold">Produits</span>

@@ -7,6 +7,7 @@ import { emailSignInStart } from "@/store/auth/auth.actions";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
+import GenericInput from "@/components/generic-input/generic-input.component";
 
 const SignInPage: React.FC = () => {
 
@@ -76,22 +77,16 @@ const SignInPage: React.FC = () => {
         <h2 className="text-2xl font-bold text-center">Se connecter</h2> {/* Sign In */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email Input */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Entrez votre email" 
-              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-          </div>
+
+          <GenericInput
+            label="Email"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            error={errors.email}
+            name="email"
+            placeholder="Entrez votre email"
+          />
 
           {/* Password Input (Replaced with PasswordInput component) */}
           <PasswordInput

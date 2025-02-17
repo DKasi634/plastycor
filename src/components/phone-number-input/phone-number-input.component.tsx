@@ -36,7 +36,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
         defaultCountry="US"
         value={value}
         onChange={handlePhoneChange} // Use the internal handler here
-        className={`mt-1 block w-full px-3 py-[0.4rem] border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+        className={`mt-1 block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent *:bg-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm ${
           error ? "border-red-500" : "border-gray-300"
         }`}
       />

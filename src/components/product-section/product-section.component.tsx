@@ -6,7 +6,7 @@ import ProductsCarousel from "../cards-carousel/products-card-carousel.component
 
 const ProductsSection = () => {
 
-    console.log("\nProducts section mounting at: ", new Date().toISOString())
+    // console.log("\nProducts section mounting at: ", new Date().toISOString())
       return (
         <div className="flex flex-col py-4">
         <SectionContainer id="products" >

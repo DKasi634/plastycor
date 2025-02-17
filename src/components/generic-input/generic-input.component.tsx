@@ -5,6 +5,7 @@ interface InputProps {
   type: string;
   value: any;
   name:string,
+  id?:string,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   placeholder?: string;
@@ -17,6 +18,7 @@ const GenericInput: React.FC<InputProps> = ({
   onChange,
   error,
   placeholder,
+  id,
   name
 }) => {
   return (
@@ -25,6 +27,7 @@ const GenericInput: React.FC<InputProps> = ({
       <input
         type={type}
         value={value}
+        id={id || name}
         onChange={onChange}
         placeholder={placeholder}
         name={name}

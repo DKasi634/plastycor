@@ -8,7 +8,7 @@ export type IUser = {
     email:string,
     firstName:string,
     lastName:string,
-    adminStatus?:ADMIN_STATUS,
+    adminStatus:ADMIN_STATUS|null,
     createdAt:string,
     phoneNumber:string,
     profilePicture:string,
