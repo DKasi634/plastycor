@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ImagesDisplayBox from "../images-display-box/images-display-box.component";
-import { IoCloudUploadOutline } from "react-icons/io5";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { firebaseStorage } from "@/utils/firebase/firebase.config";
 import { SelectedImage } from "@/types";
 import { setErrorToast } from "@/store/toast/toast.actions";
 import { useDispatch } from "react-redux";
+import { IoCloudUploadOutline } from "@/assets";
 
 type ImagesUploadFormGroupProps = {
   imagesLimit: number;

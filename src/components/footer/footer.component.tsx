@@ -1,8 +1,9 @@
 import { SectionContainer } from "@/styles/globals.styles"
 import { Link, NavLink } from "react-router-dom"
 import FooterLogoImage from "@/assets/logo/icon_footer.png"
-import { FaFacebookF, FaInstagram } from "react-icons/fa"
-import { FaXTwitter } from "react-icons/fa6"
+import { FaFacebookF, FaInstagram, FaXTwitter } from "@/assets"
+import GenericImage from "../generic-image/generic-image.component"
+
 
 
 const Footer = () => {
@@ -11,7 +12,7 @@ const Footer = () => {
             <SectionContainer className="grid grid-cols-1 lg:flex flex-row justify-between items-start gap-[3rem] lg:gap-4 my-8 lg:max-w-[80rem]">
                 <div className="flex flex-col items-start justify-start">
                     <Link to={"/"} className="h-[4rem] w-fit inline-block">
-                        <img loading="lazy" src={FooterLogoImage} className="h-full object-cover object-center" alt="Logo" />
+                        <GenericImage loading="lazy" src={FooterLogoImage} className="h-full object-cover object-center" alt="Logo" />
                     </Link>
                 </div>
                 <div className="flex flex-col gap-4 items-start justify-start">

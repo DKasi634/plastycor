@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
 import { useNavigate } from "react-router-dom";
 import LoaderLayout from "@/components/loader/loader-layout.component";
-import { CiMail } from "react-icons/ci";
-import { MdOutlinePhone } from "react-icons/md";
+
 
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { BiPlus } from "react-icons/bi";
+
 import ProductsContainer from "@/components/products-container/products-container.component";
-import { FiLogOut } from "react-icons/fi";
+
 import { logoutStart } from "@/store/auth/auth.actions";
+import { BiPlus, CiMail, FiLogOut, MdOutlinePhone } from "@/assets";
+import GenericImage from "@/components/generic-image/generic-image.component";
 
 
 const ProfilePage = () => {
@@ -39,7 +40,7 @@ const ProfilePage = () => {
             <>
               <div className="flex items-center justify-start lg:px-8 w-full gap-8">
                 <div className="inline-block w-[4rem] h-[4rem] md:w-[8rem] md:h-[8rem] bg-light-transparent backdrop-blur-lg rounded-full md:rounded-[2.5rem] overflow-hidden">
-                  <img
+                  <GenericImage
                     src={currentUser.profilePicture} alt={`${currentUser.firstName} ${currentUser.lastName}`}
                     className="w-full h-full object-cover object-center"
                   />

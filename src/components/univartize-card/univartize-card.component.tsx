@@ -1,7 +1,7 @@
+import { CiLocationOn, FaRegHeart, IoEyeOutline } from "@/assets";
 import { Product } from "@/constants/data";
-import { CiLocationOn } from "react-icons/ci";
-import { FaRegHeart } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
+import GenericImage from "../generic-image/generic-image.component";
+
 
 type UnivartizeCardProps = {
     product: Product,
@@ -12,7 +12,7 @@ const UnivartizeCard = ({ product, className = '' }: UnivartizeCardProps) => {
     return (
         <div className={`relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] cursor-pointer shadow-dark-transparent p-[2px] min-h-full  ${className}`}>
             <div className="aspect-square bg-gray-transparent rounded-t-lg overflow-hidden border-gray-transparent border-[1px]">
-                <img loading="lazy"
+                <GenericImage loading="lazy"
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover object-center"
@@ -25,7 +25,7 @@ const UnivartizeCard = ({ product, className = '' }: UnivartizeCardProps) => {
                 <p className="text-sm font-normal text-slate-900 mb-2 line-clamp-3 min-h-[4rem]">{product.description}</p>
                 <div className="flex items-center justify-start gap-4 mb-4">
                     <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
-                        <img loading="lazy" src={product.owner.image} className="object-cover object-center w-full h-full" alt="" />
+                        <GenericImage loading="lazy" src={product.owner.image} className="object-cover object-center w-full h-full" alt="" />
                     </div>
                     <div className="flex flex-col justify-start">
                         <span className="text-xs font-bold text-dark text-left">{product.owner.name}</span>

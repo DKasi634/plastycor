@@ -1,10 +1,11 @@
 import { categories } from "@/constants/data";
 import BaseButton, { buttonType } from "../base-button/base-button.component";
-import { LuShoppingCart } from "react-icons/lu";
 import { ApiProduct, Category, IUser } from "@/api/types";
 import { useEffect, useState } from "react";
 import { getFirestoreUserByEmail } from "@/utils/firebase/firestore.utils";
 import { useNavigate } from "react-router-dom";
+import { LuShoppingCart } from "@/assets";
+import GenericImage from "../generic-image/generic-image.component";
  
 
 type ProductCardProps = {
@@ -46,7 +47,7 @@ const ProductCard = ({ product, className = '', ownerView = false }: ProductCard
     return (
         <div className={`relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] cursor-pointer shadow-dark-transparent min-h-full border-gray-transparent border-[1px]  ${className}`}>
             <div className="aspect-square bg-gray-transparent rounded-t-lg overflow-hidden border-gray-transparent border-b-[1px]">
-                <img loading="lazy"
+                <GenericImage loading="lazy"
                     src={product.images[0]}
                     alt={product.name}
                     className="w-full h-full object-cover object-center"
@@ -60,7 +61,7 @@ const ProductCard = ({ product, className = '', ownerView = false }: ProductCard
                 {!ownerView &&
                     <div className="flex items-center justify-start gap-4 mb-4">
                         <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
-                            <img loading="lazy" src={productOwner?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
+                            <GenericImage loading="lazy" src={productOwner?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
                         </div>
                         <span className="text-sm font-bold text-gray text-left">{productOwner?.firstName} {productOwner?.lastName}</span>
                     </div>

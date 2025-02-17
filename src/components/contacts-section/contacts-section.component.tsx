@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { ContactSectionWrapper, SectionContainer } from "@/styles/globals.styles";
-import { HiOutlineMail } from "react-icons/hi";
-import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlinePhoneEnabled } from "react-icons/md";
+
 import BaseButton from "../base-button/base-button.component";
 import axios from "axios";
 import LoaderLayout from '../loader/loader-layout.component';
 import { clearToast, setErrorToast, setSuccessToast, ToastMessage } from '@/store/toast/toast.actions';
 import { useDispatch } from 'react-redux';
+import { HiOutlineMail, IoLocationOutline, MdOutlinePhoneEnabled } from '@/assets';
 
 export const ContactSection = () => {
 
@@ -47,7 +46,6 @@ export const ContactSection = () => {
         e.preventDefault();
 
 
-        // Basic validation
         if (!formData.name || !formData.email || !formData.message) {
             alert('Veuillez remplir tous les champs');
             return;

@@ -1,13 +1,13 @@
 import { NavDrawerWrapper } from "@/styles/globals.styles";
 import React, { useRef } from "react";
-import { IoClose } from "react-icons/io5"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import NavBtn from "../nav-btn/nav-btn.component";
 import { LandingPageRoutes } from "@/constants/data";
 import BaseButton, { buttonType } from "../base-button/base-button.component";
-import { FiLogIn } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/store/auth/auth.selector";
+import { FiLogIn, IoClose } from "@/assets";
+import GenericImage from "../generic-image/generic-image.component";
 
 
 type NavMenuProps = {
@@ -66,7 +66,7 @@ const NavMenu = ({ className = "", visible, hideCallback }: NavMenuProps) => {
               {!currentUser ?
                 <BaseButton clickHandler={hideCallback} type={buttonType.clear} href="/signin"> <FiLogIn /> &nbsp; Se connecter</BaseButton>
                 :
-                <Link to={"/me/profile"} className="w-[2rem] h-[2rem] rounded-full overflow-hidden" > <img
+                <Link to={"/me/profile"} className="w-[2rem] h-[2rem] rounded-full overflow-hidden" > <GenericImage
                   src={currentUser.profilePicture} alt={`${currentUser.firstName} ${currentUser.lastName}`}
                   className="w-full h-full object-cover object-center"
                 /> </Link>

@@ -1,7 +1,8 @@
 
 import CtaImage from "@/assets/cta/cta.jpg";
 import BaseButton, { buttonType } from "../base-button/base-button.component";
-import { GoArrowUpRight } from "react-icons/go";
+import { GoArrowUpRight } from "@/assets";
+
 
 export const CTASection = ()=>{
     return (

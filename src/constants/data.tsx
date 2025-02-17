@@ -1,33 +1,9 @@
 import { ReactElement } from "react";
-import { BsPeopleFill } from "react-icons/bs";
-import { FaRecycle, FaTree } from "react-icons/fa";
-import { PiHandshake } from "react-icons/pi";
-import { SiTarget } from "react-icons/si";
-import { TbBulb } from "react-icons/tb";
+
 import { Activity, Creator, MenuItem, Testimonial } from "@/types";
 
-import ProductImage1 from "@/assets/products-min/product-1.jpg"
-import ProductImage2 from "@/assets/products-min/product-2.jpg"
-import ProductImage3 from "@/assets/products-min/product-3.jpg"
-import ProductImage4 from "@/assets/products-min/product-4.jpg"
-import ProductImage5 from "@/assets/products-min/product-5.jpg"
-
-import ActivityImage1 from "@/assets/activities/activity-1.jpg"
-import ActivityImage2 from "@/assets/activities/activity-2.jpg"
-import ActivityImage3 from "@/assets/activities/activity-3.jpg"
-import ActivityImage4 from "@/assets/activities/activity-4.jpg"
-import ActivityImage5 from "@/assets/activities/activity-5.jpg"
-
-
-
-import TeamMember0 from "@/assets/team/team-ceo-1.jpg"
-import TeamMember1 from "@/assets/team/team--woman-1.jpg"
-import TeamMember2 from "@/assets/team/team--woman-2.jpg"
-import TeamMember3 from "@/assets/team/team--woman--3.jpg"
-import TeamMember4 from "@/assets/team/team--man-4.jpg"
-import { FiUser, FiPackage, FiBarChart } from "react-icons/fi";
-import { HiOutlineLightBulb } from "react-icons/hi";
 import { Category } from "@/api/types";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiPackage, FiUser, HiOutlineLightBulb, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
 
 

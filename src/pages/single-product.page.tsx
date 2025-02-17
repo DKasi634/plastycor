@@ -1,5 +1,6 @@
 import { ApiProduct, IUser } from "@/api/types";
 import BaseButton from "@/components/base-button/base-button.component";
+import GenericImage from "@/components/generic-image/generic-image.component";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
 import { setErrorToast } from "@/store/toast/toast.actions";
@@ -59,8 +60,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
                 <div className={`${className} min-h-screen flex justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.name}</h1>
-
-                        <img
+                        <GenericImage
                             src={product.images[0]}
                             alt={product.name}
                             className="w-64 h-64 object-cover mb-4 shadow-md rounded-lg border border-gray"
@@ -72,7 +72,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
 
                         <div className="flex items-center justify-start gap-4 mb-4 mt-2">
                             <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
-                                <img loading="lazy" src={productOwner?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
+                                <GenericImage loading="lazy" src={productOwner?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
                             </div>
                             <span className="text-xs font-bold text-gray text-left">{productOwner?.firstName} {productOwner?.lastName}</span>
                         </div>

@@ -1,7 +1,9 @@
-import { CiLocationOn } from "react-icons/ci"
+
 import { Card } from "../cards-carousel/cards-carousel.styles"
 import BaseButton, { buttonType } from "../base-button/base-button.component"
 import { Creator } from "@/types"
+import { CiLocationOn } from "@/assets"
+import GenericImage from "../generic-image/generic-image.component"
 
 
 
@@ -17,7 +19,7 @@ const CreatorCard = ({ className = "", creator }: CreatorCardProps) => {
 
             <div className="relative w-full bg-gradient-to-r from-green via-green-secondary to-green/40 min-h-[8rem] mb-10">
                 <div className="absolute bottom-4 translate-y-1/2 translate-x-6 !w-fit !h-[6rem] aspect-square overflow-hidden rounded-full border-[0.2rem] border-light bg-red-400">
-                    <img src={creator.image} alt={creator.name} className="h-full aspect-square object-cover object-center" />
+                    <GenericImage src={creator.image} alt={creator.name} className="h-full aspect-square object-cover object-center" />
                 </div>
             </div>
 

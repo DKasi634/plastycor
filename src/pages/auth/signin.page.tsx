@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PasswordInput from "@/components/generic-input/password-input.component";
-import { FcGoogle } from "react-icons/fc"; // For the Google icon
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { emailSignInStart, googleSignInStart } from "@/store/auth/auth.actions";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
 import LoaderLayout from "@/components/loader/loader-layout.component";
+import { FcGoogle } from "@/assets";
 
 const SignInPage: React.FC = () => {
 

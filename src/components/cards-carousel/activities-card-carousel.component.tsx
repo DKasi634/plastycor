@@ -1,8 +1,10 @@
 import { Activity } from "@/types";
 import React, { useState, useEffect, useRef } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+
 import BaseButton, { buttonType } from "../base-button/base-button.component";
 import { Card, CarouselContainer, CarouselContent, PaginationDot, PaginationDotsContainer } from "./cards-carousel.styles";
+import { FaAngleLeft, FaAngleRight } from "@/assets";
+import GenericImage from "../generic-image/generic-image.component";
 
 interface ActivitiesCarouselCardProps {
     activities: Activity[];
@@ -74,7 +76,7 @@ const ActivitiesCarousel: React.FC<ActivitiesCarouselCardProps> = ({ activities,
                         className="flex items-center justify-center w-full min-w-[100%] sm:min-w-[100%] lg:w-1/2 lg:min-w-[51%]" // Responsive width
                     >
                         <Card className="!w-full !max-w-[28rem]">
-                            <img
+                            <GenericImage
                                 src={activity.image}
                                 alt={activity.title}
                                 className="w-full object-cover object-center rounded-lg"

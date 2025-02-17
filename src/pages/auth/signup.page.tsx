@@ -9,7 +9,7 @@ import { clearAuthError, clearNavigateToSignIn, googleSignInStart, registerStart
 import { selectAuthError, selectAuthLoading, selectNavigateToSignIn } from "@/store/auth/auth.selector";
 import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle } from "@/assets";
 // import { store } from "@/store/store";
 
 const SignUpPage: React.FC = () => {

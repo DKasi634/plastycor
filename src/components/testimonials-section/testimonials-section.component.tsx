@@ -2,9 +2,9 @@
 import { SectionContainer } from "@/styles/globals.styles"
 import { Testimonial } from "@/types"
 import { useState, useEffect, useRef } from "react"
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
-import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri"
+
 import { Card } from "../cards-carousel/cards-carousel.styles"
+import { FaAngleLeft, FaAngleRight, RiDoubleQuotesL, RiDoubleQuotesR } from "@/assets"
 
 
 type TestimonialsProps = {

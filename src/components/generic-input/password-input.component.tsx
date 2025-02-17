@@ -1,5 +1,5 @@
+import { FiEye, FiEyeOff } from "@/assets";
 import React, { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi"; // For show/hide password icons
 
 interface PasswordInputProps {
   label: string;

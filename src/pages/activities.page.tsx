@@ -1,3 +1,4 @@
+import GenericImage from "@/components/generic-image/generic-image.component"
 import TestimonialsSection from "@/components/testimonials-section/testimonials-section.component"
 import { activities, trainingTestimonials } from "@/constants/data"
 import { SectionContainer } from "@/styles/globals.styles"
@@ -18,7 +19,7 @@ const ActivitiesPage = () => {
                                 return (
                                     <div id={activity.id} key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start justify-start">
                                         <div className="px-8 w-full aspect-square max-h-[60svh] overflow-hidden rounded-sm">
-                                            <img loading="lazy" src={activity.image} className="w-full h-full object-cover object-center" alt={activity.title} />
+                                            <GenericImage loading="lazy" src={activity.image} className="w-full h-full object-cover object-center" alt={activity.title} />
                                         </div>
                                         <div className="flex flex-col gap-4 px-6 py-4">
                                             <h3 className="text-xl font-bold w-full text-left uppercase"> {activity.title} </h3>
@@ -34,7 +35,7 @@ const ActivitiesPage = () => {
                                             <p className="text-sm text-dark w-full text-left"> {activity.description} </p>
                                         </div>
                                         <div className="px-8 w-full aspect-square max-h-[60svh] overflow-hidden rounded-sm">
-                                            <img loading="lazy" src={activity.image} className="w-full h-full object-cover object-center" alt={activity.title} />
+                                            <GenericImage loading="lazy" src={activity.image} className="w-full h-full object-cover object-center" alt={activity.title} />
                                         </div>
                                     </div>
                                 )
