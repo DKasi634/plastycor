@@ -37,10 +37,10 @@ const ManageCategoriesPage: React.FC = () => {
 
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      categoryName: value,
     }));
   };
 

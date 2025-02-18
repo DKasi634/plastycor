@@ -31,7 +31,7 @@ function* createCategory({payload:category}:ActionWithPayload<CATEGORIES_ACTION_
         yield put(createCategorySuccess(createdCategory));
         yield put(setSuccessToast("Category created successfully !"));
     } catch (error) {
-        console.log("Could not create category due to : ", error)
+        // console.log("Could not create category due to : ", error)
         yield put(createCategoryFailure(error));
         yield put(setErrorToast("Something went wrong ! Failed to create the category"));
     }

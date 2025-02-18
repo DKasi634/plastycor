@@ -28,6 +28,7 @@ import { ADMIN_STATUS } from './api/types'
 import ManageCategoriesPage from './pages/admin-pages/manage-categories.page'
 import { fetchCategoriesStart } from './store/categories/categories.actions'
 import DashboardPage from './pages/admin-pages/dashboard.page'
+import ManageUsersPage from './pages/admin-pages/manage-users.page'
 
 const App = () => {
 
@@ -74,9 +75,9 @@ const App = () => {
           <Route path='profile' element={<ProfilePage />} />
           <Route path='post' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}> <PostProductPage /> </AdminProtectedRoute>} />
           <Route path='edit-product/:productId' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}><EditProductPage /></AdminProtectedRoute>} />
-          <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><DashboardPage/></AdminProtectedRoute>}>
-          </Route>
-          <Route path='manage-categories' element={<ManageCategoriesPage />} />
+          <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><DashboardPage/></AdminProtectedRoute>}/>
+          <Route path='manage-categories' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageCategoriesPage /></AdminProtectedRoute>} />
+          <Route path='manage-users' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageUsersPage /></AdminProtectedRoute>} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

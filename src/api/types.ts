@@ -67,3 +67,20 @@ export type Category = {
     disabled:boolean,
     createdAt:string
 }
+
+
+// This models the raw response returned by the Netlify function
+export interface NetlifyFunctionResponse {
+    statusCode: number;
+    body: string
+  }
+  
+  // The payload our function sends back. Either a success or error
+  export interface SuccessPayload {
+    message: string;
+  }
+  
+  export interface ErrorPayload {
+    error: string;
+  }
+    

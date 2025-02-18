@@ -11,7 +11,7 @@ const DashboardPage: React.FC = () => {
       <div className="grid gap-8 md:grid-cols-3">
         {/* Users Card */}
         <Link
-          to="#"
+          to="/me/manage-users"
           className="bg-gray/20 rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 p-8 flex flex-col items-center"
         >
           <FaUsers className="text-6xl mb-4" />
