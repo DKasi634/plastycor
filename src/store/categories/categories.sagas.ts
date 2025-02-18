@@ -13,7 +13,7 @@ import { ActionWithPayload } from "@/utils/reducer/reducer.utils";
 function* fetchCategories(){
     try {
         const categories:Category[] = yield call(fetchAllFirestoreCategories);
-        if(!categories.length){ throw new Error("Found no categories")};
+        // if(!categories.length){ throw new Error("Found no categories")};
         yield put(fetchCategoriesSuccess(categories))
     } catch (error) {
         yield put(fetchCategoriesFailure(error));
@@ -31,7 +31,7 @@ function* createCategory({payload:category}:ActionWithPayload<CATEGORIES_ACTION_
         yield put(createCategorySuccess(createdCategory));
         yield put(setSuccessToast("Category created successfully !"));
     } catch (error) {
-        console.log("Could not created category due to : ", error)
+        console.log("Could not create category due to : ", error)
         yield put(createCategoryFailure(error));
         yield put(setErrorToast("Something went wrong ! Failed to create the category"));
     }

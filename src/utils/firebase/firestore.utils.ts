@@ -99,11 +99,13 @@ export const createOrUpdateProduct = async (newProduct: ApiProduct): Promise<Api
 
   export const fetchAllFirestoreCategories = async ():Promise<Category[]> =>{
     try {
-      const q  = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.CATEGORIES_COLLECTION));
+      console.log("Fetching categories !")
+      const q  = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.CATEGORIES_COLLECTION), where("disabled", "!=", true));
       const docsSnapshot = await getDocs(q);
       if(docsSnapshot.empty){ throw new Error("Found no category") };
       return docsSnapshot.docs.map(doc => doc.data() as Category)
     } catch (error) {
+      // console.log("Error fetching categories : ", error)
       return []
     }
   }
