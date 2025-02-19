@@ -98,7 +98,7 @@ const PostProductForm = ({ className = "", initialProduct }: PostFormProps) => {
                 <div className="flex flex-col gap-1 mt-1 w-full">
                     <label className="text-xs font-bold text-dark/80 w-full text-left pl-1" htmlFor="categories">Categorie</label>
                     <select name="categories" className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" value={initialProduct.categoryId} onChange={(e) => setCategory(e)} >
-                        {categories.map((cat, idx) => (<option key={idx} value={cat.categoryId} >{cat.categoryName}</option>))}
+                        {categories.filter(cat => !cat.disabled).map((cat, idx) => (<option key={idx} value={cat.categoryId} >{cat.categoryName}</option>))}
                     </select>
                 </div>
 

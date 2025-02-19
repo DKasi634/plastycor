@@ -12,7 +12,7 @@ import LoaderItem from "../loader/loader.component"
 
 type ProductsContainerProps = {
     className?: string,
-    OwnerView?: boolean
+    OwnerView?: boolean,
 }
 
 const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContainerProps) => {
@@ -38,6 +38,7 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
         try {
             const constraints: QueryConstraint[] = [
                 containerFilter as QueryConstraint,
+                where("disabled", "==", false),
                 orderBy('createdAt', 'desc'),
                 orderBy('id', 'desc'),
                 limit(queryLimit)
@@ -55,15 +56,10 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
             setIsLoading(false);
 
         } catch (error) {
+            console.log(error)
             setIsLoading(false)
         }
     }
-
-    // useEffect(()=>{
-    //     if(hasMore && !products.length){
-    //         fetchProducts()
-    //     }
-    // }, [])
 
     useEffect(() => {
         if (isLoading) { return };
@@ -72,7 +68,6 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
             if (entries[0].isIntersecting && hasMore) {
                 fetchProducts(); return
             }
-
         }, { threshold: 1.0, rootMargin: "100px 0px 0px 0px" });
 
         if (observerRef.current) {
@@ -99,17 +94,6 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
                     ))
                 :
                 <></>
-                // Array(8).fill(0).map((_, index) => (
-                //     <div key={index} className="relative w-full flex flex-col gap-2">
-                //         <div className="h-[11rem]">
-                //             <ShimerEffect className='w-full h-full object-center object-cover rounded-sm' />
-                //         </div>
-                //         <div className="h-[2rem]">
-                //             <ShimerEffect className=' w-full h-full object-center object-cover rounded-sm' />
-                //         </div>
-
-                //     </div>
-                // ))
             }
             </GridContainerSm>
             {isLoading && <LoaderItem className="w-[2.5rem] border-[0.1rem] mt-[4rem]" />}

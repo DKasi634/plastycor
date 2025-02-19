@@ -3,13 +3,14 @@ import PhoneNumberInput from "@/components/phone-number-input/phone-number-input
 import PasswordInput from "@/components/generic-input/password-input.component"; // Import the reusable PasswordInput
 import React, { useEffect, useState } from "react";
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAuthError, clearNavigateToSignIn, registerStart } from "@/store/auth/auth.actions";
 import { selectAuthError, selectAuthLoading, selectCurrentUser, selectNavigateToSignIn } from "@/store/auth/auth.selector";
 import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
+import { nextRouteLocation } from "@/routes/auth-protected.route";
 // import { store } from "@/store/store";
 
 const SignUpPage: React.FC = () => {
@@ -28,6 +29,10 @@ const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialFormData);
 
+  const location = useLocation();
+  const nextLocation:nextRouteLocation = location.state;
+  console.log("\n State in signup : ", nextLocation)
+
 
   useEffect(()=>{
       if(currentUser){
@@ -39,7 +44,7 @@ const SignUpPage: React.FC = () => {
     if (navigateToSignin) {
       setFormData(initialFormData);
       const timer = setTimeout(() => {
-        navigate("/signin");
+        navigate("/signin", {state: nextLocation});
         dispatch(clearNavigateToSignIn())
       }, 4000);
       return () => clearTimeout(timer)

@@ -54,10 +54,13 @@ export type Creator = {
 }
 
 export type Blog = {
+    id:string,
     publisherEmail:string,
     title:string,
     content:string,
+    image:string,
     createdAt:string,
+    disabled:boolean,
     views:number
 }
 

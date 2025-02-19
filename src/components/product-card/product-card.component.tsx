@@ -1,4 +1,4 @@
-import { categories } from "@/constants/data";
+
 import BaseButton, { buttonType } from "../base-button/base-button.component";
 import { ApiProduct, Category, IUser } from "@/api/types";
 import { useEffect, useState } from "react";
@@ -6,6 +6,8 @@ import { getFirestoreUserByEmail } from "@/utils/firebase/firestore.utils";
 import { useNavigate } from "react-router-dom";
 import { LuShoppingCart } from "@/assets";
 import GenericImage from "../generic-image/generic-image.component";
+import { useSelector } from "react-redux";
+import { selectCategories } from "@/store/categories/categories.selector";
  
 
 type ProductCardProps = {
@@ -18,6 +20,8 @@ const ProductCard = ({ product, className = '', ownerView = false }: ProductCard
 
     const [productOwner, setProductOwner] = useState<IUser|null>(null);
     const [productCategory, setProductCategory] = useState<Category|null>(null);
+    const categories = useSelector(selectCategories);
+
     const navigate = useNavigate();
 
     useEffect(()=>{

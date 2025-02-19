@@ -1,6 +1,6 @@
 // src/pages/ManageUsersPage.tsx
 import { IUser } from '@/api/types';
-import UserCard from '@/components/admin-component/user-card.components';
+import UserCard from '@/components/admin-components/user-card.components';
 import LoaderLayout from '@/components/loader/loader-layout.component';
 import LoaderItem from '@/components/loader/loader.component';
 import { selectAuthLoading, selectCurrentUser } from '@/store/auth/auth.selector';

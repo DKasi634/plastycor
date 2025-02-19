@@ -1,9 +1,6 @@
 import { ApiProduct } from "@/api/types"
-// import BaseButton from "@/components/base-button/base-button.component";
-// import GenericInput from "@/components/generic-input/generic-input.component"
-// import ImageUploadFormGroup from "@/components/image-upload-input/image-upload-input.component";
 import PostProductForm from "@/components/post-product-form/post-product-form.component";
-// import { categories } from "@/constants/data";
+
 import { selectCurrentUser, selectAuthLoading } from "@/store/auth/auth.selector";
 import  { useEffect } from "react";
 import { useSelector } from "react-redux";

@@ -29,6 +29,10 @@ import ManageCategoriesPage from './pages/admin-pages/manage-categories.page'
 import { fetchCategoriesStart } from './store/categories/categories.actions'
 import DashboardPage from './pages/admin-pages/dashboard.page'
 import ManageUsersPage from './pages/admin-pages/manage-users.page'
+import ManageProductsPage from './pages/admin-pages/manage-products.page'
+import BlogNavigation from './routes/blog.route'
+import CreateEditBlogPage from './pages/create-edit-blog.page'
+import SingleBlogPage from './pages/single-blog.page'
 
 const App = () => {
 
@@ -58,7 +62,12 @@ const App = () => {
         <Route path='/' element={<MainNavigation />}>
           <Route index element={<LandingPage />} />
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='blog' element={<BlogPage />} />
+          <Route path='blogs' element={<BlogNavigation />} >
+            <Route index element={<BlogPage/>} />
+            <Route path='create' element={<CreateEditBlogPage/>} />
+            <Route path='edit/:blogId' element={<CreateEditBlogPage/>} />
+            <Route path=':blogId' element={<SingleBlogPage/>} />
+          </Route>
           <Route path='contact' element={<ContactPage />} />
           <Route path='activities' element={<ActivitiesPage />} />
           <Route path='shop' element={<ProductsPage />} />
@@ -78,6 +87,7 @@ const App = () => {
           <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><DashboardPage/></AdminProtectedRoute>}/>
           <Route path='manage-categories' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageCategoriesPage /></AdminProtectedRoute>} />
           <Route path='manage-users' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageUsersPage /></AdminProtectedRoute>} />
+          <Route path='manage-products' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageProductsPage /></AdminProtectedRoute>} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

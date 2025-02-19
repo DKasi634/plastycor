@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 
-import { Activity, Creator, MenuItem, Testimonial } from "@/types";
-import { Category } from "@/api/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+
 
 export type PrincipleData = {
     title: string,
@@ -21,6 +21,35 @@ export type TeamMember = {
     socials: TeamMemberSocials
 }
 
+export type Achievement = {
+    number: number;
+    label: string;
+    icon: JSX.Element;
+};
+
+export type Article = {
+    image: string;
+    title: string;
+    description: string;
+    published: Date;
+    views: number;
+};
+
+export type routeType = {
+    path: string,
+    label: string,
+    id: string
+}
+
+export type Product = {
+    id: string,
+    name: string;
+    image: string;
+    category: string,
+    owner: Creator,
+    description: string;
+    price: number;
+}
 export const teamMembers: TeamMember[] = [
     {
         name: "Nicole MENEMENE",
@@ -83,11 +112,7 @@ export const corePrinciples: PrincipleData[] = [
 ];
 
 
-export type Achievement = {
-    number: number;
-    label: string;
-    icon: JSX.Element;
-};
+
 
 export const achievements: Achievement[] = [
     {
@@ -108,13 +133,7 @@ export const achievements: Achievement[] = [
 ];
 
 
-export type Article = {
-    image: string;
-    title: string;
-    description: string;
-    published: Date;
-    views: number;
-};
+
 
 export const articles: Article[] = [
     {
@@ -155,11 +174,7 @@ export const articles: Article[] = [
 ];
 
 
-export type routeType = {
-    path: string,
-    label: string,
-    id: string
-}
+
 
 export const LandingPageRoutes: routeType[] = [
     {
@@ -188,7 +203,7 @@ export const LandingPageRoutes: routeType[] = [
         id: 'boutique'
     },
     {
-        path: "/blog",
+        path: "/blogs",
         label: "Blog",
         id: 'blog'
     },
@@ -201,15 +216,7 @@ export const LandingPageRoutes: routeType[] = [
 ]
 
 
-export type Product = {
-    id: string,
-    name: string;
-    image: string;
-    category: string,
-    owner: Creator,
-    description: string;
-    price: number;
-}
+
 
 export const products: Product[] = [
     {
@@ -451,11 +458,15 @@ export const userMenuItems:MenuItem[] = [
   ];
 
 
-  export const categories:Category[] = [
-    {categoryId:"1", categoryName:"Category 1", disabled:false, createdAt:""},
-    {categoryId:"2", categoryName:"Category 2", disabled:false, createdAt:""},
-    {categoryId:"3", categoryName:"Category 3", disabled:false, createdAt:""},
-    {categoryId:"4", categoryName:"Category 4", disabled:false, createdAt:""},
-    {categoryId:"5", categoryName:"Category 5", disabled:false, createdAt:""},
-    {categoryId:"6", categoryName:"Category 6", disabled:false, createdAt:""},
-  ]
+
+export enum ADMIN_ROUTE_PATHS {
+    MANAGE_USERS='/me/manage-users',
+    MANAGE_CATEGORIES="/me/manage-categories",
+    MANAGE_PRODUCTS="/me/manage-products",
+}
+
+export const adminDashboardRoutes: DashBoardRoute[] = [
+    { label: "Manage Users", path: ADMIN_ROUTE_PATHS.MANAGE_USERS, icon: <AiOutlineUser />, description: "Oversee user profiles and permissions effortlessly." },
+    { label: "Manage Categories", path: ADMIN_ROUTE_PATHS.MANAGE_CATEGORIES, icon: <AiOutlineUnorderedList />, description: "Organize and update product categories with a click." },
+    { label: "Manage Products", path: ADMIN_ROUTE_PATHS.MANAGE_PRODUCTS, icon: <AiOutlineInbox />, description: "Add, edit, or remove products seamlessly in real-time." }
+];

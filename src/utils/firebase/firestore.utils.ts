@@ -1,12 +1,14 @@
-import { ADMIN_STATUS, ApiProduct, Category, ErrorPayload, IUser } from "@/api/types";
-import { collection, doc, getDocFromServer, getDocs, limit, orderBy, query, QueryConstraint, setDoc, startAfter, where } from "firebase/firestore";
-import { firestoreDB } from "./firebase.config";
+import { ADMIN_STATUS, ApiProduct, Blog, Category, ErrorPayload, IUser } from "@/api/types";
+import { collection, doc, DocumentData, getDocFromServer, getDocs, limit, orderBy, query, QueryConstraint, QueryDocumentSnapshot, setDoc, startAfter, where } from "firebase/firestore";
+import { firebaseStorage, firestoreDB } from "./firebase.config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export enum FIRESTORE_COLLECTIONS {
   USERS_COLLECTION = "Users",
   CATEGORIES_COLLECTION = "Categories",
   PRODUCTS_COLLECTION = "Products",
   INNOVATIONS_COLLECTION = "Innovations",
+  BLOGS_COLLECTION = "Blogs",
 }
 
 export const getFirestoreCollectionRef = (collectionName: FIRESTORE_COLLECTIONS) => collection(firestoreDB, collectionName)
@@ -123,6 +125,48 @@ export const createOrUpdateProduct = async (newProduct: ApiProduct): Promise<Api
   }
 }
 
+export const disableFirestoreProduct = async (product: ApiProduct): Promise<ApiProduct | null> => {
+  try {
+
+    const disabledProduct = { ...product, disabled: true } as ApiProduct
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION, product.id), disabledProduct);
+    return disabledProduct
+  } catch (error) {
+    return null
+  }
+}
+
+export const enableFirestoreProduct = async (product: ApiProduct): Promise<ApiProduct | null> => {
+  try {
+    const enabledProduct = { ...product, disabled: false } as ApiProduct
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION, product.id), enabledProduct);
+    return enabledProduct
+  } catch (error) { return null
+  }
+}
+
+type firestoreDocSnapshot = QueryDocumentSnapshot<DocumentData, DocumentData>
+
+export const fetchFirestoreProductsByChunk = async (queryLimit=15, customFilter:QueryConstraint | null, lastDoc:firestoreDocSnapshot | null):Promise<firestoreDocSnapshot[]> => {
+  try {
+      const constraints: QueryConstraint[] = [
+          customFilter as QueryConstraint,
+          orderBy('createdAt', 'desc'),
+          orderBy('id', 'desc'),
+          limit(queryLimit)
+      ].filter(Boolean)
+
+      let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION), ...constraints);
+      if (lastDoc) {  q = query(q, startAfter(lastDoc))}
+      const docsSnapshot = await getDocs(q);
+    return docsSnapshot.docs
+  } catch (error) {
+      return []
+  }
+}
+
+
+
 
 export const getCategoryById = async (categoryId: string): Promise<Category | null> => {
   const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.CATEGORIES_COLLECTION), where("categoryId", "==", categoryId));
@@ -169,7 +213,7 @@ export const disableCategory = async (categoryToDisable: Category): Promise<Cate
 
 export const fetchAllFirestoreCategories = async (): Promise<Category[]> => {
   try {
-    const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.CATEGORIES_COLLECTION), where("disabled", "!=", true));
+    const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.CATEGORIES_COLLECTION));
     const docsSnapshot = await getDocs(q);
     if (docsSnapshot.empty) { throw new Error("Found no category") };
     return docsSnapshot.docs.map(doc => doc.data() as Category)
@@ -178,3 +222,56 @@ export const fetchAllFirestoreCategories = async (): Promise<Category[]> => {
     return []
   }
 }
+
+
+
+export const getBlogById = async (blogId: string): Promise<Blog | null> => {
+  const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.BLOGS_COLLECTION), where("id", "==", blogId));
+  const blogSnapshot = await getDocs(q);
+  if (blogSnapshot.empty) {
+    return null
+  }
+  return blogSnapshot.docs[0].data() as Blog
+}
+
+export const createOrUpdateBlog = async (newBlog: Blog): Promise<Blog | null> => {
+
+  try {
+    const existingBlog = await getBlogById(newBlog.id)
+    const updatedBlog = { ...existingBlog, ...newBlog, createdAt: existingBlog ? existingBlog.createdAt : new Date().toISOString() } as Blog
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.BLOGS_COLLECTION, updatedBlog.id), updatedBlog)
+    return updatedBlog
+  } catch (error) {
+    return null
+  }
+}
+
+export const disableFirestoreBlog = async (blog: Blog): Promise<Blog | null> => {
+  try {
+
+    const disabledBlog = { ...blog, disabled: true } as Blog
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.BLOGS_COLLECTION, blog.id), disabledBlog);
+    return disabledBlog
+  } catch (error) {
+    return null
+  }
+}
+
+export const enableFirestoreBlog = async (blog: Blog): Promise<Blog | null> => {
+  try {
+    const enabledBlog = { ...blog, disabled: false } as Blog
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.BLOGS_COLLECTION, blog.id), enabledBlog);
+    return enabledBlog
+  } catch (error) { return null
+  }
+}
+
+
+export const uploadImageToStorage = async (fileToUpload:File, folderPath:string): Promise<string> => {
+      const storage = firebaseStorage;
+        const imageName = `image_${new Date().getTime()}`;
+        const storageRef = ref(storage, `${folderPath}/${imageName}`);
+        await uploadBytes(storageRef, fileToUpload);
+        const url = await getDownloadURL(storageRef);
+        return url
+    };

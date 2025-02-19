@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 
 export interface ISection extends React.HTMLAttributes<HTMLDivElement>{}
 
@@ -30,6 +30,12 @@ export type MenuItem = {
     path: string,
     restricted:boolean
   }
+  export type DashBoardRoute = {
+    label:string,
+    description:string,
+    path:string,
+    icon:ReactElement
+}
 
 export type SelectedImage = {
     file:File,

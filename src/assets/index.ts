@@ -1,14 +1,35 @@
 // Icons
 import { BsPeopleFill } from "react-icons/bs";
-import { FaRecycle, FaTree, FaAngleLeft, FaAngleRight, FaFacebookF, FaInstagram, FaRegHeart } from "react-icons/fa";
+import {
+  FaRecycle,
+  FaTree,
+  FaAngleLeft,
+  FaAngleRight,
+  FaFacebookF,
+  FaInstagram,
+  FaRegHeart,
+} from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
-import { FiUser, FiPackage, FiBarChart, FiEye, FiEyeOff, FiLogIn, FiLogOut } from "react-icons/fi";
+import {
+  FiUser,
+  FiPackage,
+  FiBarChart,
+  FiEye,
+  FiEyeOff,
+  FiLogIn,
+  FiLogOut,
+} from "react-icons/fi";
 import { HiOutlineLightBulb, HiOutlineMail } from "react-icons/hi";
-import { IoLocationOutline, IoCloudUploadOutline, IoClose, IoEyeOutline } from "react-icons/io5";
+import {
+  IoLocationOutline,
+  IoCloudUploadOutline,
+  IoClose,
+  IoEyeOutline,
+} from "react-icons/io5";
 import { MdOutlinePhoneEnabled, MdOutlinePhone } from "react-icons/md";
-import { CiLocationOn, CiMail } from "react-icons/ci";
+import { CiLocationOn, CiMail, CiEdit } from "react-icons/ci";
 import { GoArrowUpRight } from "react-icons/go";
 import { FaXTwitter } from "react-icons/fa6";
 import { LiaTimesSolid } from "react-icons/lia";
@@ -18,6 +39,11 @@ import { CgMenuRightAlt } from "react-icons/cg";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { SlSocialLinkedin } from "react-icons/sl";
+import {
+  AiOutlineUser,
+  AiOutlineUnorderedList,
+  AiOutlineInbox,
+} from "react-icons/ai";
 
 // Images
 import MissingItemImage from "@/assets/placeholder_image.png";
@@ -68,6 +94,7 @@ export {
   MdOutlinePhone,
   CiLocationOn,
   CiMail,
+  CiEdit,
   GoArrowUpRight,
   FaXTwitter,
   LiaTimesSolid,
@@ -78,6 +105,10 @@ export {
   RiDoubleQuotesR,
   LuShoppingCart,
   SlSocialLinkedin,
+  AiOutlineUser,
+  AiOutlineUnorderedList,
+  AiOutlineInbox,
+  
 
   // Images
   MissingItemImage,
@@ -97,3 +128,5 @@ export {
   TeamMember3,
   TeamMember4,
 };
+
+

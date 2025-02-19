@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PasswordInput from "@/components/generic-input/password-input.component";
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { emailSignInStart } from "@/store/auth/auth.actions";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
 import GenericInput from "@/components/generic-input/generic-input.component";
+import { nextRouteLocation } from "@/routes/auth-protected.route";
 
 const SignInPage: React.FC = () => {
 
@@ -20,13 +21,22 @@ const SignInPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
+  const location = useLocation();
+  const nextLocation:nextRouteLocation = location.state;
+  console.log("\n State in signin : ", nextLocation)
 
   useEffect(()=>{
     if(currentUser){
-      navigate("/me/profile")
+      navigate( nextLocation && nextLocation.fromRoute ? nextLocation.fromRoute :  "/me/profile")
     }
-  }, [currentUser])
-  // Handle email input change and validate
+  }, [currentUser]);
+
+
+  const handleNavigateToSignup = (e:React.MouseEvent<HTMLAnchorElement>) =>{
+    e.preventDefault();
+    navigate("/signup", { state:nextLocation })
+  }
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -96,7 +106,7 @@ const SignInPage: React.FC = () => {
             error={errors.password}
           />
 
-          <p className="w-full text-xs !mt-8">Vous n'avez pas encore de compte ? <Link to={"/signup"} className="text-green font-bold px-2 underline-offset-2 underline">S'inscrire</Link> </p>
+          <p className="w-full text-xs !mt-8">Vous n'avez pas encore de compte ? <Link onClick={handleNavigateToSignup} to={"/signup"} className="text-green font-bold px-2 underline-offset-2 underline">S'inscrire</Link> </p>
 
           {/* Sign In Button */}
           <BaseButton

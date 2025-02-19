@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ImagesDisplayBox from "../images-display-box/images-display-box.component";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { firebaseStorage } from "@/utils/firebase/firebase.config";
+
 import { SelectedImage } from "@/types";
 import { setErrorToast } from "@/store/toast/toast.actions";
 import { useDispatch } from "react-redux";
 import { IoCloudUploadOutline } from "@/assets";
+import { uploadImageToStorage } from "@/utils/firebase/firestore.utils";
 
 type ImagesUploadFormGroupProps = {
   imagesLimit: number;
@@ -63,7 +63,6 @@ const ImageUploadFormGroup = forwardRef<
     };
 
     const handleUploadToStorage = async (): Promise<string[]> => {
-      const storage = firebaseStorage;
       const urls: string[] = [];
 
       if (!selectedImages || !selectedImages.length) {
@@ -71,10 +70,7 @@ const ImageUploadFormGroup = forwardRef<
       }
 
       for (const { file } of selectedImages) {
-        const imageName = `image_${new Date().getTime()}`;
-        const storageRef = ref(storage, `${folderPath}/${imageName}`);
-        await uploadBytes(storageRef, file);
-        const url = await getDownloadURL(storageRef);
+        const url = await uploadImageToStorage(file, folderPath);
         urls.push(url);
       }
 

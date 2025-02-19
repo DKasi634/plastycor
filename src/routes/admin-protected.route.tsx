@@ -3,7 +3,8 @@ import NotFoundPage from "@/pages/errors/not-found.page"
 import { selectCurrentUser } from "@/store/auth/auth.selector"
 import React, { ReactNode } from "react"
 import { useSelector } from "react-redux"
-import { Location, Navigate, useLocation } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
+import { nextRouteLocation } from "./auth-protected.route"
 
 
 interface ProtectedRouteProps {
@@ -11,9 +12,6 @@ interface ProtectedRouteProps {
     adminStatus:ADMIN_STATUS
 }
 
-export type nextRouteLocation = {
-    fromRoute:Location
-}
 
 const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminStatus }: ProtectedRouteProps) => {
 
