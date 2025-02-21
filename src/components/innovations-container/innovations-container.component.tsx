@@ -25,36 +25,7 @@ const InnovationsContainer = ({ className = "", OwnerEmail, adminView=false}: In
     const observerRef = useRef<HTMLDivElement | null>(null);
     const queryLimit = 15;
 
-    // const fetchInnovations = async () => {
-    //     if (!hasMore) { return };
-    //     setIsLoading(true)
-    //     let containerFilter: QueryConstraint | null = null;
-    //     if (OwnerView && currentUser) { containerFilter = where('ownerEmail', "==", currentUser.email)}
 
-    //     try {
-    //         const constraints: QueryConstraint[] = [
-    //             containerFilter as QueryConstraint,
-    //             where("disabled", "==", false),
-    //             orderBy('createdAt', 'desc'),
-    //             orderBy('id', 'desc'),
-    //             limit(queryLimit)
-    //         ].filter(Boolean)
-
-    //         let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), ...constraints);
-    //         if (lastDoc) {  q = query(q, startAfter(lastDoc))}
-    //         const docsSnapshot = await getDocs(q);
-    //         if (docsSnapshot.docs.length < queryLimit) { setHasMore(false) };
-    //         if (!docsSnapshot.empty) {
-    //             setLastDoc(docsSnapshot.docs[docsSnapshot.docs.length - 1])
-    //             const newProducts = docsSnapshot.docs.map(doc => doc.data() as Innovation);
-    //             setInnovations(prev => [...prev, ...newProducts]);
-    //         }
-    //         setIsLoading(false);
-
-    //     } catch (error) {
-    //         setIsLoading(false)
-    //     }
-    // }
 
     const fetchInnovations = async () => {
             if (isLoading || !hasMore) { return }

@@ -14,7 +14,7 @@ const UnivartizePage = () => {
             <SectionContainer>
             <h3 className="text-4xl font-bold text-dark w-full text-center mt-[2rem]">Univartize</h3>
             <p className="text-lg text-dark w-full text-center my-[2rem]">Découvrez et partagez des techniques innovantes de recyclage créatif</p>
-                <InnovationsContainer />
+                <InnovationsContainer OwnerEmail={null}/>
             </SectionContainer>
             {(currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) &&
              <BaseButton href="/univartize/create" className="fixed right-[2rem] bottom-[3rem] z-40 shadow-lg shadow-dark-transparent lg:bottom-[2rem] font-semibold !text-sm">Créer <BiPlus className='text-xl ml-1' /></BaseButton>      }
