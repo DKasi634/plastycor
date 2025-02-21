@@ -1,6 +1,7 @@
 import { Blog } from "@/api/types"
-import { BlogAction, BLOGS_ACTION_TYPES } from "./blogs.types"
+import {  BLOGS_ACTION_TYPES } from "./blogs.types"
 import { CustomError } from "@/utils/errors.utils"
+import { BlogAction } from "./blogs.actions"
 
 export type BlogsState = {
     readBlogsIds:string[],

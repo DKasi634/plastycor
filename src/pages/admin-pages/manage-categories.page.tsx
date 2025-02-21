@@ -63,17 +63,19 @@ const ManageCategoriesPage: React.FC = () => {
     setSelectedCategory(null);
   }
 
-  const openDeleteModal = (category:Category) => {
+  const openDeleteModal = (category: Category) => {
     setIsDeleteModalOpen(true)
     setSelectedCategory(category);
   }
-
-
 
   const closeEditModal = () => {
     setSelectedCategory(null)
     setIsEditModalOpen(false);
   };
+
+  const handleEnableCategory = (category: Category) => {
+    dispatch(updateCategoryStart({ ...category, disabled: false } as Category));
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,8 +84,6 @@ const ManageCategoriesPage: React.FC = () => {
       dispatch(setErrorToast("The category name can not be empty !"))
         ; return
     }
-
-
     if (isEditing && selectedCategory) {
       // For editing, send the complete category.
       const updatedCategory: Category = {
@@ -124,36 +124,43 @@ const ManageCategoriesPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:flex xl:flex-wrap xl:items-center justify-start">
-        {categories && categories.length > 0 ? (
-          categories.map((category) => (
-            <div key={category.categoryId} className="bg-white shadow-dark-transparent shadow-md w-full max-w-[32rem] xl:max-w-[24rem] rounded-lg border border-dark-variant p-4 flex flex-col gap-2 items-start">
-              <h2 className="text-2xl text-dark/70 text-left font-semibold mb-2">{category.categoryName}</h2>
-              <p className="text-dark text-sm">
-                Created: {new Date(category.createdAt).toLocaleDateString()}
-              </p>
-              <div className="flex items-center justify-between gap-2 p-2 w-full">
-                <BaseButton
-                  clickHandler={() => openEditModal(category)}
-                  type={buttonType.green}
-                  rounded={false}
-                  className="!px-3 !py-1"
-                >
-                  Edit
-                </BaseButton>
-                <BaseButton
-                  clickHandler={() => openDeleteModal(category)}
-                  rounded={false}
-                  type={buttonType.clear}
-                  className="!bg-red-500 !border-red-400  text-white !px-3 !py-1"
-                >
-                  Delete
-                </BaseButton>
-              </div>
-            </div>
-          ))
-        ) : (
+        {categories && categories.length > 0 ?
+          <>
+            {
+              categories.map((category) => (
+                <div key={category.categoryId} className="bg-white shadow-dark-transparent shadow-md w-full max-w-[32rem] xl:max-w-[24rem] rounded-lg border border-dark-variant p-4 flex flex-col gap-2 items-start">
+                  <h2 className="text-2xl text-dark/70 text-left font-semibold mb-2">{category.categoryName}</h2>
+                  <p className="text-dark text-sm">
+                    Created: {new Date(category.createdAt).toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'})}
+                  </p>
+                  <div className="flex items-center justify-between gap-2 p-2 w-full">
+                    <BaseButton
+                      clickHandler={() => openEditModal(category)}
+                      type={buttonType.green}
+                      rounded={false}
+                      className="!px-3 !py-1"
+                    >
+                      Edit
+                    </BaseButton>
+                    {!category.disabled ?
+                      <BaseButton clickHandler={() => openDeleteModal(category)} rounded={false} type={buttonType.clear}
+                        className="!bg-red-500 !border-red-400  text-white !px-3 !py-1"
+                      >
+                        Delete
+                      </BaseButton> :
+                      <BaseButton clickHandler={() => handleEnableCategory(category)} rounded={false}
+                        className=" text-white !px-3 !py-1"
+                      >
+                        Enable
+                      </BaseButton>
+                    }
+                  </div>
+                </div>)
+              )
+            }
+          </> :
           <p className="col-span-full text-center text-gray-500">No categories found.</p>
-        )}
+        }
       </div>
 
       {/* Modal for Create/Edit Category */}
@@ -195,7 +202,6 @@ const ManageCategoriesPage: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
           <div className="bg-white rounded px-6 py-4 w-full max-w-[24rem]">
             <h2 className="text-xl font-semibold mb-4"> You're about to delete <span className="text-dark/80 font-bold">{selectedCategory.categoryName}</span> </h2>
-            <p className="text-sm font-bold text-red-500 text-center w-full"> This action is irreversible</p>
             <div className="flex items-center justify-between px-2 py-4">
               <BaseButton clickHandler={closeDeleteModal} type={buttonType.clear} submitType="button"
                 className="!px-4 !py-[0.4rem]" >

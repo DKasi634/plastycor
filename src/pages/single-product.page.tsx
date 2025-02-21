@@ -60,11 +60,14 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
                 <div className={`${className} min-h-screen flex justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.name}</h1>
+                        <div className="w-full h-80 shadow-md rounded-lg bg-gray-transparent border border-gray overflow-hidden mb-8">
+
                         <GenericImage
                             src={product.images[0]}
                             alt={product.name}
-                            className="w-64 h-64 object-cover mb-4 shadow-md rounded-lg border border-gray"
+                            className="w-full h-full object-contain"
                         />
+                        </div>
                         <div  className="flex items-center justify-start gap-2 ">
                            <span className="text-sm font-semibold">Prix : </span> <span className="text-lg font-bold">$ {product.price.toFixed(2)}</span> 
                         </div>

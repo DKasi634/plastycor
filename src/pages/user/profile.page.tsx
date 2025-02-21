@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthLoading, selectCurrentUser } from "@/store/auth/auth.selector";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 
 
@@ -11,9 +11,11 @@ import BaseButton, { buttonType } from "@/components/base-button/base-button.com
 import ProductsContainer from "@/components/products-container/products-container.component";
 
 import { logoutStart } from "@/store/auth/auth.actions";
-import { BiPlus, CiMail, FiLogOut, MdOutlinePhone } from "@/assets";
+import { BiPlus, CiEdit, CiLocationOn, CiMail, FiLogOut, MdOutlinePhone } from "@/assets";
 import GenericImage from "@/components/generic-image/generic-image.component";
 import { ADMIN_STATUS } from "@/api/types";
+import { fetchUserInnovationsCount, fetchUserProductsCount } from "@/utils/firebase/firestore.utils";
+
 
 
 const ProfilePage = () => {
@@ -23,6 +25,10 @@ const ProfilePage = () => {
 
   const currentUser = useSelector(selectCurrentUser);
   const authLoading = useSelector(selectAuthLoading);
+  const [userProductsCount, setUserProductsCount] = useState(0);
+  const [userInnovationsCount, setUserInnovationsCount] = useState(0);
+  const [updateProfileFlag, setUpdateProfileFlag] = useState(false);
+
 
   useEffect(() => {
     if (!authLoading && !currentUser) {
@@ -30,7 +36,28 @@ const ProfilePage = () => {
     }
   }, [authLoading, currentUser])
 
+  const fetchCounts = async (email: string) => {
+    try {
+      const productsCount = await fetchUserProductsCount(email);
+      const innovationsCount = await fetchUserInnovationsCount(email);
+      setUserProductsCount(productsCount); setUserInnovationsCount(innovationsCount);
+
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchCounts(currentUser.email);
+    }
+  }, [currentUser])
+
   const logout = () => { dispatch(logoutStart()) }
+
+  const toggleUpdateFlag = () => {
+    setUpdateProfileFlag(!updateProfileFlag)
+  }
 
 
   return (
@@ -52,6 +79,7 @@ const ProfilePage = () => {
                     {currentUser.adminStatus &&
                       <span className="px-3 py-[0.15rem] md:py-1 rounded-[0.3rem] text-xs bg-green-secondary text-light w-fit">{currentUser.adminStatus}</span>
                     }
+                    <Link to={"/me/profile/edit"} className="text-2xl cursor-pointer px-4 w-fit" onClick={toggleUpdateFlag}><CiEdit /></Link>
                     <BaseButton type={buttonType.clear} clickHandler={logout} className="!bg-light fixed right-[2rem] bottom-[8rem] z-40 shadow-lg lg:bottom-[5rem] flex items-center gap-2 !px-11 md:!px-4"><span className="hidden md:inline-block">Logout</span> <FiLogOut className="text-lg" /> </BaseButton>
                   </div>
                   <div className="flex items-center justify-start gap-4 ">
@@ -62,17 +90,28 @@ const ProfilePage = () => {
                       <MdOutlinePhone className="text-sm md:text-lg" /> <p className="text-dark/80 text-xs md:text-sm w-fit font-bold">{currentUser.phoneNumber}</p>
                     </div>
                   }
-                  <div className="flex items-center justify-start gap-4">
+                  <div className="flex flex-col w-full py-2 gap-1">
+                    {
+                      currentUser.bio && <span className="text-xs lg:text-sm text-dark font-semibold line-clamp-2 w-full">{currentUser.bio}</span>
+                    }
+                    {
+                      currentUser.location &&
+                    <span className="text-xs lg:text-sm text-dark/80 font-bold flex items-center justify-start gap-2"><CiLocationOn className="text-xl"/> {currentUser.location?.city}, {currentUser.location.country}</span>
+                    }
+                  </div>
+                  
+                </div>
+                <div className="flex items-center justify-start gap-4">
+
                     <div className="flex flex-col items-start w-fit">
                       <span className="text-xs text-dark/70 font-semibold">Produits</span>
-                      <span className="text-lg md:text-xl font-bold text-dark/80">235</span>
+                      <span className="text-lg md:text-2xl font-bold text-dark/80 w-full text-center">{userProductsCount}</span>
                     </div>
                     <div className="flex flex-col items-start w-fit">
                       <span className="text-xs text-dark/70 font-semibold">Innovations</span>
-                      <span className="text-lg md:text-xl font-bold text-dark/80">13</span>
+                      <span className="text-lg md:text-2xl font-bold text-dark/80 w-full text-center">{userInnovationsCount}</span>
                     </div>
                   </div>
-                </div>
               </div>
 
               {(currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) &&
@@ -84,13 +123,14 @@ const ProfilePage = () => {
                   <BaseButton href="/me/post" type={buttonType.green} className="fixed right-[2rem] bottom-[5rem] z-40 shadow-lg lg:bottom-[2rem] font-semibold !text-sm">Post <BiPlus /></BaseButton>
                 </>
               }
+
             </>
+
           }
         </main>
         :
         <LoaderLayout />
       }
-
     </div>
   );
 };

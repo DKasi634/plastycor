@@ -11,6 +11,10 @@ export type IUser = {
     adminStatus:ADMIN_STATUS|null,
     createdAt:string,
     phoneNumber:string,
+    location?:Location,
+    organisation?:string,
+    bio?:string,
+    tags?:string[],
     profilePicture:string,
     disabled:boolean
 }
@@ -27,10 +31,10 @@ export type ApiProduct = {
     disabled:boolean
 }
 
-// export type Location = {
-//     country:string,
-//     city:string
-// }
+export type Location = {
+    country:string,
+    city:string
+}
 
 export type Innovation = {
     id:string,

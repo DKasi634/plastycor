@@ -24,9 +24,7 @@ const ManageUsersPage: React.FC = () => {
         setLoading(true);
         const lastUserEmail = users.length > 0 ? users[users.length - 1].email : undefined;
         const newUsers = await fetchFirestoreUsersByChunk(queryLimit, lastUserEmail);
-        if (newUsers.length < queryLimit) {
-            setHasMore(false);
-        }
+        if (newUsers.length < queryLimit) { setHasMore(false); }
         setUsers((prev) => [...prev, ...newUsers.filter((user) => { if ((!prev.some((prevUser) => prevUser.email == user.email) && user.email !== currentUser?.email)) { return true } }
         )]);
         setLoading(false);

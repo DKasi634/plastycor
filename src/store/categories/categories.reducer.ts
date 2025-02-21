@@ -39,7 +39,7 @@ export const categoriesReducer = (state=categoriesInitialState, action:CategoryA
             return {...state, isLoading:false, categories:[...state.categories.filter((cat) => cat.categoryId !== (action.payload as Category).categoryId)]}
         
         case CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
-            return {...state, isLoading:false, categories:action.payload as Category[]}
+            return {...state, isLoading:false, categories:(action.payload as Category[]).filter(cat => !cat.disabled)}
         default:
             return state
     }

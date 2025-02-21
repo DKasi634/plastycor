@@ -1,6 +1,6 @@
 
 import './App.css'
-import {  Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 import MainNavigation from './routes/main-navigation/main-navigation.route'
 import LandingPage from './pages/landing.page'
 import BlogPage from './pages/blog.page'
@@ -37,6 +37,9 @@ import UnivartizeNavigation from './routes/univartize.route'
 import PostInnovationPage from './pages/user/post-innovation.page'
 import EditInnovationPage from './pages/user/edit-innovation.page'
 import SingleInnovationPage from './pages/single-innovation.page'
+import EditProfilePage from './pages/user/edit-profile.page'
+import MyInnovationsPage from './pages/user/my-innovations.page'
+import ManageInnovationsPage from './pages/admin-pages/manage-innovations.page'
 
 const App = () => {
 
@@ -53,10 +56,10 @@ const App = () => {
     }; return unsubscribe;
   })
 
-    // Fetch categories when the component mounts.
-    useEffect(() => {
-      dispatch(fetchCategoriesStart());
-    }, [dispatch]);
+  // Fetch categories when the component mounts.
+  useEffect(() => {
+    dispatch(fetchCategoriesStart());
+  }, [dispatch]);
 
 
 
@@ -67,20 +70,20 @@ const App = () => {
           <Route index element={<LandingPage />} />
           <Route path='*' element={<NotFoundPage />} />
           <Route path='blogs' element={<BlogNavigation />} >
-            <Route index element={<BlogPage/>} />
-            <Route path='create' element={<CreateEditBlogPage/>} />
-            <Route path='edit/:blogId' element={<CreateEditBlogPage/>} />
-            <Route path=':blogId' element={<SingleBlogPage/>} />
+            <Route index element={<BlogPage />} />
+            <Route path='create' element={<CreateEditBlogPage />} />
+            <Route path='edit/:blogId' element={<CreateEditBlogPage />} />
+            <Route path=':blogId' element={<SingleBlogPage />} />
           </Route>
           <Route path='contact' element={<ContactPage />} />
           <Route path='activities' element={<ActivitiesPage />} />
           <Route path='shop' element={<ProductsPage />} />
           <Route path='network' element={<NetworkPage />} />
           <Route path='univartize' element={<UnivartizeNavigation />}>
-            <Route index element={<UnivartizePage/>} />
-            <Route path='create' element={<PostInnovationPage/>} />
-            <Route path='edit/:innovationId' element={<EditInnovationPage/>} />
-            <Route path=':innovationId' element={<SingleInnovationPage/>} />
+            <Route index element={<UnivartizePage />} />
+            <Route path='create' element={<PostInnovationPage />} />
+            <Route path='edit/:innovationId' element={<EditInnovationPage />} />
+            <Route path=':innovationId' element={<SingleInnovationPage />} />
           </Route>
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
@@ -90,13 +93,18 @@ const App = () => {
         <Route path='/me' element={<AuthProtectedRoute> <UserProfileNavigation /></AuthProtectedRoute>}>
           <Route index element={<ProfilePage />} />
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='profile' element={<ProfilePage />} />
+          <Route path='innovations' element={<MyInnovationsPage />} />
+          <Route path='profile' element={<Outlet />}>
+            <Route index element={<ProfilePage />} />
+            <Route path='edit' element={<EditProfilePage />} />
+          </Route>
           <Route path='post' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}> <PostProductPage /> </AdminProtectedRoute>} />
           <Route path='edit-product/:productId' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.CO_ADMIN}><EditProductPage /></AdminProtectedRoute>} />
-          <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><DashboardPage/></AdminProtectedRoute>}/>
+          <Route path='admin' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><DashboardPage /></AdminProtectedRoute>} />
           <Route path='manage-categories' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageCategoriesPage /></AdminProtectedRoute>} />
           <Route path='manage-users' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageUsersPage /></AdminProtectedRoute>} />
           <Route path='manage-products' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageProductsPage /></AdminProtectedRoute>} />
+          <Route path='manage-innovations' element={<AdminProtectedRoute adminStatus={ADMIN_STATUS.MAIN_ADMIN}><ManageInnovationsPage /></AdminProtectedRoute>} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

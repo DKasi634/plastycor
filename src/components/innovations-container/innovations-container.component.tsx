@@ -5,15 +5,16 @@ import { QueryDocumentSnapshot, DocumentData } from "firebase/firestore"
 import { useState, useRef, useEffect } from "react"
 import { fetchFirestoreInnovationsByChunk } from "@/utils/firebase/firestore.utils"
 import LoaderItem from "../loader/loader.component"
-import UnivartizeCard from "../univartize-card/univartize-card.component"
+import InnovationCard from "../innovation-card/innovation-card.component"
 
 
-type ProductsContainerProps = {
+type InnovationsContainerProps = {
     className?: string,
-    OwnerView?: boolean,
+    OwnerEmail: string|null,
+    adminView?:boolean
 }
 
-const InnovationsContainer = ({ className = "", OwnerView = false }: ProductsContainerProps) => {
+const InnovationsContainer = ({ className = "", OwnerEmail, adminView=false}: InnovationsContainerProps) => {
 
     const [innovations, setInnovations] = useState<Innovation[]>([]);
 
@@ -54,12 +55,13 @@ const InnovationsContainer = ({ className = "", OwnerView = false }: ProductsCon
     //         setIsLoading(false)
     //     }
     // }
+
     const fetchInnovations = async () => {
             if (isLoading || !hasMore) { return }
             setIsLoading(true)
             try {
                 setIsLoading(true)
-                const fetchedDocs = await fetchFirestoreInnovationsByChunk(queryLimit, false, lastDoc);
+                const fetchedDocs = await fetchFirestoreInnovationsByChunk(queryLimit, adminView, OwnerEmail, lastDoc);
                 if (fetchedDocs.length < queryLimit) { setHasMore(false) }
                 if (fetchedDocs.length) {
                     setLastDoc(fetchedDocs[fetchedDocs.length - 1]);
@@ -104,10 +106,11 @@ const InnovationsContainer = ({ className = "", OwnerView = false }: ProductsCon
             <GridContainerSm className="md:!flex md:!items-center md:!justify-start md:!flex-wrap">
             {(!isLoading && innovations.length) ?
                     innovations.map((innovation) => (
-                        <UnivartizeCard className="md:!max-w-[17rem] lg:!max-w-[18rem]"
+                        <InnovationCard className="md:!max-w-[17rem] lg:!max-w-[18rem]"
                             key={innovation.id}
                             innovation={innovation}
-                            ownerView={OwnerView}
+                            ownerView={!!OwnerEmail}
+                            adminView={adminView}
                         />
                     ))
                 :
@@ -121,3 +124,4 @@ const InnovationsContainer = ({ className = "", OwnerView = false }: ProductsCon
 }
 
 export default InnovationsContainer
+

@@ -45,12 +45,12 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
     useEffect(() => {
         const createInnovation = async () => {
             if (!thisInnovation) { return };
-            console.log("\nThe innovation to create or update : ", thisInnovation);
+            // console.log("\nThe innovation to create or update : ", thisInnovation);
             setIsSubmitting(false);
             const createdInnovation = await createOrUpdateInnovation(thisInnovation);
-            console.log("The created or updated innovation : ", createdInnovation)
+            // console.log("The created or updated innovation : ", createdInnovation)
             setIsSubmitting(false);
-            if (!createdInnovation) { dispatch(setErrorToast("Oops ! Something went wrong")) }
+            if (!createdInnovation) { dispatch(setErrorToast("Oops ! Quelque chose s'est mal passé")) }
             else {
                 
                 navigate(`/univartize/${thisInnovation.id}`)
@@ -65,7 +65,7 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
         setIsSubmitting(true)
 
         try {
-            console.log("\nStarted submit with innovation : ", thisInnovation)
+            // console.log("\nStarted submit with innovation : ", thisInnovation);
             if (!thisInnovation.categoryId) { setError("Please choose a category"); throw new Error("Category") }
             if (thisInnovation.name.trim().length < 3) { setError("Posting name must have at least 3 characters"); throw new Error("Name ") }
             if (!thisInnovation.location) { setError("Posting must have a location"); throw new Error("location") }
@@ -74,11 +74,11 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
                 if (!imagesUploadRef.current.hasSelectedImages() &&!initialInnovation.images.length) { setError("Choose at least one image, max 3"); throw new Error("Images") }
                 const uploadedImagesUrls = await imagesUploadRef.current.uploadImages();
                 if (!uploadedImagesUrls.length && !initialInnovation.images.length) { setError("Failed to upload images. Check your network and try again"); throw new Error("Upload !") }
-                setThisInnovation(prev => ({ ...prev, images: [...prev?.images || [], ...uploadedImagesUrls], id:initialInnovation.id || new Date().getTime().toString()} as Innovation));
+                setThisInnovation(prev => ({ ...prev, images: [...prev?.images || [], ...uploadedImagesUrls], id:initialInnovation.id || new Date().getTime().toString(), name:thisInnovation.name.trim(), description:thisInnovation.description.trim(), createdAt:new Date().toISOString()} as Innovation));
                 setCanSubmitPost(true);
             }
         } catch (error) {
-            console.log("\nEncountered an error : ", error)
+            // console.log("\nEncountered an error : ", error)
             setIsSubmitting(false);
         }
 
@@ -88,7 +88,7 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
     return (
         <>
             <form className={`${className} flex flex-col gap-2 w-full max-w-[32rem]`} onSubmit={handleFormSubmit}>
-                <GenericInput type="text" label="Nom du produit" value={thisInnovation && thisInnovation.name} name="product_name" onChange={setName} />
+                <GenericInput type="text" label="Nom de la solution" value={thisInnovation && thisInnovation.name} name="product_name" onChange={setName} />
                 <div className="flex flex-col gap-1 mt-1 w-full">
                     <label className="text-xs font-bold text-dark/80 w-full text-left pl-1" htmlFor="post_description">Description</label>
                     <textarea rows={3} className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" value={thisInnovation && thisInnovation.description || ''} name="post_description" onChange={setDescription} />
@@ -98,7 +98,8 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
 
                 <div className="flex flex-col gap-1 mt-1 w-full">
                     <label className="text-xs font-bold text-dark/80 w-full text-left pl-1" htmlFor="categories">Categorie</label>
-                    <select name="categories" className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" value={initialInnovation.categoryId} onChange={(e) => setCategory(e)}>
+                    <select name="categories" className="block w-full px-3 py-[0.6rem] rounded-lg bg-gray-transparent text-dark text-sm font-semibold placeholder:text-gray sm:text-sm" value={(thisInnovation &&thisInnovation.categoryId) ||''} onChange={(e) => setCategory(e)}>
+                        <option value="" disabled>Choisir ici</option>
                         {categories.filter(cat => !cat.disabled).map((cat, idx) => (<option key={idx} value={cat.categoryId} >{cat.categoryName}</option>))}
                     </select>
                 </div>

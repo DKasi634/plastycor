@@ -33,7 +33,7 @@ const SidebarNav = ({ className = "" }: SideBarNavProps) => {
           )
         })}
       </div>
-      <div className="px-6 text-sm text-gray-500">
+      <div className="px-6 text-xs text-dark/70 font-bold w-full text-left">
         &copy; {new Date().getFullYear()} Plastycor
       </div>
     </nav>

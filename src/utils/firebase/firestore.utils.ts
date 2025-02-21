@@ -1,5 +1,5 @@
 import { ADMIN_STATUS, ApiProduct, Blog, Category, ErrorPayload, Innovation, IUser } from "@/api/types";
-import { collection, doc, DocumentData, getDocFromServer, getDocs, limit, orderBy, query, QueryConstraint, QueryDocumentSnapshot, setDoc, startAfter, where } from "firebase/firestore";
+import { collection, doc, DocumentData, getCountFromServer, getDocFromServer, getDocs, limit, orderBy, query, QueryConstraint, QueryDocumentSnapshot, setDoc, startAfter, where } from "firebase/firestore";
 import { firebaseStorage, firestoreDB } from "./firebase.config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -27,7 +27,6 @@ export const getFirestoreUserByEmail = async (userEmail: string): Promise<IUser 
 }
 
 export const fetchFirestoreUsersByChunk = async (queryLimit: number, lastUserEmail?: string): Promise<IUser[]> => {
-
   try {
     if (!queryLimit) { throw new Error("Invalid query limit ! Should be a positive number ") }
     const constraints: QueryConstraint[] = [
@@ -41,6 +40,26 @@ export const fetchFirestoreUsersByChunk = async (queryLimit: number, lastUserEma
     const docSnapshot = await getDocs(q);
     return docSnapshot.docs.map(doc => doc.data() as IUser)
   } catch (error) {
+    return []
+  }
+}
+
+export const fetchFirestoreCoAdminsAndAdminsByChunk = async (queryLimit:number, lastDoc:firestoreDocSnapshot|null):Promise<firestoreDocSnapshot[]> =>{
+  try {
+    if (!queryLimit) { throw new Error("Invalid query limit ! Should be a positive number ") }
+    const constraints: QueryConstraint[] = [
+      where("adminStatus", "in", [ADMIN_STATUS.CO_ADMIN, ADMIN_STATUS.MAIN_ADMIN]),
+      orderBy("email", 'desc'),
+      orderBy('createdAt', 'desc'),
+      limit(queryLimit)
+    ]
+
+    let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.USERS_COLLECTION), ...constraints);
+    if (lastDoc) { q = query(q, startAfter(lastDoc)) };
+    const docSnapshot = await getDocs(q);
+    return docSnapshot.docs
+  } catch (error) {
+    console.log(error)
     return []
   }
 }
@@ -313,6 +332,43 @@ export const uploadImageToStorage = async (fileToUpload: File, folderPath: strin
 
 
 
+
+export const viewFirestoreInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const existingInnovation = await getInnovationById(innovation.id);
+    if (!existingInnovation) { throw new Error("Failed to get this innovation") }
+    const updatedInnovation = { ...existingInnovation, views: existingInnovation.views + 1 } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, updatedInnovation.id), updatedInnovation)
+    return updatedInnovation
+  } catch (error) {
+    return null
+  }
+}
+
+export const likeFirestoreInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const existingInnovation = await getInnovationById(innovation.id);
+    if (!existingInnovation) { throw new Error("Failed to get this innovation") }
+    const updatedInnovation = { ...existingInnovation, likes: existingInnovation.likes + 1 } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, updatedInnovation.id), updatedInnovation)
+    return updatedInnovation
+  } catch (error) {
+    return null
+  }
+}
+
+export const unlikeFirestoreInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const existingInnovation = await getInnovationById(innovation.id);
+    if (!existingInnovation) { throw new Error("Failed to get this innovation") }
+    const updatedInnovation = { ...existingInnovation, likes: existingInnovation.likes - 1 } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, updatedInnovation.id), updatedInnovation)
+    return updatedInnovation
+  } catch (error) {
+    return null
+  }
+}
+
 export const getInnovationById = async (innovationId: string): Promise<Innovation | null> => {
   const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), where("id", "==", innovationId));
   const innovationSnapshot = await getDocs(q);
@@ -356,16 +412,20 @@ export const enableFirestoreInnovation = async (innovation: Innovation): Promise
 }
 
 
-export const fetchFirestoreInnovationsByChunk = async (queryLimit = 15, adminView = false, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
+export const fetchFirestoreInnovationsByChunk = async (queryLimit = 15, adminView = false, ownerEmail:string|null, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
   try {
     let customFilter: QueryConstraint | null = null
     if (!adminView) { customFilter = where("disabled", "!=", true) }
-    const constraints: QueryConstraint[] = [
+    let constraints: QueryConstraint[] = [
       customFilter as QueryConstraint,
       orderBy('createdAt', 'desc'),
       orderBy('id', 'desc'),
       limit(queryLimit)
     ].filter(Boolean)
+
+    if(ownerEmail && ownerEmail.trim()){
+      constraints = [where("ownerEmail", "==", ownerEmail), ...constraints]
+    }
 
     let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), ...constraints);
     if (lastDoc) { q = query(q, startAfter(lastDoc)) }
@@ -376,5 +436,36 @@ export const fetchFirestoreInnovationsByChunk = async (queryLimit = 15, adminVie
     return []
   }
 }
+// export const fetchUserFirestoreInnovationsByChunk = async (queryLimit = 15, userEmail:string, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
+//   try {
+//     if(!userEmail){ return [] }
+//     const constraints: QueryConstraint[] = [
+//       where("ownerEmail", "==", userEmail),
+//       where("disabled", "!=", true),
+//       orderBy('createdAt', 'desc'),
+//       orderBy('id', 'desc'),
+//       limit(queryLimit)
+//     ].filter(Boolean)
 
+//     let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), ...constraints);
+//     if (lastDoc) { q = query(q, startAfter(lastDoc)) }
+//     const docsSnapshot = await getDocs(q);
+//     return docsSnapshot.docs
+//   } catch (error) {
+//     console.log(error)
+//     return []
+//   }
+// }
+
+export const fetchUserInnovationsCount = async(userEmail:string):Promise<number> =>{
+  const q =query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), where("ownerEmail", "==", userEmail));
+  const countSnapshot = (await getCountFromServer(q)).data().count;
+  return countSnapshot
+}
+
+export const fetchUserProductsCount = async(userEmail:string):Promise<number> =>{
+  const q =query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION), where("ownerEmail", "==", userEmail));
+  const countSnapshot = (await getCountFromServer(q)).data().count;
+  return countSnapshot
+}
 

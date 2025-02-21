@@ -5,5 +5,7 @@ export const getSingleProductPath = (productId:string):string =>{
 
 export const getFullDateFromIsostring = (isoDate:string) =>{
   const newDate = new Date(isoDate);
-  return `${newDate.getDate()} / ${newDate.getMonth() + 1} / ${newDate.getFullYear()}`
+  if(!isoDate || !newDate){ return "" }
+  return newDate.toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'})
 }
+

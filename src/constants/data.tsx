@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, HiOutlineLightBulb, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
 
 export type PrincipleData = {
@@ -408,8 +408,8 @@ export const trainingTestimonials: Testimonial[] = [
 
 export const userMenuItems:MenuItem[] = [
     { label: "Profil", icon: <FiUser />, path:"profile", restricted:false},
+    { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations", restricted:false },
     { label: "Admin", icon: <FiBarChart />, path:"admin", restricted:true },
-    // { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations" },
   ];
 
 
@@ -418,10 +418,12 @@ export enum ADMIN_ROUTE_PATHS {
     MANAGE_USERS='/me/manage-users',
     MANAGE_CATEGORIES="/me/manage-categories",
     MANAGE_PRODUCTS="/me/manage-products",
+    MANAGE_INNOVATIONS="/me/manage-innovations",
 }
 
 export const adminDashboardRoutes: DashBoardRoute[] = [
     { label: "Manage Users", path: ADMIN_ROUTE_PATHS.MANAGE_USERS, icon: <AiOutlineUser />, description: "Oversee user profiles and permissions effortlessly." },
     { label: "Manage Categories", path: ADMIN_ROUTE_PATHS.MANAGE_CATEGORIES, icon: <AiOutlineUnorderedList />, description: "Organize and update product categories with a click." },
-    { label: "Manage Products", path: ADMIN_ROUTE_PATHS.MANAGE_PRODUCTS, icon: <AiOutlineInbox />, description: "Add, edit, or remove products seamlessly in real-time." }
+    { label: "Manage Products", path: ADMIN_ROUTE_PATHS.MANAGE_PRODUCTS, icon: <AiOutlineInbox />, description: "Add, edit, or remove products seamlessly in real-time." },
+    { label: "Manage Innovations", path: ADMIN_ROUTE_PATHS.MANAGE_INNOVATIONS, icon: <HiOutlineLightBulb />, description: "Manage innovations here " }
 ];

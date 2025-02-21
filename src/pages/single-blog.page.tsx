@@ -12,7 +12,7 @@ import NotFoundPage from "./errors/not-found.page";
 import { CiEdit } from "react-icons/ci";
 import { getFullDateFromIsostring } from "@/utils/index.utils";
 import { selectReadBlogsIds } from "@/store/blogs/blogs.selector";
-import { readBlogStart } from "@/store/blogs/blogs.types";
+import { readBlogStart } from "@/store/blogs/blogs.actions";
 
 
 const SingleBlogPage = () => {

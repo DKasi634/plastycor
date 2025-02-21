@@ -3,13 +3,16 @@ import BaseButton, { buttonType } from "@/components/base-button/base-button.com
 import GenericImage from "@/components/generic-image/generic-image.component";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import { selectCurrentUser, selectAuthLoading } from "@/store/auth/auth.selector";
-import { getFirestoreUserByEmail, getInnovationById } from "@/utils/firebase/firestore.utils";
+import { getFirestoreUserByEmail, getInnovationById, likeFirestoreInnovation, unlikeFirestoreInnovation } from "@/utils/firebase/firestore.utils";
 import { useState, useEffect } from "react";
-import {  useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import NotFoundPage from "./errors/not-found.page";
 import { CiEdit } from "react-icons/ci";
+import { FaRegHeart, FaHeart } from "@/assets"
 import { getFullDateFromIsostring } from "@/utils/index.utils";
+import { selectLikedInnovationsIds, selectReadInnovationsIds } from "@/store/innovations/innovations.selector";
+import { likeInnovationSuccess, readInnovationStart, unlikeInnovationSuccess } from "@/store/innovations/innovations.actions";
 
 
 const SingleInnovationPage = () => {
@@ -20,8 +23,10 @@ const SingleInnovationPage = () => {
     const [loading, setLoading] = useState(true);
     const [innovationPublisher, setInnovationPublisher] = useState<IUser | null>(null);
     const [innovationFound, setInnovationFound] = useState(true);
+    const likedInnovationsIds = useSelector(selectLikedInnovationsIds);
+    const readInnovationsIds = useSelector(selectReadInnovationsIds);
 
-
+    const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser);
     const userLoading = useSelector(selectAuthLoading);
 
@@ -43,12 +48,31 @@ const SingleInnovationPage = () => {
         }
     };
 
+    const handleLikeInnovation = async () => {
+        if (!thisInnovation) { return }
+        if (!likedInnovationsIds.some(id => id === thisInnovation.id)) {
+            const likedInnovation = await likeFirestoreInnovation(thisInnovation);
+            if (likedInnovation) {
+                dispatch(likeInnovationSuccess(thisInnovation))
+            }
+        }
+    }
+    const handleUnlikeInnovation = async () => {
+        if (!thisInnovation) { return }
+        if (likedInnovationsIds.some(id => id === thisInnovation.id)) {
+            const likedInnovation = await unlikeFirestoreInnovation(thisInnovation);
+            if (likedInnovation) {
+                dispatch(unlikeInnovationSuccess(thisInnovation))
+            }
+        }
+    }
 
-    // useEffect(()=>{
-    //     if(thisInnovation && !readBlogsIds.some(id => id === thisInnovation.id)){
-    //         dispatch(readBlogStart(thisInnovation))
-    //     }
-    // }, [thisInnovation])
+
+    useEffect(() => {
+        if (thisInnovation && !readInnovationsIds.some(id => id === thisInnovation.id)) {
+            dispatch(readInnovationStart(thisInnovation))
+        }
+    }, [thisInnovation])
 
     useEffect(() => {
         if (innovationId) {
@@ -66,12 +90,12 @@ const SingleInnovationPage = () => {
                 <div className={`min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12 mx-auto">
                         <h1 className="text-2xl font-bold text-gray-800 my-8 w-full text-center">{thisInnovation.name}</h1>
-                        <div className="w-full h-64 shadow-md rounded-lg border border-gray overflow-hidden mb-8">
+                        <div className="w-full h-80 shadow-md rounded-lg bg-gray-transparent border border-gray overflow-hidden mb-8">
 
                             <GenericImage
                                 src={thisInnovation.images[0]}
                                 alt={thisInnovation.name}
-                                className="object-cover object-center w-full h-full"
+                                className="object-contain object-center w-full h-full"
                             />
                         </div>
 
@@ -84,9 +108,15 @@ const SingleInnovationPage = () => {
                                 </div>
                                 <span className="text-xs font-semibold text-dark text-left">{innovationPublisher?.firstName} {innovationPublisher?.lastName}</span>
                             </div>
-                            <span className="text-xs font-bold text-dark/80 text-left">{getFullDateFromIsostring(thisInnovation.createdAt)}</span>
+                            <p className="text-xs font-bold text-dark/80 text-left">{getFullDateFromIsostring(thisInnovation.createdAt)}</p>
+                            <div className="flex items-center justify-start py-4">
+                                {(!likedInnovationsIds.some(id => id === thisInnovation.id)) ?
+                                    <span className="text-2xl cursor-pointer" onClick={handleLikeInnovation}><FaRegHeart /></span>
+                                    : <span className="text-2xl cursor-pointer" onClick={handleUnlikeInnovation}><FaHeart className="fill-pink-500" /></span>
+                                }
+                            </div>
                         </div>
-                        {(currentUser && currentUser.email === innovationPublisher?.email ) &&
+                        {(currentUser && currentUser.email === innovationPublisher?.email) &&
                             <BaseButton type={buttonType.light} className="!fixed !bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/univartize/edit/${thisInnovation.id}`} > Edit <CiEdit className="text-xl ml-2" /></BaseButton>
                         }
                     </div>

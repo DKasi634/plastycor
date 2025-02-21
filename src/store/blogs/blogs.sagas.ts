@@ -1,8 +1,9 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
-import { BLOGS_ACTION_TYPES, readBlogFailure, readBlogSuccess } from "./blogs.types";
+import { BLOGS_ACTION_TYPES } from "./blogs.types";
 import { ActionWithPayload } from "@/utils/reducer/reducer.utils";
 import { Blog } from "@/api/types";
 import { viewFirestoreBlog } from "@/utils/firebase/firestore.utils";
+import { readBlogFailure, readBlogSuccess } from "./blogs.actions";
 
 
 function* readBlog({payload:blog}:ActionWithPayload<BLOGS_ACTION_TYPES.READ_BLOG_START, Blog>){

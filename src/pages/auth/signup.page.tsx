@@ -11,6 +11,7 @@ import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
 import { nextRouteLocation } from "@/routes/auth-protected.route";
+import { parsePhoneNumber } from "react-phone-number-input";
 // import { store } from "@/store/store";
 
 const SignUpPage: React.FC = () => {
@@ -79,11 +80,12 @@ const SignUpPage: React.FC = () => {
         }
         break;
       case "phoneNumber":
-        if (!value.trim()) {
-          error = "Le numéro de téléphone est obligatoire."; // Phone number is required.
-        }
-        else if (value.trim().length >= 15) {
-          error = "Numéro de téléphone trop long "; // Phone number is too long.
+        // if (!value.trim()) {
+        //   error = "Le numéro de téléphone est obligatoire."; // Phone number is required.
+        //   break;
+        // }
+        if(!parsePhoneNumber(value)?.isValid()){
+          error="Numero invalide";
         }
         break;
       case "password":
@@ -112,7 +114,7 @@ const SignUpPage: React.FC = () => {
     setErrors({ ...errors, [name]: error });
   };
 
-  const handlePasswordChange = (field: keyof typeof formData, value: string) => {
+  const handleCustomFieldChange = (field: keyof typeof formData, value: string) => {
     setFormData({ ...formData, [field]: value });
     const error = validateField(field, value);
     setErrors({ ...errors, [field]: error });
@@ -181,7 +183,7 @@ const SignUpPage: React.FC = () => {
           {/* Phone Number */}
           <PhoneNumberInput
             value={formData.phoneNumber}
-            onChange={(value) => handlePasswordChange("phoneNumber", value)}
+            onChange={(value) => handleCustomFieldChange("phoneNumber", value)}
             error={errors.phoneNumber}
           />
 
@@ -190,7 +192,7 @@ const SignUpPage: React.FC = () => {
             label="Mot de passe"
             id="password"
             value={formData.password}
-            onChange={(value) => handlePasswordChange("password", value)}
+            onChange={(value) => handleCustomFieldChange("password", value)}
             error={errors.password}
           />
 
@@ -199,7 +201,7 @@ const SignUpPage: React.FC = () => {
             label="Confirmez le mot de passe"
             id="confirm_password"
             value={formData.confirmPassword}
-            onChange={(value) => handlePasswordChange("confirmPassword", value)}
+            onChange={(value) => handleCustomFieldChange("confirmPassword", value)}
             error={errors.confirmPassword}
           />
 
