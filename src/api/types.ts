@@ -27,20 +27,23 @@ export type ApiProduct = {
     disabled:boolean
 }
 
-export type Location = {
-    country:string,
-    city:string
-}
+// export type Location = {
+//     country:string,
+//     city:string
+// }
 
 export type Innovation = {
     id:string,
+    categoryId:string,
     ownerEmail:string,
     name:string,
+    description:string,
     images:string[],
     likes:number,
     views:number,
-    location:Location,
-    disabled:boolean
+    location:string,
+    disabled:boolean,
+    createdAt:string
 }
 
 

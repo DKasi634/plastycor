@@ -13,6 +13,7 @@ import ProductsContainer from "@/components/products-container/products-containe
 import { logoutStart } from "@/store/auth/auth.actions";
 import { BiPlus, CiMail, FiLogOut, MdOutlinePhone } from "@/assets";
 import GenericImage from "@/components/generic-image/generic-image.component";
+import { ADMIN_STATUS } from "@/api/types";
 
 
 const ProfilePage = () => {
@@ -74,7 +75,7 @@ const ProfilePage = () => {
                 </div>
               </div>
 
-              {(currentUser && currentUser.adminStatus) &&
+              {(currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) &&
                 <>
                   <div className="flex flex-col py-2">
                     <h2 className="font-bold text-dark text-2xl md:text-3xl my-4 ">Mes Produits</h2>

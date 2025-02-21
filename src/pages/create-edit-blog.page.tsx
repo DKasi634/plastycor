@@ -24,7 +24,6 @@ const CreateEditBlogPage = () => {
                     const blog = await getBlogById(blogId);
                     if (blog) {
                         setBlogData(blog);
-                        console.log("Got a blog : ", blog)
                     }
                 } catch (error) {
                     console.error("Failed to fetch blog:", error);

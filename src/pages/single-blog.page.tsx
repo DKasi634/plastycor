@@ -1,5 +1,5 @@
 import { ADMIN_STATUS, Blog, IUser } from "@/api/types"
-import BaseButton from "@/components/base-button/base-button.component";
+import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
 import GenericImage from "@/components/generic-image/generic-image.component";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import { selectCurrentUser, selectAuthLoading } from "@/store/auth/auth.selector";
@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import NotFoundPage from "./errors/not-found.page";
 import { CiEdit } from "react-icons/ci";
+import { getFullDateFromIsostring } from "@/utils/index.utils";
+import { selectReadBlogsIds } from "@/store/blogs/blogs.selector";
+import { readBlogStart } from "@/store/blogs/blogs.types";
 
 
 const SingleBlogPage = () => {
@@ -25,29 +28,36 @@ const SingleBlogPage = () => {
 
     const currentUser = useSelector(selectCurrentUser);
     const userLoading = useSelector(selectAuthLoading);
+    const readBlogsIds = useSelector(selectReadBlogsIds);
+    // const readBlogsIdsLoading = useSelector(selectReadBlogsLoading);
 
     const setErrorMessage = (error: string) => dispatch(setErrorToast(error));
+
 
     // Call to fetch blog data
     const fetchBlog = async (id: string) => {
         setLoading(true);
-        console.log("Fetching blog with id :", id)
         try {
             const blog: Blog | null = await getBlogById(id);
             if (!blog) { throw new Error("Failed to load the blog") }
-            
+
             setBlog(blog);
             const owner = await getFirestoreUserByEmail(blog.publisherEmail);
             setBlogPublisher(owner);
-            console.log("\nFetched blog publisher  : ", owner);
         } catch (err) {
-            console.log("Error fetching blog : ", err)
             setErrorMessage("Failed to load blog details.");
             setBlogFound(false)
         } finally {
             setLoading(false);
         }
     };
+
+
+    useEffect(()=>{
+        if(blog && !readBlogsIds.some(id => id === blog.id)){
+            dispatch(readBlogStart(blog))
+        }
+    }, [blog])
 
     useEffect(() => {
         if (blogId) {
@@ -64,8 +74,8 @@ const SingleBlogPage = () => {
             {blog &&
                 <div className={`min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12 mx-auto">
-                        <h1 className="text-2xl font-bold text-gray-800 mb-4">{blog.title}</h1>
-                        <div className="w-full h-64 mb-4 shadow-md rounded-lg border border-gray overflow-hidden">
+                        <h1 className="text-2xl font-bold text-gray-800 my-8 w-full text-center">{blog.title}</h1>
+                        <div className="w-full h-64 shadow-md rounded-lg border border-gray overflow-hidden mb-8">
 
                             <GenericImage
                                 src={blog.image}
@@ -74,16 +84,19 @@ const SingleBlogPage = () => {
                             />
                         </div>
 
-                        <p className="text-dark/80 text-xs font-semibold py-2 w-full text-center">{blog.content}</p>
+                        <p className="text-dark/80 text-sm font-semibold py-3 w-full text-center leading-7">{blog.content}</p>
 
                         <div className="flex items-center justify-start gap-4 mb-4 mt-2 w-full">
-                            <div className="rounded-full aspect-square w-[1.2rem] overflow-hidden">
-                                <GenericImage loading="lazy" src={blogPublisher?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
+                            <div className="flex items-center justify-start gap-1 w-fit">
+                                <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
+                                    <GenericImage loading="lazy" src={blogPublisher?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
+                                </div>
+                                <span className="text-xs font-semibold text-dark text-left">{blogPublisher?.firstName} {blogPublisher?.lastName}</span>
                             </div>
-                            <span className="text-xs font-semibold text-gray text-left">{blogPublisher?.firstName} {blogPublisher?.lastName}</span>
+                            <span className="text-xs font-bold text-dark/80 text-left">{getFullDateFromIsostring(blog.createdAt)}</span>
                         </div>
                         {(currentUser && currentUser.email === blogPublisher?.email && ([ADMIN_STATUS.CO_ADMIN, ADMIN_STATUS.MAIN_ADMIN].some(val => val === blogPublisher.adminStatus))) &&
-                            <BaseButton className="!fixed !bottom-[5rem] !right-[3rem] shadow-md" href={`/blogs/edit/${blog.id}`} > Edit <CiEdit className="text-xl ml-2" /></BaseButton>
+                            <BaseButton type={buttonType.light} className="!fixed !bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/blogs/edit/${blog.id}`} > Edit <CiEdit className="text-xl ml-2" /></BaseButton>
                         }
                     </div>
                 </div>

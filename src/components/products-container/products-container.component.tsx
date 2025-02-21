@@ -56,7 +56,6 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
             setIsLoading(false);
 
         } catch (error) {
-            console.log(error)
             setIsLoading(false)
         }
     }

@@ -27,13 +27,6 @@ export type Achievement = {
     icon: JSX.Element;
 };
 
-export type Article = {
-    image: string;
-    title: string;
-    description: string;
-    published: Date;
-    views: number;
-};
 
 export type routeType = {
     path: string,
@@ -134,44 +127,6 @@ export const achievements: Achievement[] = [
 
 
 
-
-export const articles: Article[] = [
-    {
-        image: ProductImage1,
-        title: "Le Voyage des Plastiques Recyclés",
-        description: "Découvrez comment les déchets plastiques se transforment en matériaux réutilisables grâce à des processus de recyclage innovants.",
-        published: new Date("2025-01-15"),
-        views: 1320,
-    },
-    {
-        image: ProductImage2,
-        title: "Créer un Vase à partir de Déchets Plastiques",
-        description: "Apprenez à transformer des déchets plastiques en un magnifique vase ou une poterie durable, combinant artisanat et recyclage.",
-        published: new Date("2025-01-20"),
-        views: 1870,
-    },
-    {
-        image: ProductImage3,
-        title: "Statistiques du Recyclage du Plastique : 2025",
-        description: "Tendances et chiffres clés mettant en lumière les progrès du recyclage du plastique dans le monde.",
-        published: new Date("2025-01-25"),
-        views: 980,
-    },
-    {
-        image: ProductImage4,
-        title: "Produits Innovants en Plastique Recyclé",
-        description: "Explorez des produits uniques et durables créés à partir de matériaux plastiques recyclés.",
-        published: new Date("2025-01-28"),
-        views: 720,
-    },
-    {
-        image: ProductImage5,
-        title: "Astuces pour le Recyclage à Domicile",
-        description: "Des moyens simples mais efficaces de contribuer aux efforts de recyclage des plastiques depuis votre foyer.",
-        published: new Date("2025-01-30"),
-        views: 1450,
-    },
-];
 
 
 

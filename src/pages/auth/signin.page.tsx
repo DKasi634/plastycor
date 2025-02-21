@@ -23,7 +23,6 @@ const SignInPage: React.FC = () => {
 
   const location = useLocation();
   const nextLocation:nextRouteLocation = location.state;
-  console.log("\n State in signin : ", nextLocation)
 
   useEffect(()=>{
     if(currentUser){

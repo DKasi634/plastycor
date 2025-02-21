@@ -33,6 +33,10 @@ import ManageProductsPage from './pages/admin-pages/manage-products.page'
 import BlogNavigation from './routes/blog.route'
 import CreateEditBlogPage from './pages/create-edit-blog.page'
 import SingleBlogPage from './pages/single-blog.page'
+import UnivartizeNavigation from './routes/univartize.route'
+import PostInnovationPage from './pages/user/post-innovation.page'
+import EditInnovationPage from './pages/user/edit-innovation.page'
+import SingleInnovationPage from './pages/single-innovation.page'
 
 const App = () => {
 
@@ -72,7 +76,12 @@ const App = () => {
           <Route path='activities' element={<ActivitiesPage />} />
           <Route path='shop' element={<ProductsPage />} />
           <Route path='network' element={<NetworkPage />} />
-          <Route path='univartize' element={<UnivartizePage />} />
+          <Route path='univartize' element={<UnivartizeNavigation />}>
+            <Route index element={<UnivartizePage/>} />
+            <Route path='create' element={<PostInnovationPage/>} />
+            <Route path='edit/:innovationId' element={<EditInnovationPage/>} />
+            <Route path=':innovationId' element={<SingleInnovationPage/>} />
+          </Route>
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
           <Route path='product/:productId' element={<SingleProductPage />} />

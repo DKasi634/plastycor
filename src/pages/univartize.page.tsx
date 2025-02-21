@@ -1,20 +1,23 @@
-import UnivartizeCard from '@/components/univartize-card/univartize-card.component'
-import { products } from '@/constants/data'
-import { GridContainerMd, SectionContainer } from '@/styles/globals.styles'
+import { ADMIN_STATUS } from '@/api/types'
+import { BiPlus } from '@/assets'
+import BaseButton from '@/components/base-button/base-button.component'
+import InnovationsContainer from '@/components/innovations-container/innovations-container.component'
+
+import { selectCurrentUser } from '@/store/auth/auth.selector'
+import { SectionContainer } from '@/styles/globals.styles'
+import { useSelector } from 'react-redux'
 
 const UnivartizePage = () => {
+    const currentUser = useSelector(selectCurrentUser)
     return (
         <div className="flex flex-col py-12">
+            <SectionContainer>
             <h3 className="text-4xl font-bold text-dark w-full text-center mt-[2rem]">Univartize</h3>
             <p className="text-lg text-dark w-full text-center my-[2rem]">Découvrez et partagez des techniques innovantes de recyclage créatif</p>
-
-            <SectionContainer>
-                <GridContainerMd>
-                    {
-                        products.map((product) => (<UnivartizeCard product={product} key={product.id} />))
-                    }
-                </GridContainerMd>
+                <InnovationsContainer />
             </SectionContainer>
+            {(currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) &&
+             <BaseButton href="/univartize/create" className="fixed right-[2rem] bottom-[3rem] z-40 shadow-lg shadow-dark-transparent lg:bottom-[2rem] font-semibold !text-sm">Créer <BiPlus className='text-xl ml-1' /></BaseButton>      }
         </div>
     )
 }

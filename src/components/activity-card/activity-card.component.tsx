@@ -1,16 +1,15 @@
-// import { Article } from "@/constants/data"
 
 import { Activity } from "@/types"
 import BaseButton, { buttonType } from "../base-button/base-button.component"
 import GenericImage from "../generic-image/generic-image.component"
 
 
-type ArticleCardProps = {
+type ActivityCardProps = {
     className?: string,
     activity: Activity
 }
 
-const ActivityCard = ({ className, activity: { image, title, description } }: ArticleCardProps) => {
+const ActivityCard = ({ className, activity: { image, title, description } }: ActivityCardProps) => {
     return (
         <div className={`${className} flex flex-col items-start justify-start p-[2px] rounded-lg border border-gray shadow-sm shadow-dark-transparent overflow-hidden pb-0` }>
             <div className="w-full h-[40%] mb-2 md:mb-4 rounded-lg overflow-hidden"> <GenericImage loading="lazy" src={image} alt="Activity" className="w-full h-full object-cover object-center" /> </div>

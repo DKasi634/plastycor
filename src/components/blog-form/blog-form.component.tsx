@@ -35,8 +35,6 @@ const BlogForm = ({ initialData, onSubmit }: BlogFormProps) => {
             setFormData(initialData);
         }
     }, [initialData])
-
-    console.log("\nInitial data : ", initialData)
     const [canSubmit, setCanSubmit] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 

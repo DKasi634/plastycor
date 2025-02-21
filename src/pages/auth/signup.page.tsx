@@ -31,7 +31,7 @@ const SignUpPage: React.FC = () => {
 
   const location = useLocation();
   const nextLocation:nextRouteLocation = location.state;
-  console.log("\n State in signup : ", nextLocation)
+  // console.log("\n State in signup : ", nextLocation)
 
 
   useEffect(()=>{

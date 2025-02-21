@@ -1,4 +1,4 @@
-import { ADMIN_STATUS, ApiProduct, Blog, Category, ErrorPayload, IUser } from "@/api/types";
+import { ADMIN_STATUS, ApiProduct, Blog, Category, ErrorPayload, Innovation, IUser } from "@/api/types";
 import { collection, doc, DocumentData, getDocFromServer, getDocs, limit, orderBy, query, QueryConstraint, QueryDocumentSnapshot, setDoc, startAfter, where } from "firebase/firestore";
 import { firebaseStorage, firestoreDB } from "./firebase.config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -26,10 +26,10 @@ export const getFirestoreUserByEmail = async (userEmail: string): Promise<IUser 
   }
 }
 
-export const fetchFirestoreUsersByChunk = async (queryLimit:number, lastUserEmail?: string): Promise<IUser[]> => {
-  
+export const fetchFirestoreUsersByChunk = async (queryLimit: number, lastUserEmail?: string): Promise<IUser[]> => {
+
   try {
-    if(!queryLimit){ throw new Error("Invalid query limit ! Should be a positive number ") }
+    if (!queryLimit) { throw new Error("Invalid query limit ! Should be a positive number ") }
     const constraints: QueryConstraint[] = [
       orderBy("email", 'desc'),
       orderBy('createdAt', 'desc'),
@@ -141,27 +141,28 @@ export const enableFirestoreProduct = async (product: ApiProduct): Promise<ApiPr
     const enabledProduct = { ...product, disabled: false } as ApiProduct
     await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION, product.id), enabledProduct);
     return enabledProduct
-  } catch (error) { return null
+  } catch (error) {
+    return null
   }
 }
 
-type firestoreDocSnapshot = QueryDocumentSnapshot<DocumentData, DocumentData>
+export type firestoreDocSnapshot = QueryDocumentSnapshot<DocumentData, DocumentData>
 
-export const fetchFirestoreProductsByChunk = async (queryLimit=15, customFilter:QueryConstraint | null, lastDoc:firestoreDocSnapshot | null):Promise<firestoreDocSnapshot[]> => {
+export const fetchFirestoreProductsByChunk = async (queryLimit = 15, customFilter: QueryConstraint | null, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
   try {
-      const constraints: QueryConstraint[] = [
-          customFilter as QueryConstraint,
-          orderBy('createdAt', 'desc'),
-          orderBy('id', 'desc'),
-          limit(queryLimit)
-      ].filter(Boolean)
+    const constraints: QueryConstraint[] = [
+      customFilter as QueryConstraint,
+      orderBy('createdAt', 'desc'),
+      orderBy('id', 'desc'),
+      limit(queryLimit)
+    ].filter(Boolean)
 
-      let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION), ...constraints);
-      if (lastDoc) {  q = query(q, startAfter(lastDoc))}
-      const docsSnapshot = await getDocs(q);
+    let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.PRODUCTS_COLLECTION), ...constraints);
+    if (lastDoc) { q = query(q, startAfter(lastDoc)) }
+    const docsSnapshot = await getDocs(q);
     return docsSnapshot.docs
   } catch (error) {
-      return []
+    return []
   }
 }
 
@@ -246,6 +247,18 @@ export const createOrUpdateBlog = async (newBlog: Blog): Promise<Blog | null> =>
   }
 }
 
+export const viewFirestoreBlog = async (blog: Blog): Promise<Blog | null> => {
+  try {
+    const existingBlog = await getBlogById(blog.id);
+    if (!existingBlog) { throw new Error("Failed to get this blog") }
+    const updatedBlog = { ...existingBlog, views: existingBlog.views + 1 } as Blog
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.BLOGS_COLLECTION, updatedBlog.id), updatedBlog)
+    return updatedBlog
+  } catch (error) {
+    return null
+  }
+}
+
 export const disableFirestoreBlog = async (blog: Blog): Promise<Blog | null> => {
   try {
 
@@ -262,16 +275,106 @@ export const enableFirestoreBlog = async (blog: Blog): Promise<Blog | null> => {
     const enabledBlog = { ...blog, disabled: false } as Blog
     await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.BLOGS_COLLECTION, blog.id), enabledBlog);
     return enabledBlog
-  } catch (error) { return null
+  } catch (error) {
+    return null
+  }
+}
+
+export const fetchFirestoreBlogsByChunk = async (queryLimit = 15, adminView = false, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
+  try {
+    let customFilter: QueryConstraint | null = null
+    if (!adminView) { customFilter = where("disabled", "!=", true) }
+    const constraints: QueryConstraint[] = [
+      customFilter as QueryConstraint,
+      orderBy('createdAt', 'desc'),
+      orderBy('id', 'desc'),
+      limit(queryLimit)
+    ].filter(Boolean)
+
+    let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.BLOGS_COLLECTION), ...constraints);
+    if (lastDoc) { q = query(q, startAfter(lastDoc)) }
+    const docsSnapshot = await getDocs(q);
+    return docsSnapshot.docs
+  } catch (error) {
+    console.log(error)
+    return []
   }
 }
 
 
-export const uploadImageToStorage = async (fileToUpload:File, folderPath:string): Promise<string> => {
-      const storage = firebaseStorage;
-        const imageName = `image_${new Date().getTime()}`;
-        const storageRef = ref(storage, `${folderPath}/${imageName}`);
-        await uploadBytes(storageRef, fileToUpload);
-        const url = await getDownloadURL(storageRef);
-        return url
-    };
+export const uploadImageToStorage = async (fileToUpload: File, folderPath: string): Promise<string> => {
+  const storage = firebaseStorage;
+  const imageName = `image_${new Date().getTime()}`;
+  const storageRef = ref(storage, `${folderPath}/${imageName}`);
+  await uploadBytes(storageRef, fileToUpload);
+  const url = await getDownloadURL(storageRef);
+  return url
+};
+
+
+
+export const getInnovationById = async (innovationId: string): Promise<Innovation | null> => {
+  const q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), where("id", "==", innovationId));
+  const innovationSnapshot = await getDocs(q);
+  if (innovationSnapshot.empty) {
+    return null
+  }
+  return innovationSnapshot.docs[0].data() as Innovation
+}
+
+
+export const createOrUpdateInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const existingInnovation: Innovation | null = await getInnovationById(innovation.id)
+    const newInnovation = { ...existingInnovation, ...innovation } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, innovation.id), newInnovation);
+    return newInnovation
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+export const disableFirestoreInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const disabledInnovation = { ...innovation, disabled: true } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, innovation.id), disabledInnovation);
+    return disabledInnovation
+  } catch (error) {
+    return null
+  }
+}
+
+export const enableFirestoreInnovation = async (innovation: Innovation): Promise<Innovation | null> => {
+  try {
+    const enabledInnovation = { ...innovation, disabled: false } as Innovation
+    await setDoc(doc(firestoreDB, FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION, innovation.id), enabledInnovation);
+    return enabledInnovation
+  } catch (error) {
+    return null
+  }
+}
+
+
+export const fetchFirestoreInnovationsByChunk = async (queryLimit = 15, adminView = false, lastDoc: firestoreDocSnapshot | null): Promise<firestoreDocSnapshot[]> => {
+  try {
+    let customFilter: QueryConstraint | null = null
+    if (!adminView) { customFilter = where("disabled", "!=", true) }
+    const constraints: QueryConstraint[] = [
+      customFilter as QueryConstraint,
+      orderBy('createdAt', 'desc'),
+      orderBy('id', 'desc'),
+      limit(queryLimit)
+    ].filter(Boolean)
+
+    let q = query(getFirestoreCollectionRef(FIRESTORE_COLLECTIONS.INNOVATIONS_COLLECTION), ...constraints);
+    if (lastDoc) { q = query(q, startAfter(lastDoc)) }
+    const docsSnapshot = await getDocs(q);
+    return docsSnapshot.docs
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+}
+
+
