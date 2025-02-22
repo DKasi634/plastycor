@@ -10,6 +10,7 @@ import LoaderItem from '../loader/loader.component'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '@/store/auth/auth.selector'
+import { BiPlus } from '@/assets'
 
 
 const BlogsContainer: React.FC<ISection> = ({ className = "" }) => {
@@ -70,7 +71,7 @@ const BlogsContainer: React.FC<ISection> = ({ className = "" }) => {
                 {hasMore &&
                     <div className="w-full flex items-center justify-center py-2"> <BaseButton clickHandler={fetchBlogs}> Voir plus ... </BaseButton> </div>
                 }
-                { (currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) && <BaseButton href="/blogs/create" className='fixed bottom-[4rem] shadow-dark-transparent shadow-lg right-[3rem]' > Nouveau </BaseButton>
+                { (currentUser && (currentUser.adminStatus === ADMIN_STATUS.CO_ADMIN || currentUser.adminStatus === ADMIN_STATUS.MAIN_ADMIN)) && <BaseButton href="/blogs/create" className='fixed bottom-[4rem] shadow-dark-transparent shadow-lg right-[3rem]' > Nouveau <BiPlus className='text-xl pl-1'/> </BaseButton>
 
                 }
             </SectionContainer>

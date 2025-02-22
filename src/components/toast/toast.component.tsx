@@ -13,7 +13,7 @@ const Toast: React.FC = () => {
         if (toastState) {
             const timer = setTimeout(() => {
                 dispatch(clearToast()); // Clear the toast after the timeout
-            }, 3000); // Timeout duration (3 seconds)
+            }, 5000); // Timeout duration (5 seconds)
 
             return () => clearTimeout(timer); // Clean up the timer on unmount
         }

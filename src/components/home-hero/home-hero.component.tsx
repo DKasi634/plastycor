@@ -85,8 +85,8 @@ const HomeHero = () =>{
           <h1 className="mb-6 text-5xl font-bold">Plastique Recyclé : Créer, Innover, Préserver</h1>
           <p className="mb-8 text-xl">Chaque bouteille, sac ou emballage devient une opportunité de créer l'extraordinaire. Découvrez comment nous valorisons le plastique autrement</p>
           <div className="flex justify-center gap-4">
-          <BaseButton className='!py-3 !font-semibold !text-[1rem]' rounded={false} type={buttonType.green}> Découvrir Nos Créations </BaseButton>
-          <BaseButton className='!py-3 !font-semibold !text-[1rem]' rounded={false} type={buttonType.light}> Nous contacter <GoArrowUpRight /> </BaseButton>
+          <BaseButton href='/shop' className='!py-3 !font-semibold !text-[1rem]' rounded={false} type={buttonType.green}> Découvrir Nos Créations </BaseButton>
+          <BaseButton href='/contact' className='!py-3 !font-semibold !text-[1rem]' rounded={false} type={buttonType.light}> Nous contacter <GoArrowUpRight /> </BaseButton>
           </div>
         </div>
       </div>

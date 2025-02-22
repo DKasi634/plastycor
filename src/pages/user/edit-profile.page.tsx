@@ -27,12 +27,13 @@ const EditProfilePage = () => {
 
     const setError = (error: string) => { dispatch(setErrorToast(error)) }
 
-    const setFirstName = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, firstName: e.target.value } as IUser)) }
-    const setLastName = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, lastName: e.target.value } as IUser)) }
-    const setPhoneNumber = (value: string) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, phoneNumber: value } as IUser)) }
-    const setBio = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, bio: e.target.value } as IUser)) }
-    const setCity = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, location: prev && { ...prev.location, city: e.target.value } as Location } as IUser)) }
-    const setCountry = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile) { return } setUserProfile(prev => ({ ...prev, location: prev && { ...prev.location, country: e.target.value } as Location } as IUser)) }
+    const setFirstName = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 50) { return } setUserProfile(prev => ({ ...prev, firstName: e.target.value } as IUser)) }
+    const setLastName = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 50) { return } setUserProfile(prev => ({ ...prev, lastName: e.target.value } as IUser)) }
+    const setPhoneNumber = (value: string) => { if (!userProfile ) { return } setUserProfile(prev => ({ ...prev, phoneNumber: value } as IUser)) }
+    const setOrganisation = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 100) { return } setUserProfile(prev => ({ ...prev, organisation: e.target.value } as IUser)) }
+    const setBio = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 500) { return } setUserProfile(prev => ({ ...prev, bio: e.target.value } as IUser)) }
+    const setCity = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 100) { return } setUserProfile(prev => ({ ...prev, location: prev && { ...prev.location, city: e.target.value } as Location } as IUser)) }
+    const setCountry = (e: React.ChangeEvent<HTMLInputElement>) => { if (!userProfile || e.target.value.length > 100) { return } setUserProfile(prev => ({ ...prev, location: prev && { ...prev.location, country: e.target.value } as Location } as IUser)) }
     const setTags = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!userProfile) { return }
         setTagsString(e.target.value)
@@ -46,9 +47,10 @@ const EditProfilePage = () => {
     }, [tagsString])
 
     useEffect(() => {
-        if (canUpdate) {
+        if (canUpdate && currentUser) {
             setCanUpdate(false);
-            updateThisUser()
+            updateThisUser();
+            dispatch(setCurrentUser(currentUser.email))
         }
     }, [canUpdate])
 
@@ -75,6 +77,7 @@ const EditProfilePage = () => {
                 console.log(error)
                 setError("Veuillez entre un numéro de teléphone valide"); setIsUpdating(false); return
             }
+            if (!userProfile.organisation?.trim()) { setError("Organisation ou communauté requise"); throw new Error("Invalid organisation") }
             if (!userProfile.bio?.trim()) { setError("Bio invalide"); throw new Error("Invalid bio") }
             if (!userProfile.location?.city.trim()) { setError("Ville ou localité invalide"); throw new Error("Invalid city") }
             if (!userProfile.location?.country.trim()) { setError("Pays invalide"); throw new Error("Invalid country") }
@@ -103,6 +106,7 @@ const EditProfilePage = () => {
                             <GenericInput label="Nom" type="text" name="first_name" value={userProfile.firstName} onChange={setFirstName} />
                             <GenericInput label="Prénom" type="text" name="last_name" value={userProfile.lastName} onChange={setLastName} />
                             <PhoneNumberInput label="Teléphone" value={userProfile.phoneNumber} onChange={(value) => setPhoneNumber(value)} />
+                            <GenericInput label="Organisation ou Communauté" type="text" name="oragnisation" value={userProfile.organisation || ''} onChange={setOrganisation} />
                             <GenericInput label="Bio" type="text" name="bio" value={userProfile.bio || ''} onChange={setBio} />
                             <GenericInput label="Ville ou Localité" type="text" name="city" value={userProfile.location?.city || ''} onChange={setCity} />
                             <GenericInput label="Pays" type="text" name="country" value={userProfile.location?.country || ''} onChange={setCountry} />

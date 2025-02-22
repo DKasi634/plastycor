@@ -14,7 +14,7 @@ const BottomNav: React.FC<BottomNavItemProps> = ({ className = '' }) => {
 
   return (
     <nav
-      className={`${className} flex lg:hidden justify-around fixed bottom-0 left-0 w-full bg-white border-t border-gray-transparent py-2 shadow-md gap-2`}
+      className={`${className} flex lg:hidden justify-center fixed bottom-0 left-0 w-full bg-white border-t border-gray-transparent py-2 shadow-md gap-2`}
     >
       {userMenuItems.map((item, index) => {
         // Render the item only if it's not restricted or the currentUser is a MAIN_ADMIN.

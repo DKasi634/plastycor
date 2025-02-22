@@ -117,7 +117,7 @@ const SingleInnovationPage = () => {
                             </div>
                         </div>
                         {(currentUser && currentUser.email === innovationPublisher?.email) &&
-                            <BaseButton type={buttonType.light} className="!fixed !bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/univartize/edit/${thisInnovation.id}`} > Edit <CiEdit className="text-xl ml-2" /></BaseButton>
+                            <BaseButton type={buttonType.light} className="!fixed !bottom-[2rem] lg:!bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/univartize/edit/${thisInnovation.id}`} > Modifier <CiEdit className="text-xl ml-2" /></BaseButton>
                         }
                     </div>
                 </div>

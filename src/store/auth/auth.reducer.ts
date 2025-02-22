@@ -8,9 +8,10 @@ export type AuthState = {
   isLoading: boolean;
   error: AuthError | null;
   navigateToSignin: boolean;
+  _persistedAt?:number
 };
 
-const authStateInitialValues: AuthState = {
+export const authStateInitialValues: AuthState = {
   currentUser: null,
   isLoading: false,
   error: null,
@@ -49,7 +50,7 @@ export const authReducer = (
       };
 
     case AUTH_ACTION_TYPES.LOGOUT_SUCCESS:
-      return {...state, currentUser:null, isLoading:false}
+      return {...state, currentUser:null, isLoading:false, navigateToSignin:false, error:null}
 
     case AUTH_ACTION_TYPES.CLEAR_AUTH_ERROR:
       return { ...state, error: null };

@@ -1,6 +1,6 @@
 import { IUser } from '@/api/types'
 import BaseButton from '@/components/base-button/base-button.component'
-import NetworkCard from '@/components/creator-card/creator-card.component'
+import NetworkCard from '@/components/network-card/network-card.component'
 import LoaderItem from '@/components/loader/loader.component'
 import { selectCurrentUser } from '@/store/auth/auth.selector'
 
@@ -61,9 +61,9 @@ const NetworkPage = () => {
 
             <SectionContainer>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex flex-wrap justify-start items-center gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex flex-wrap justify-start items-start gap-4">
                     {networkMembers.map((member) => (
-                        <NetworkCard className='lg:max-w-[16rem]' key={member.email} member={member} />
+                        <NetworkCard className='lg:w-[24rem]' key={member.email} member={member} />
                     )
                     )}
                     <div className="h-6" ref={observerRef}></div>
@@ -71,7 +71,7 @@ const NetworkPage = () => {
                 {(loading && hasMore) && <div className='w-full py-8 px-4 flex items-center justify-center' ><LoaderItem className='!w-[2rem] !h-[2rem] !border-[0.2rem]' /></div>}
             </SectionContainer>
             {currentUser ?
-                <BaseButton className='!fixed !bottom-[4rem] right-[2rem]' href='/me/profile/manage-users' >Gérer les utilisateurs</BaseButton> :
+                <BaseButton className='!fixed !bottom-[2rem] right-[2rem] shadow-lg shadow-dark-variant' href='/me/manage-users' >Gérer les utilisateurs</BaseButton> :
                 <></>
             }
         </div>

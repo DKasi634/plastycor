@@ -114,12 +114,12 @@ const ManageCategoriesPage: React.FC = () => {
   return (
     <div className="container mx-auto py-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Categories</h1>
+        <h1 className="text-2xl font-bold">Gérer les Catégories</h1>
         <BaseButton
           clickHandler={openCreateModal}
           className="!px-4 !py-2"
         >
-          Create Category
+          Creér une categorie
         </BaseButton>
       </div>
 
@@ -131,7 +131,7 @@ const ManageCategoriesPage: React.FC = () => {
                 <div key={category.categoryId} className="bg-white shadow-dark-transparent shadow-md w-full max-w-[32rem] xl:max-w-[24rem] rounded-lg border border-dark-variant p-4 flex flex-col gap-2 items-start">
                   <h2 className="text-2xl text-dark/70 text-left font-semibold mb-2">{category.categoryName}</h2>
                   <p className="text-dark text-sm">
-                    Created: {new Date(category.createdAt).toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'})}
+                    Créée: {new Date(category.createdAt).toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'})}
                   </p>
                   <div className="flex items-center justify-between gap-2 p-2 w-full">
                     <BaseButton
@@ -140,18 +140,18 @@ const ManageCategoriesPage: React.FC = () => {
                       rounded={false}
                       className="!px-3 !py-1"
                     >
-                      Edit
+                      Modifier
                     </BaseButton>
                     {!category.disabled ?
                       <BaseButton clickHandler={() => openDeleteModal(category)} rounded={false} type={buttonType.clear}
                         className="!bg-red-500 !border-red-400  text-white !px-3 !py-1"
                       >
-                        Delete
+                        Desactiver
                       </BaseButton> :
                       <BaseButton clickHandler={() => handleEnableCategory(category)} rounded={false}
                         className=" text-white !px-3 !py-1"
                       >
-                        Enable
+                        Activer
                       </BaseButton>
                     }
                   </div>
@@ -159,7 +159,7 @@ const ManageCategoriesPage: React.FC = () => {
               )
             }
           </> :
-          <p className="col-span-full text-center text-gray-500">No categories found.</p>
+          <p className="col-span-full text-center text-gray-500">Pas de catégories</p>
         }
       </div>
 
@@ -201,14 +201,14 @@ const ManageCategoriesPage: React.FC = () => {
       {(isDeleteModalOpen && selectedCategory) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
           <div className="bg-white rounded px-6 py-4 w-full max-w-[24rem]">
-            <h2 className="text-xl font-semibold mb-4"> You're about to delete <span className="text-dark/80 font-bold">{selectedCategory.categoryName}</span> </h2>
+            <h2 className="text-xl font-semibold mb-4"> Voulez-vous désactiver <span className="text-dark/80 font-bold">{selectedCategory.categoryName}</span> ? </h2>
             <div className="flex items-center justify-between px-2 py-4">
               <BaseButton clickHandler={closeDeleteModal} type={buttonType.clear} submitType="button"
                 className="!px-4 !py-[0.4rem]" >
-                Cancel
+                Annuler
               </BaseButton>
               <BaseButton clickHandler={() => handleDelete(selectedCategory)} className="!px-4 !py-[0.4rem]">
-                Delete
+                Confirmer
               </BaseButton>
             </div>
           </div>

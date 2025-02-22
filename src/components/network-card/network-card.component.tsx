@@ -25,12 +25,12 @@ const NetworkCard = ({ className = "", member }: NetworkCardProps) => {
 
             <div className="flex flex-col gap-1 p-4 h-full ">
                 <h3 className="text-xl font-bold w-full text-left text-dark">{member.firstName} {member.lastName}</h3>
-                <p className="text-sm font-normal w-full text-left">{member.organisation}</p>
-                <div className="text-xs flex items-center gap-2 justify-start font-semibold text-dark/80 w-full text-left "> <span><CiLocationOn /></span> {member.location?.city}, {member.location?.country}</div>
+                <p className="text-xs font-extrabold text-dark/60 w-full text-left">{member.organisation}</p>
+                <div className="text-xs flex items-end gap-1 justify-start font-bold text-dark/80 w-full text-left "> <span><CiLocationOn className="text-lg text-dark" /></span> {member.location?.city}, {member.location?.country}</div>
                 <p className="text-sm font-normal w-full text-left "> {member.bio}</p>
                 <div className="flex items-center justify-start py-6 gap-x-4 gap-y-2 flex-wrap">
                     {member.tags && member.tags.map((tag, index) =>
-                        (<span key={index} className="text-xs font-semibold text-green px-3 py-1 rounded-xl w-fit bg-green-transparent min-w-fit">{tag}</span>)
+                        (<span key={index} className="text-xs font-bold text-green px-3 py-1 rounded-xl w-fit bg-green-transparent min-w-fit">{tag}</span>)
                     )
                     }
                 </div>

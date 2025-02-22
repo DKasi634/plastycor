@@ -149,7 +149,7 @@ export const LandingPageRoutes: routeType[] = [
     },
     {
         path: "/network",
-        label: "Notre Reseau",
+        label: "Notre Réseau",
         id: 'reseau'
     },
     {
@@ -406,11 +406,6 @@ export const trainingTestimonials: Testimonial[] = [
 ];
 
 
-export const userMenuItems:MenuItem[] = [
-    { label: "Profil", icon: <FiUser />, path:"profile", restricted:false},
-    { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations", restricted:false },
-    { label: "Admin", icon: <FiBarChart />, path:"admin", restricted:true },
-  ];
 
 
 
@@ -421,9 +416,16 @@ export enum ADMIN_ROUTE_PATHS {
     MANAGE_INNOVATIONS="/me/manage-innovations",
 }
 
-export const adminDashboardRoutes: DashBoardRoute[] = [
-    { label: "Manage Users", path: ADMIN_ROUTE_PATHS.MANAGE_USERS, icon: <AiOutlineUser />, description: "Oversee user profiles and permissions effortlessly." },
-    { label: "Manage Categories", path: ADMIN_ROUTE_PATHS.MANAGE_CATEGORIES, icon: <AiOutlineUnorderedList />, description: "Organize and update product categories with a click." },
-    { label: "Manage Products", path: ADMIN_ROUTE_PATHS.MANAGE_PRODUCTS, icon: <AiOutlineInbox />, description: "Add, edit, or remove products seamlessly in real-time." },
-    { label: "Manage Innovations", path: ADMIN_ROUTE_PATHS.MANAGE_INNOVATIONS, icon: <HiOutlineLightBulb />, description: "Manage innovations here " }
+export const userMenuItems:MenuItem[] = [
+    { label: "Profil", icon: <FiUser />, path:"profile", restricted:false},
+    { label: "Innovations", icon: <HiOutlineLightBulb />, path:"innovations", restricted:false },
+    { label: "Admin", icon: <FiBarChart />, path:"admin", restricted:true },
 ];
+
+export const adminDashboardRoutes: DashBoardRoute[] = [
+    { label: "Gérer les utilisateurs", path: ADMIN_ROUTE_PATHS.MANAGE_USERS, icon: <AiOutlineUser />, description: "Gérez les profils et les permissions des utilisateurs sans effort." },
+    { label: "Gérer les catégories", path: ADMIN_ROUTE_PATHS.MANAGE_CATEGORIES, icon: <AiOutlineUnorderedList />, description: "Mettez à jour les catégories de produits d'un simple clic." },
+    { label: "Gérer les produits", path: ADMIN_ROUTE_PATHS.MANAGE_PRODUCTS, icon: <AiOutlineInbox />, description: "Gérez les produits en temps réel." },
+    { label: "Gérer les innovations", path: ADMIN_ROUTE_PATHS.MANAGE_INNOVATIONS, icon: <HiOutlineLightBulb />, description: "Gérez les innovations ici." }
+];
+

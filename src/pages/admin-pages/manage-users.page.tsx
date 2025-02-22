@@ -60,17 +60,18 @@ const ManageUsersPage: React.FC = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Manage Users</h1>
+        <div className="container mx-auto py-4">
+            <h1 className="text-2xl font-bold mb-4">Gérer des utilisateurs</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {users.map((user) => (
                     <UserCard key={user.email} user={user} onUserUpdated={handleUserUpdated} />
                 )
                 )}
                 <div className="h-6" ref={lastUserRef}></div>
+                
             </div>
             {(loading && hasMore) && <div className='w-full py-8 px-4 flex items-center justify-center' ><LoaderItem className='!w-[2rem] !h-[2rem] !border-[0.2rem]'/></div>}
-            {!hasMore && <p className="text-center mt-4">No more users to load.</p>}
+            {/* {!hasMore && <p className="text-center mt-4">Il n'y a plus d'utilisateurs à charger.</p>} */}
             {(!currentUser && currentUserLoading) && <LoaderLayout />}
         </div>
     );

@@ -1,7 +1,7 @@
 
 import GenericImage from "../generic-image/generic-image.component"
 import { Blog } from "@/api/types"
-import { useEffect, useState } from "react"
+import { getFullDateFromIsostring } from "@/utils/index.utils"
 
 
 type BlogCardProps = {
@@ -10,10 +10,6 @@ type BlogCardProps = {
 }
 
 const BlogCard = ({ className = "", blog }: BlogCardProps) => {
-    const [publicationDate, setPublicationDate] = useState<Date>(new Date(blog.createdAt));
-    useEffect(() => {
-        setPublicationDate(new Date(blog.createdAt))
-    }, [blog])
 
     return (
         <div className={`${className} md:max-w-[20rem] flex flex-col items-start justify-start min-h-fit max-h-max p-[2px] rounded-lg border border-gray shadow-sm shadow-dark-transparent overflow-hidden pb-0`}>
@@ -31,7 +27,7 @@ const BlogCard = ({ className = "", blog }: BlogCardProps) => {
                 </div>
                 <span className="text-xs font-semibold text-dark text-left">{blogPublisher?.firstName} {blogPublisher?.lastName}</span>
             </div> */}
-            <div className="flex items-center justify-between text-sm gap-4 w-full py-4 px-8"><span className="font-bold">{publicationDate.getDate()}/{publicationDate.getMonth() + 1}/{publicationDate.getFullYear()}</span>
+            <div className="flex items-center justify-between text-sm gap-4 w-full py-4 px-8"><span className="font-bold">{getFullDateFromIsostring(blog.createdAt)}    </span>
                 <span className="font-semibold">{blog.views} vue{blog.views > 1 ? 's' : ''}</span>
             </div>
         </div>

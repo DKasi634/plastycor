@@ -20,10 +20,6 @@ const ManageProductsPage = () => {
     const fetchProducts = async () => {
         if (!hasMore) { return };
         setIsLoading(true)
-        // let containerFilter: QueryConstraint | null = null;
-        // if (OwnerView && currentUser) { containerFilter = where('ownerEmail', "==", currentUser.email)}
-        // if(AdminView && currentUser?.adminStatus === ADMIN_STATUS.MAIN_ADMIN){ containerFilter = null }
-
         try {
             const resultDocs = await fetchFirestoreProductsByChunk(queryLimit, null, lastDoc);
             if (resultDocs.length < queryLimit) { setHasMore(false) };
@@ -62,11 +58,11 @@ const ManageProductsPage = () => {
 
     return (
         <div className={`flex flex-col mx-auto py-4`}>
-            <h2 className="text-2xl md:text-3xl w-full text-center text-dark mb-4"> Manage products</h2>
+            <h2 className="text-2xl md:text-3xl w-full text-center text-dark mb-4"> Gérer des produits</h2>
             <div className="grid grid-cols-1 md:!flex md:!items-center md:!justify-start md:!flex-wrap gap-[1rem]">
             {(!isLoading && products.length) ?
                     products.map((product) => (
-                        <AdminProductCard className="md:!max-w-[15rem] "
+                        <AdminProductCard className="md:!max-w-[18rem] "
                             key={product.id}
                             product={product}
                         />

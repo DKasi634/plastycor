@@ -96,7 +96,7 @@ const SingleBlogPage = () => {
                             <span className="text-xs font-bold text-dark/80 text-left">{getFullDateFromIsostring(blog.createdAt)}</span>
                         </div>
                         {(currentUser && currentUser.email === blogPublisher?.email && ([ADMIN_STATUS.CO_ADMIN, ADMIN_STATUS.MAIN_ADMIN].some(val => val === blogPublisher.adminStatus))) &&
-                            <BaseButton type={buttonType.light} className="!fixed !bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/blogs/edit/${blog.id}`} > Edit <CiEdit className="text-xl ml-2" /></BaseButton>
+                            <BaseButton type={buttonType.light} className="!fixed !bottom-[4rem] !right-[3rem] !font-bold shadow-lg shadow-dark-transparent !border-gray" href={`/blogs/edit/${blog.id}`} > Modifier <CiEdit className="text-xl ml-2" /></BaseButton>
                         }
                     </div>
                 </div>

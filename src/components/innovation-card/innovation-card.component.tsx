@@ -112,9 +112,9 @@ const InnovationCard = ({ innovation, className = '', ownerView = false, adminVi
                 {(adminView) && <div className="flex items-center justify-between px-4 w-full">
                     <BaseButton className="!px-3 !py-[0.3rem] !text-xs" clickHandler={handleClick}> Voir </BaseButton>
                     {thisInnovation.disabled ?
-                        <BaseButton type={buttonType.clear} className="!px-3 !py-[0.3rem] !text-xs !text-green !border-green hover:!border-green" clickHandler={handleEnableInnovation} > Enable </BaseButton>
+                        <BaseButton type={buttonType.clear} className="!px-3 !py-[0.3rem] !text-xs !text-green !border-green hover:!border-green" clickHandler={handleEnableInnovation} > Activer </BaseButton>
                         :
-                        <BaseButton type={buttonType.clear} clickHandler={handleDisableInnovation} className="!px-3 !py-[0.3rem] !text-xs !text-red-500 !border-red-500 hover:!border-red-500 " > Disable </BaseButton>
+                        <BaseButton type={buttonType.clear} clickHandler={handleDisableInnovation} className="!px-3 !py-[0.3rem] !text-xs !text-red-500 !border-red-500 hover:!border-red-500 " > Désactiver </BaseButton>
                     }
                 </div>}
             </div>

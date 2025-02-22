@@ -13,8 +13,10 @@ export type RootState = {
     toast:ToastState
 }
 
+
+
 export const rootReducer = combineReducers({
-    auth:authReducer,
+    auth:authReducer, // Apply persistence and transforms
     categories:categoriesReducer,
     blogs:blogsReducer,
     innovations:innovationsReducer,

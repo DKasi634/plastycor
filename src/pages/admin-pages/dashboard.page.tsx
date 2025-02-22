@@ -8,7 +8,7 @@ const DashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen  p-10">
       <h1 className="text-3xl md:text-5xl font-bold text-center mb-10 text-gray-800 w-full">
-        Admin Dashboard
+        Tableau de bord Admin
       </h1>
       <div className="grid gap-8 md:grid-cols-3">
         {

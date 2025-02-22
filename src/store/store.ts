@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { rootReducer } from "./rootReducer";
 import { rootSaga } from "./rootSaga";
+import sessionExpirationMiddleware from "./middlewares";
 
 const persistConfig = {
   key: "root",
@@ -30,7 +31,8 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, REGISTER],
       },
-    }).concat(sagaMiddleware),
+    }).concat(sagaMiddleware)
+    .concat(sessionExpirationMiddleware),
     devTools:process.env.NODE_ENV !== 'production'
 });
 
@@ -40,8 +42,11 @@ export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 
-// store.subscribe(()=>{
-//   const state = store.getState();
-// console.log("\nAuth slice", state.auth)  
+persistor.subscribe(()=>{
+  console.log("\nPersistor triggered : ")
+})
+store.subscribe(()=>{
+  const state = store.getState();
+console.log("\nAuth slice", state.auth)  
 // console.log("\n Toast slice", state.toast)  
-// })
+})

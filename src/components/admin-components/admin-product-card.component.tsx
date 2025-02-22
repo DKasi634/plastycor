@@ -95,8 +95,8 @@ const AdminProductCard = ({ className = "", product }: AdminProductCardProps) =>
                 <div className="flex items-center gap-4 w-full justify-between">
                     <BaseButton clickHandler={handleClick} className="!px-3 !py-[0.2rem] !text-xs" rounded={false} type={buttonType.blue}>Voir</BaseButton>
                     {thisProduct.disabled ?
-                        <BaseButton clickHandler={handleEnable} className="!px-3 !py-[0.2rem] !text-xs" rounded={false} type={buttonType.green}>Enable</BaseButton> :
-                        <BaseButton clickHandler={handleDisable} className="!px-3 !py-[0.2rem] !text-xs" rounded={false} type={buttonType.clear}>Disable</BaseButton>
+                        <BaseButton clickHandler={handleEnable} className="!px-3 !py-[0.2rem] !text-xs" rounded={false} type={buttonType.green}>Activer</BaseButton> :
+                        <BaseButton clickHandler={handleDisable} className="!px-3 !py-[0.2rem] !text-xs" rounded={false} type={buttonType.clear}>Désactiver</BaseButton>
                     }</div>
             </div>
             </>
