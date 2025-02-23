@@ -41,9 +41,9 @@ const CreateEditBlogPage = () => {
     const handleSave = async(newBlog:Blog) =>{
         setLoading(true)
         const submittedBlog = await createOrUpdateBlog(newBlog);
-        if(submittedBlog){ dispatch(setSuccessToast("Completed !")); navigate(`/blogs/${submittedBlog.id}`) 
+        if(submittedBlog){ dispatch(setSuccessToast("Terminé !")); navigate(`/blogs/${submittedBlog.id}`) 
         }
-        else{dispatch(setErrorToast("Sorry, we could not complete this operation. Something went wrong !")) }
+        else{dispatch(setErrorToast("Desolé, quelque chose s'est mal passé !")) }
         setLoading(false)
 };
 

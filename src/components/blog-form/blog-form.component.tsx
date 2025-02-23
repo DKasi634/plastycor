@@ -80,11 +80,11 @@ const BlogForm = ({ initialData, onSubmit }: BlogFormProps) => {
         try {
             setIsSubmitting(true)
             if (!formData.title || !formData.content  || !(selectedImage || formData.image)) {
-                dispatch(setErrorToast("Please fill all the required fields")); throw new Error("Missing fields ")
+                dispatch(setErrorToast("Veiullez remplir tous les champs")); throw new Error("Missing fields ")
             }  
             if(selectedImage){
                 const uploadedBlogImage = await uploadImageToStorage(selectedImage, "Blogs");
-                if(!uploadedBlogImage){ dispatch(setErrorToast("Failed to upload image, check your network and try again !")); throw new Error("Failed to upload image !") };
+                if(!uploadedBlogImage){ dispatch(setErrorToast("Nous n'avons pas pu sauvegarder l'image, veuillez vérifier votre connexion puis reéssayer !")); throw new Error("Failed to upload image !") };
                 setFormData(prev => ({...prev, image:uploadedBlogImage}))
             }
             setFormData(prev => ({...prev, createdAt:new Date().toISOString()}))

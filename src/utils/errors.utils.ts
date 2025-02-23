@@ -1,115 +1,114 @@
 import { FirebaseError } from "firebase/app";
 
-
 export type AuthError = {
-    code?:string,
-    message:string
+    code?: string,
+    message: string
 }
 
-export type CustomError= {
-    name:string,
-    message:string
+export type CustomError = {
+    name: string,
+    message: string
 }
 
 export const getAuthError = (error: unknown): AuthError => {
-    
+
     if (error instanceof FirebaseError) {
         switch (error.code) {
             case "auth/user-not-found":
-                return { code: error.code, message: "User does not exist" };
+                return { code: error.code, message: "Utilisateur inexistant." };
 
             case "auth/wrong-password":
-                return { code: error.code, message: "Incorrect password" };
+                return { code: error.code, message: "Mot de passe incorrect." };
 
             case "auth/email-already-in-use":
-                return { code: error.code, message: "Email is already in use" };
+                return { code: error.code, message: "L'adresse e-mail est déjà utilisée." };
 
             case "auth/invalid-email":
-                return { code: error.code, message: "Invalid email address" };
+                return { code: error.code, message: "Adresse e-mail invalide." };
 
             case "auth/too-many-requests":
-                return { code: error.code, message: "Too many failed attempts. Please try again later." };
+                return { code: error.code, message: "Trop de tentatives échouées. Veuillez réessayer plus tard." };
 
-            case "auth/network-request-failed": 
-                return { code: error.code, message: "Network error. Please check your connection and try again." };
+            case "auth/network-request-failed":
+                return { code: error.code, message: "Erreur réseau. Veuillez vérifier votre connexion et réessayer." };
 
             case "auth/user-disabled":
-                return { code: error.code, message: "This account has been disabled by an administrator." };
+                return { code: error.code, message: "Ce compte a été désactivé par un administrateur." };
 
             case "auth/popup-closed-by-user":
-                return { code: error.code, message: "Popup closed before completing sign-in." };
+                return { code: error.code, message: "La fenêtre contextuelle a été fermée avant la fin de la connexion." };
+
             case "auth/popup-blocked":
-                return { code: error.code, message: "Popup blocked by the browser." };
+                return { code: error.code, message: "Fenêtre contextuelle bloquée par le navigateur." };
+
             case "auth/operation-not-allowed":
-                return { code: error.code, message: "This operation is not allowed. Please contact support." };
+                return { code: error.code, message: "Cette opération n'est pas autorisée. Veuillez contacter le support." };
 
             case "auth/requires-recent-login":
-                return { code: error.code, message: "Please log in again to perform this action." };
+                return { code: error.code, message: "Veuillez vous reconnecter pour effectuer cette action." };
 
             case "auth/credential-already-in-use":
-                return { code: error.code, message: "This credential is already associated with a different user account." };
+                return { code: error.code, message: "Ces identifiants sont déjà associés à un autre compte utilisateur." };
 
             case "auth/invalid-credential":
-                return { code: error.code, message: "The credential provided is invalid or has expired." };
+                return { code: error.code, message: "Les identifiants fournis sont invalides ou expirés." };
 
             case "auth/account-exists-with-different-credential":
-                return { code: error.code, message: "An account already exists with the same email but different credentials." };
+                return { code: error.code, message: "Un compte existe déjà avec le même e-mail mais avec des identifiants différents." };
 
             case "auth/invalid-verification-code":
-                return { code: error.code, message: "The verification code is invalid or expired." };
+                return { code: error.code, message: "Le code de vérification est invalide ou expiré." };
 
             case "auth/missing-verification-code":
-                return { code: error.code, message: "The verification code is missing." };
+                return { code: error.code, message: "Le code de vérification est manquant." };
 
             case "auth/missing-email":
-                return { code: error.code, message: "The email field is required but missing." };
+                return { code: error.code, message: "Le champ de l'adresse e-mail est requis mais manquant." };
 
             case "auth/internal-error":
-                return { code: error.code, message: "An internal error occurred. Please try again later." };
+                return { code: error.code, message: "Une erreur interne s'est produite. Veuillez réessayer plus tard." };
 
             case "auth/session-cookie-expired":
-                return { code: error.code, message: "Your session has expired. Please sign in again." };
+                return { code: error.code, message: "Votre session a expiré. Veuillez vous reconnecter." };
 
             case "auth/invalid-session-cookie":
-                return { code: error.code, message: "Your session cookie is invalid. Please sign in again." };
+                return { code: error.code, message: "Le cookie de session est invalide. Veuillez vous reconnecter." };
 
             case "auth/invalid-phone-number":
-                return { code: error.code, message: "The provided phone number is not valid." };
+                return { code: error.code, message: "Le numéro de téléphone fourni n'est pas valide." };
 
             case "auth/missing-phone-number":
-                return { code: error.code, message: "The phone number is required but missing." };
+                return { code: error.code, message: "Le numéro de téléphone est requis mais manquant." };
 
             case "auth/quota-exceeded":
-                return { code: error.code, message: "The quota for this operation has been exceeded. Please try later." };
+                return { code: error.code, message: "Le quota pour cette opération a été dépassé. Veuillez réessayer plus tard." };
 
             case "auth/unverified-email":
-                return { code: error.code, message: "The email address has not been verified." };
+                return { code: error.code, message: "L'adresse e-mail n'a pas été vérifiée." };
 
             case "auth/invalid-action-code":
-                return { code: error.code, message: "The action code is invalid or has expired." };
+                return { code: error.code, message: "Le code d'action est invalide ou expiré." };
 
             case "auth/expired-action-code":
-                return { code: error.code, message: "The action code has expired." };
+                return { code: error.code, message: "Le code d'action a expiré." };
 
             case "auth/missing-password":
-                return { code: error.code, message: "The password is required but missing." };
+                return { code: error.code, message: "Le mot de passe est requis mais manquant." };
 
             case "auth/weak-password":
-                return { code: error.code, message: "The password is too weak. Please use a stronger password." };
+                return { code: error.code, message: "Le mot de passe est trop faible. Veuillez utiliser un mot de passe plus fort." };
 
             default:
-                return { code: error.code, message: "An unexpected error occurred. Please try again later." };     
+                return { code: error.code, message: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard." };
         }
-    }
-    else{
-        return { message: "An unexpected error occurred" };
+    } else {
+        return { message: "Une erreur inattendue s'est produite." };
     }
 };
 
-export const getCustomError = (error:unknown):CustomError =>{
-    if(error instanceof Error){
-        return {name:error.name, message:error.message}
+export const getCustomError = (error: unknown): CustomError => {
+    if (error instanceof Error) {
+        return { name: error.name, message: error.message };
     }
-    return {name:'Unknown error', message:"An unkown error occurred!" }
-}
-
+    return { name: 'Erreur inconnue', message: "Une erreur inconnue s'est produite !" };
+};

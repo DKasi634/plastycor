@@ -3,8 +3,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCategoryStart,
-  updateCategoryStart,
-  deleteCategoryStart,
+  updateCategoryStart
 } from "@/store/categories/categories.actions";
 import { Category } from "@/api/types";
 import { selectCategories, selectCategoriesLoading } from "@/store/categories/categories.selector";
@@ -81,7 +80,7 @@ const ManageCategoriesPage: React.FC = () => {
     e.preventDefault();
 
     if (!formData.categoryName) {
-      dispatch(setErrorToast("The category name can not be empty !"))
+      dispatch(setErrorToast("Le nom de catégories ne peut rester vide !"))
         ; return
     }
     if (isEditing && selectedCategory) {
@@ -108,7 +107,7 @@ const ManageCategoriesPage: React.FC = () => {
   const handleDelete = (category: Category) => {
     setSelectedCategory(null)
     setIsDeleteModalOpen(false)
-    dispatch(deleteCategoryStart(category));
+    dispatch(updateCategoryStart({ ...category, disabled: false } as Category));
   };
 
   return (

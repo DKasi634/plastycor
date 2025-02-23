@@ -42,7 +42,7 @@ const EditProfilePage = () => {
     useEffect(()=>{
         if(tagsString){
             console.log("\nChanged Tags value : ", tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', '')))
-            setUserProfile(prev => ({ ...prev, tags: [...tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', ''))] } as IUser))
+            setUserProfile(prev => ({ ...prev, tags: [...tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', '')).slice(0, 3)] } as IUser))
         }
     }, [tagsString])
 

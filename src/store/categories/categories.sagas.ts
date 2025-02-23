@@ -23,50 +23,60 @@ function* fetchCategories(){
 function* createCategory({payload:category}:ActionWithPayload<CATEGORIES_ACTION_TYPES.CREATE_CATEGORY_START, Category>){
     try {
         const existingCategory:Category|null = yield call(getCategoryByName, category.categoryName);
-        if(existingCategory){ yield put(setErrorToast("A category with a similar name exists")); 
+        if(existingCategory){ yield put(setErrorToast("Une catégories avec un nom similaire existe")); 
             throw new Error("Failed to created category")}
         const createdCategory:Category|null = yield call(createOrUpdateCategory, {...category, createdAt:new Date().toISOString(), categoryId:new Date().getTime().toString()} as Category)
         
         if(!createdCategory){ throw new Error("Failed to created category") }
         yield put(createCategorySuccess(createdCategory));
-        yield put(setSuccessToast("Category created successfully !"));
+        yield put(setSuccessToast("Catégories créée avec succés !"));
     } catch (error) {
         // console.log("Could not create category due to : ", error)
         yield put(createCategoryFailure(error));
-        yield put(setErrorToast("Something went wrong ! Failed to create the category"));
+        yield put(setErrorToast("Quelque chose s'est mal passé !"));
     }
 }
 
-function* updateCategory({payload:category}:ActionWithPayload<CATEGORIES_ACTION_TYPES.CREATE_CATEGORY_START, Category>){
+function* updateCategory({ payload: category }: ActionWithPayload<CATEGORIES_ACTION_TYPES.CREATE_CATEGORY_START, Category>) {
     try {
-        const existingCategory:Category|null = yield call(getCategoryById, category.categoryId);
-        if(!existingCategory){ yield put(setErrorToast("This category doesn't exist")); 
-            throw new Error("Failed to update category")}
-        const updatedCategory:Category|null = yield call(createOrUpdateCategory, category)
-        
-        if(!updatedCategory){ throw new Error("Failed to update category") }
+        const existingCategory: Category | null = yield call(getCategoryById, category.categoryId);
+        if (!existingCategory) { 
+            yield put(setErrorToast("Cette catégorie n'existe pas")); 
+            throw new Error("Failed to update category");
+        }
+        const updatedCategory: Category | null = yield call(createOrUpdateCategory, category);
+
+        if (!updatedCategory) { 
+            throw new Error("Failed to update category"); 
+        }
         yield put(updateCategorySuccess(updatedCategory));
-        yield put(setSuccessToast("Category updated successfully !"));
+        yield put(setSuccessToast("Catégorie mise à jour avec succès !"));
     } catch (error) {
         yield put(updateCategoryFailure(error));
-        yield put(setErrorToast("Something went wrong ! Failed to update the category"));
+        yield put(setErrorToast("Une erreur est survenue ! Échec de la mise à jour de la catégorie."));
     }
 }
-function* deleteCategory({payload:category}:ActionWithPayload<CATEGORIES_ACTION_TYPES.CREATE_CATEGORY_START, Category>){
+
+function* deleteCategory({ payload: category }: ActionWithPayload<CATEGORIES_ACTION_TYPES.CREATE_CATEGORY_START, Category>) {
     try {
-        const existingCategory:Category|null = yield call(getCategoryById, category.categoryId);
-        if(!existingCategory){ yield put(setErrorToast("This category doesn't exist")); 
-            throw new Error("Failed to delete category")}
-        const deletedCategory:Category|null = yield call(disableCategory, category)
-        
-        if(!deletedCategory){ throw new Error("Failed to delete category") }
+        const existingCategory: Category | null = yield call(getCategoryById, category.categoryId);
+        if (!existingCategory) { 
+            yield put(setErrorToast("Cette catégorie n'existe pas")); 
+            throw new Error("Failed to delete category");
+        }
+        const deletedCategory: Category | null = yield call(disableCategory, category);
+
+        if (!deletedCategory) { 
+            throw new Error("Failed to delete category"); 
+        }
         yield put(deleteCategorySuccess(deletedCategory));
-        yield put(setSuccessToast("Category removed successfully !"));
+        yield put(setSuccessToast("Catégorie supprimée avec succès !"));
     } catch (error) {
         yield put(createCategoryFailure(error));
-        yield put(setErrorToast("Something went wrong ! Failed to delete the category"));
+        yield put(setErrorToast("Une erreur est survenue ! Échec de la suppression de la catégorie."));
     }
 }
+
 
 export function* watchCategoriesFetch(){
     yield takeLatest(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, fetchCategories)
