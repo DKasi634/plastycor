@@ -8,6 +8,7 @@ import { getFirestoreUserByEmail, getProductById } from "@/utils/firebase/firest
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import NotFoundPage from "./errors/not-found.page";
 
 
 // Define the Props type for the component
@@ -40,7 +41,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
             const owner = await getFirestoreUserByEmail(product?.ownerEmail);
             setProductOwner(owner)
         } catch (err) {
-            setErrorMessage("Failed to load product details.");
+            setErrorMessage("Quelque chose s'est mal passé.");
             setProductFound(false)
         } finally {
             setLoading(false);
@@ -56,7 +57,7 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
 
     return (
         <>
-            {product &&
+            {product?
                 <div className={`${className} min-h-screen flex justify-center bg-gray-100 py-8`}>
                     <div className="bg-white p-6 max-w-3xl w-full px-12">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">{product.name}</h1>
@@ -80,10 +81,11 @@ const SingleProductPage: React.FC<ProductPageProps> = ({ className = "" }) => {
                             <span className="text-xs font-bold text-gray text-left">{productOwner?.firstName} {productOwner?.lastName}</span>
                         </div>
                         {(currentUser && productOwner && productOwner.phoneNumber) &&
-                            <BaseButton href={`tel:${productOwner.phoneNumber}`} > Contact Owner</BaseButton>
+                            <BaseButton href={`tel:${productOwner.phoneNumber}`} > Contacter</BaseButton>
                         }
                     </div>
-                </div>
+                </div>:
+                <NotFoundPage/>
             }
             { (!productFound && !loading) &&
             <></>
