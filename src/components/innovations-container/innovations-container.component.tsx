@@ -44,9 +44,6 @@ const InnovationsContainer = ({ className = "", OwnerEmail, adminView=false}: In
             finally { setIsLoading(false) }
         }
     
-        useEffect(() => {
-            console.log("\Innovations changed : ", innovations)
-        }, [innovations])
     
         useEffect(() => {
             fetchInnovations()

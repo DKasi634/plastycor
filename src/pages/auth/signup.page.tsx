@@ -3,20 +3,24 @@ import PhoneNumberInput from "@/components/phone-number-input/phone-number-input
 import PasswordInput from "@/components/generic-input/password-input.component"; // Import the reusable PasswordInput
 import React, { useEffect, useState } from "react";
 import BaseButton, { buttonType } from "@/components/base-button/base-button.component";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAuthError, clearNavigateToSignIn, registerStart } from "@/store/auth/auth.actions";
 import { selectAuthError, selectAuthLoading, selectCurrentUser, selectNavigateToSignIn } from "@/store/auth/auth.selector";
 import { AuthError } from "@/utils/errors.utils";
 import LoaderLayout from "@/components/loader/loader-layout.component";
 import GoogleSigninButton from "@/components/base-button/google-button.component";
-import { nextRouteLocation } from "@/routes/auth-protected.route";
+// import { nextRouteLocation } from "@/routes/auth-protected.route";
 import { parsePhoneNumber } from "react-phone-number-input";
-// import { store } from "@/store/store";
+
+
+export type emailToVerifyState = {
+  userEmail:string
+}
 
 const SignUpPage: React.FC = () => {
 
-  const initialFormData = {firstName: "", lastName: "", email: "", phoneNumber: "", password: "", confirmPassword: ""}
+  const initialFormData = { firstName: "", lastName: "", email: "", phoneNumber: "", password: "", confirmPassword: "" }
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,22 +34,22 @@ const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialFormData);
 
-  const location = useLocation();
-  const nextLocation:nextRouteLocation = location.state;
+  // const nextLocation: nextRouteLocation = location.state;
   // console.log("\n State in signup : ", nextLocation)
 
 
-  useEffect(()=>{
-      if(currentUser){
-        navigate("/me/profile")
-      }
-    }, [currentUser])
-    
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/me/profile")
+    }
+  }, [currentUser])
+
   useEffect(() => {
     if (navigateToSignin) {
       setFormData(initialFormData);
       const timer = setTimeout(() => {
-        navigate("/signin", {state: nextLocation});
+        navigate("/verification-email-sent", {state: { userEmail:formData.email } as emailToVerifyState });
         dispatch(clearNavigateToSignIn())
       }, 4000);
       return () => clearTimeout(timer)
@@ -84,9 +88,14 @@ const SignUpPage: React.FC = () => {
         //   error = "Le numéro de téléphone est obligatoire."; // Phone number is required.
         //   break;
         // }
-        if(!parsePhoneNumber(value)?.isValid()){
-          error="Numero invalide";
+        try {
+          if (!parsePhoneNumber(value)?.isValid()) {
+            error = "Numero invalide";
+          }
+        } catch (error) {
+          error = "Numero invalide";
         }
+
         break;
       case "password":
         if (!value.trim()) {
@@ -139,7 +148,7 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-16 px-4">  
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-16 px-4">
       <div className="w-full max-w-md p-8 space-y-3 lg:rounded-xl bg-white lg:shadow-lg">
         <h2 className="text-2xl font-bold text-center">S'inscrire</h2> {/* Sign Up */}
         <form onSubmit={handleSubmit} className="space-y-4">

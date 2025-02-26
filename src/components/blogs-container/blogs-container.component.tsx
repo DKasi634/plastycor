@@ -41,10 +41,6 @@ const BlogsContainer: React.FC<ISection> = ({ className = "" }) => {
     }
 
     useEffect(() => {
-        console.log("\nBlogs changed : ", blogs)
-    }, [blogs])
-
-    useEffect(() => {
         fetchBlogs()
     }, [])
 

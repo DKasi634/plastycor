@@ -8,7 +8,7 @@ import {
   FaFacebookF,
   FaInstagram,
   FaRegHeart,
-  FaHeart
+  FaHeart, FaCheck
 } from "react-icons/fa";
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
@@ -75,6 +75,7 @@ export {
   FaFacebookF,
   FaInstagram,
   FaRegHeart,
+  FaCheck,
   FaHeart,
   PiHandshake,
   SiTarget,

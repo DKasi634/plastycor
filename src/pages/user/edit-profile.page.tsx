@@ -41,7 +41,7 @@ const EditProfilePage = () => {
 
     useEffect(()=>{
         if(tagsString){
-            console.log("\nChanged Tags value : ", tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', '')))
+            // console.log("\nChanged Tags value : ", tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', '')))
             setUserProfile(prev => ({ ...prev, tags: [...tagsString.split(" ").filter((tag, idx) => (tag.startsWith("#") && idx <= 3)).map(tag => tag.replace(',', '')).slice(0, 3)] } as IUser))
         }
     }, [tagsString])
@@ -56,11 +56,14 @@ const EditProfilePage = () => {
 
     const updateThisUser = async () => {
         if (!userProfile) { return }
-        console.log("\nStarted profile update : ", userProfile)
+        // console.log("\nStarted profile update : ", userProfile)
         try {
             const updatedUser = await createOrUpdateFirestoreUser(userProfile);
             if (updatedUser) { dispatch(setCurrentUser(updatedUser.email)); navigate("/me/profile") }
-        } catch (error) { console.log("Error updating profile as : ", error) }
+        } catch (error) { 
+            setError("Quelque chose a mal tourné, veuillez ressayer plus tart")
+            // console.log("Error updating profile as : ", error) 
+        }
         finally { setIsUpdating(false) }
     }
 
@@ -74,7 +77,7 @@ const EditProfilePage = () => {
             try {
                 if (!parsePhoneNumber(userProfile.phoneNumber).isValid()) { setError("Numéro de teléphone invalide"); throw new Error("Invalid phone number") }
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 setError("Veuillez entre un numéro de teléphone valide"); setIsUpdating(false); return
             }
             if (!userProfile.organisation?.trim()) { setError("Organisation ou communauté requise"); throw new Error("Invalid organisation") }

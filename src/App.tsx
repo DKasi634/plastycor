@@ -15,7 +15,7 @@ import Toast from './components/toast/toast.component'
 import ProfilePage from './pages/user/profile.page'
 import { useEffect } from 'react'
 import { onAuthStateChangedListener } from './utils/firebase/firebase.auth'
-import { setCurrentUser } from './store/auth/auth.actions'
+import {  setCurrentUser } from './store/auth/auth.actions'
 import { useDispatch } from 'react-redux'
 import UserProfileNavigation from './routes/user-navigation/user-navigation.route'
 import AuthProtectedRoute from './routes/auth-protected.route'
@@ -40,6 +40,8 @@ import SingleInnovationPage from './pages/single-innovation.page'
 import EditProfilePage from './pages/user/edit-profile.page'
 import MyInnovationsPage from './pages/user/my-innovations.page'
 import ManageInnovationsPage from './pages/admin-pages/manage-innovations.page'
+import VerificationEmailSentPage from './pages/auth/verification-email-sent.page'
+import VerifyEmailPage from './pages/auth/verify-email.page'
 
 const App = () => {
 
@@ -50,7 +52,8 @@ const App = () => {
       try {
         onAuthStateChangedListener(async (userAuth) => {
           // console.log("\nAuth state changed : ", userAuth)
-          if (userAuth && userAuth.email) { dispatch(setCurrentUser(userAuth.email)) }
+          if (userAuth && userAuth.email && userAuth.emailVerified) { 
+            dispatch(setCurrentUser(userAuth.email)); return }
         })
       } catch (error) { }
     }; return unsubscribe;
@@ -87,6 +90,8 @@ const App = () => {
           </Route>
           <Route path='signin' element={<SignInPage />} />
           <Route path='signup' element={<SignUpPage />} />
+          <Route path='verification-email-sent' element={<VerificationEmailSentPage />} />
+          <Route path='auth/action' element={<VerifyEmailPage />} />
           <Route path='product/:productId' element={<SingleProductPage />} />
 
         </Route>

@@ -7,6 +7,7 @@ import LoaderLayout from '../loader/loader-layout.component';
 import { clearToast, setErrorToast, setSuccessToast, ToastMessage } from '@/store/toast/toast.actions';
 import { useDispatch } from 'react-redux';
 import { HiOutlineMail, IoLocationOutline, MdOutlinePhoneEnabled } from '@/assets';
+import GenericInput from '../generic-input/generic-input.component';
 
 export const ContactSection = () => {
 
@@ -20,6 +21,7 @@ export const ContactSection = () => {
         message: ''
     }
 
+    const [formData, setFormData] = useState(initialFormData);
     useEffect(() => {
         if (toastMessage) {
             dispatch(toastMessage.type === "error"? setErrorToast(toastMessage.message):setSuccessToast(toastMessage.message))
@@ -30,9 +32,6 @@ export const ContactSection = () => {
             return () => clearTimeout(timer);
         }
     }, [toastMessage]);
-
-
-    const [formData, setFormData] = useState(initialFormData);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -54,7 +53,7 @@ export const ContactSection = () => {
         setIsSubmitting(true)
 
         try {
-            await axios.post("/.netlify/functions/send-email", formData);
+            await axios.post("/.netlify/functions/send-contact-email", formData);
             setToastMessage({message:"Message envoyé avec succès!", type:"success"});
             setFormData(initialFormData); // Reset form
         } catch (error) {
@@ -100,31 +99,26 @@ export const ContactSection = () => {
                     <aside className="bg-white px-8 py-4 rounded-xl shadow-sm xl:w-full xl:max-w-[40rem]">
                         <form className="space-y-2" onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor="name" className="block text-gray-700 mb-2 text-sm font-semibold">
-                                    Nom Complet
-                                </label>
-                                <input
+                                
+                                <GenericInput
+                                label='Nom Complet'
                                     type="text"
                                     id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-2 rounded-lg bg-gray-transparent focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                     placeholder="Jean Dupont"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="block text-gray-700 mb-2 text-sm font-semibold">
-                                    Adresse Email
-                                </label>
-                                <input
+                                <GenericInput
                                     type="email"
+                                    label='Adresse Email'
                                     id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-3 bg-gray-transparent rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                     placeholder="jean@exemple.com"
                                 />
                             </div>
@@ -139,7 +133,7 @@ export const ContactSection = () => {
                                     value={formData.message}
                                     onChange={handleInputChange}
                                     rows={4}
-                                    className="w-full px-4 py-3 bg-gray-transparent rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    className="w-full px-4 py-3 bg-gray-transparent rounded-lg text-sm"
                                     placeholder="Votre message..."
                                 ></textarea>
                             </div>

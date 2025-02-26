@@ -42,11 +42,8 @@ export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 
-persistor.subscribe(()=>{
-  console.log("\nPersistor triggered : ")
-})
-store.subscribe(()=>{
-  const state = store.getState();
-console.log("\nAuth slice", state.auth)  
+// store.subscribe(()=>{
+//   const state = store.getState();
+// console.log("\nAuth slice", state.auth)  
 // console.log("\n Toast slice", state.toast)  
-})
+// })

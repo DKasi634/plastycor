@@ -101,7 +101,11 @@ export const getAuthError = (error: unknown): AuthError => {
             default:
                 return { code: error.code, message: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard." };
         }
-    } else {
+    } 
+    else if (error instanceof Error) {
+        return {message: error.message };
+    }
+    else {
         return { message: "Une erreur inattendue s'est produite." };
     }
 };

@@ -89,7 +89,6 @@ export const logout = async (): Promise<void> => {
     }
     
   })
-  // return await signOut(auth);
 };
 
 export const signInWithGoogle = async (): Promise<UserCredential> => {
@@ -100,3 +99,41 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
 export const onAuthStateChangedListener = async (
   callback: (user: User | null) => Promise<void>
 ) => onAuthStateChanged(auth, callback);
+
+
+// export const sendCustomVerificationEmail = async (user:User):Promise<boolean> => {
+//   try {
+//     await sendEmailVerification(user);
+//     return true
+//   } catch (error) {
+//     console.log("Error sending verification email as : ", error)
+//     return false
+//   }
+// } 
+
+
+export const sendCustomVerificationEmail = async (email: string, displayName: string):Promise<boolean> => {
+  try {
+    const response = await fetch("/.netlify/functions/send-verification-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, displayName }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    await response.json();
+    // console.log("Verification email sent successfully:", data);
+    return true
+  } catch (error) {
+    console.error("Failed to send verification email:", error);
+    return false
+  }
+};
+

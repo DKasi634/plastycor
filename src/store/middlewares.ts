@@ -23,7 +23,7 @@ const sessionExpirationMiddleware: Middleware<{}, RootState> = (store) => (next)
     }
 
     sessionTimer = setTimeout(() => {
-      console.log("Session expired! Logging out...");
+      // console.log("Session expired! Logging out...");
       store.dispatch({ type: AUTH_ACTION_TYPES.LOGOUT_START });
     }, SESSION_TIMEOUT);
   } else {

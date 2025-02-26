@@ -2,19 +2,12 @@ import { Handler } from '@netlify/functions';
 import admin from 'firebase-admin';
 import * as dotenv from 'dotenv';
 import { NetlifyFunctionResponse } from "../../src/api/types"
+import { initializeAdminApp } from './send-verification-email';
 
 dotenv.config();
 
 // Initialize Firebase Admin only once
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY,
-    }),
-  });
-}
+initializeAdminApp()
 
 export const handler: Handler = async (event): Promise<NetlifyFunctionResponse> => {
   try {
