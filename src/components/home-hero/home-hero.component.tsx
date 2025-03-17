@@ -87,7 +87,7 @@ const HomeHero = () => {
               <>
                 <h1 className={`mb-12 text-5xl font-bold backdrop-opacity-95 ${currentImageIndex === 1?"text-sky-500": currentImageIndex === 2?"text-red-500":currentImageIndex === 3?"text-amber-400":"text-white" }`}>{HeroBlocs[currentImageIndex].department}</h1>
                 <p className="mb-8 text-xl">{HeroBlocs[currentImageIndex].description}</p>
-                <p className={`mb-8 text-xl px-4 py-2 rounded-xl bg-light w-fit mx-auto font-bold opacity-90 ${currentImageIndex === 1?"text-sky-500": currentImageIndex === 2?"text-red-500":currentImageIndex === 3?"text-amber-400":"text-white bg-dark-transparent" } `}>{HeroBlocs[currentImageIndex].slogan}</p>
+                <p className={`mb-8 text-xl px-4 py-2 rounded-xl ${ currentImageIndex === 0 ? "bg-dark-transparent":"bg-light"} w-fit mx-auto font-bold opacity-90 ${currentImageIndex === 1?"text-sky-500": currentImageIndex === 2?"text-red-500":currentImageIndex === 3?"text-amber-400":"text-white " } `}>{HeroBlocs[currentImageIndex].slogan}</p>
               </>
           <div className="flex justify-center gap-4">
             <BaseButton href='/shop' className='!py-3 !font-semibold !text-[1rem]' rounded={false} type={buttonType.green}> Découvrir Nos Créations </BaseButton>
