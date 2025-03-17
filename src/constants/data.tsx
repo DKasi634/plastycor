@@ -1,8 +1,41 @@
 import { ReactElement } from "react";
-
+import image1 from "@/assets/hero-min/image-fundraising.jpg"
+import image3 from "@/assets/hero-min/image-communication.jpg"
+import image4 from "@/assets/hero-min/image-network.jpg"
+import image5 from "@/assets/hero-min/hero-bins-street.jpg"
 import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTree, FiBarChart, FiUser, HiOutlineLightBulb, PiHandshake, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTrash, FiBarChart, FiUser, GiSwapBag, HiOutlineLightBulb, PiCityBold, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, RxTimer, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
+export type HeroBloc = {
+    department:string, description:string, slogan:string, image:string
+}
+
+export const HeroBlocs:HeroBloc[] = [
+    {
+    department:"Gestion, Collecte des Fonds et partenariats",
+    description:"Gérer efficacement les opérations, mobiliser des ressources financières stratégiques et établir des collaborations solides afin de maximiser l'impact et la durabilité des initiatives environnementales et sociales.",
+    slogan:"Innovation, Croissance et Impact pour un avenir durable",
+    image:image1
+},
+    {
+    department:"Collecte, Surcyclage et Sensibilisation",
+    description:"Rassembler efficacement les déchets, à les transformer en produits à forte valeur ajoutée et à sensibiliser les communautés à l'importance de la gestion durable des ressources pour un avenir plus respectueux de l’environnement",
+    slogan:"Chaque déchet a une seconde chance",
+        image:image5
+},
+    {
+    department:"Place de marché, marketing et communication",
+    description:"La promotion des produits et services issus de la valorisation des déchets, la création d'une plateforme de vente dynamique et le renforcement de la visibilité à travers des stratégies de communication innovantes.",
+    slogan:"Réinventons le marché ensemble pour un avenir durable",
+    image:image3
+},
+    {
+    department:"Académie et réseau",
+    description:"Former les communautés (femmes et jeunes) aux pratiques durables tout en renforçant un réseau d'acteurs engagés pour multiplier l'impact positif sur l'environnement et la société",
+    slogan:"Apprendre, Innover, Valoriser, Partager",
+    image:image4
+},
+]
 
 export type PrincipleData = {
     title: string,
@@ -89,19 +122,19 @@ export const teamMembers: TeamMember[] = [
 export const corePrinciples: PrincipleData[] = [
     {
         title: "Mission",
-        content: "Promouvoir le recyclage créatif et le développement durable à travers des solutions innovantes.",
+        content: "Notre mission est de transformer la gestion des déchets en République Démocratique du Congo (RDC) et dans les villes africaines, en promeuvant des systèmes durables qui intègrent la technologie numérique et l'engagement communautaire. Nous visons à stimuler le développement économique des jeunes et des femmes par le biais de l'économie circulaire, tout en créant un environnement plus propre et plus sain pour tous.",
         icon: <SiTarget />
     },
     {
         title: "Vision",
-        content: "Créer une RDC plus propre où chaque déchet devient une opportunité de création et d'innovation.",
+        content: "Notre vision est de devenir le leader en gestion durable des déchets en Afrique, où chaque ville bénéficie de solutions innovantes et inclusives. Nous imaginons un avenir où les communautés sont autonomes, les jeunes et les femmes sont économiquement prospères grâce à l'économie circulaire, et où la protection de l'environnement est au cœur des préoccupations de chacun.",
         icon: <TbBulb />
     },
-    {
-        title: "Valeurs",
-        content: "Innovation, durabilité, collaboration et engagement communautaire.",
-        icon: <PiHandshake />
-    }
+    // {
+    //     title: "Valeurs",
+    //     content: "Innovation, durabilité, collaboration et engagement communautaire.",
+    //     icon: <PiHandshake />
+    // }
 ];
 
 
@@ -109,19 +142,34 @@ export const corePrinciples: PrincipleData[] = [
 
 export const achievements: Achievement[] = [
     {
-        number: 5000,
-        label: "Arbres plantés",
-        icon: <FaTree />,
+        number: 510000,
+        label: "Déchets plastiques valorisées (bouteilles, sachets, sacs, babouches)",
+        icon: <FaTrash />,
     },
     {
-        number: 150,
-        label: "Communautés impactées",
+        number: 1000,
+        label: "Personnes formées",
         icon: <BsPeopleFill />,
     },
     {
-        number: 100,
-        label: "Tonnes de déchets recyclés",
+        number: 450,
+        label: "Tonnes des déchets urbains collectés",
         icon: <FaRecycle />,
+    },
+    {
+        number: 9,
+        label: "Ans d'engagement dans la protection de l'environnement",
+        icon: <RxTimer />,
+    },
+    {
+        number: 5,
+        label: "Villes congolaises avec agents et collaborateurs en action",
+        icon: <PiCityBold />,
+    },
+    {
+        number: 30000,
+        label: "Kg des déchets plastiques collectés",
+        icon: <GiSwapBag />,
     },
 ];
 

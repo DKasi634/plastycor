@@ -34,9 +34,6 @@ const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(initialFormData);
 
-  // const nextLocation: nextRouteLocation = location.state;
-  // console.log("\n State in signup : ", nextLocation)
-
 
 
   useEffect(() => {

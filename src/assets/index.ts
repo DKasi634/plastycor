@@ -13,6 +13,8 @@ import {
 import { PiHandshake } from "react-icons/pi";
 import { SiTarget } from "react-icons/si";
 import { TbBulb } from "react-icons/tb";
+
+
 import {
   FiUser,
   FiPackage,
@@ -22,6 +24,9 @@ import {
   FiLogIn,
   FiLogOut,
 } from "react-icons/fi";
+
+import { GiSwapBag } from "react-icons/gi";
+
 import { HiOutlineLightBulb, HiOutlineMail } from "react-icons/hi";
 import {
   IoLocationOutline,
@@ -29,10 +34,13 @@ import {
   IoClose,
   IoEyeOutline,
 } from "react-icons/io5";
+
+import { PiCityBold } from "react-icons/pi";
+
 import { MdOutlinePhoneEnabled, MdOutlinePhone } from "react-icons/md";
 import { CiLocationOn, CiMail, CiEdit } from "react-icons/ci";
 import { GoArrowUpRight } from "react-icons/go";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaTrash} from "react-icons/fa6";
 import { LiaTimesSolid } from "react-icons/lia";
 import { BiPlus } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
@@ -45,6 +53,7 @@ import {
   AiOutlineUnorderedList,
   AiOutlineInbox,
 } from "react-icons/ai";
+import { RxTimer } from "react-icons/rx";
 
 // Images
 import MissingItemImage from "@/assets/placeholder_image.png";
@@ -70,6 +79,7 @@ export {
   BsPeopleFill,
   FaRecycle,
   FaTree,
+  FaTrash,
   FaAngleLeft,
   FaAngleRight,
   FaFacebookF,
@@ -87,6 +97,8 @@ export {
   FiEyeOff,
   FiLogIn,
   FiLogOut,
+  PiCityBold,
+  GiSwapBag,
   HiOutlineLightBulb,
   HiOutlineMail,
   IoLocationOutline,
@@ -111,7 +123,7 @@ export {
   AiOutlineUser,
   AiOutlineUnorderedList,
   AiOutlineInbox,
-  
+  RxTimer,
 
   // Images
   MissingItemImage,
