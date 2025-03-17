@@ -44,9 +44,9 @@ const PostInnovationForm = ({ className = "", initialInnovation }: InnovationFor
     }, [error])
     useEffect(() => {
         const createInnovation = async () => {
-            if (!thisInnovation) { return };
+            if (!thisInnovation) { setIsSubmitting(false); return };
             // console.log("\nThe innovation to create or update : ", thisInnovation);
-            setIsSubmitting(false);
+            setIsSubmitting(true);
             const createdInnovation = await createOrUpdateInnovation(thisInnovation);
             // console.log("The created or updated innovation : ", createdInnovation)
             setIsSubmitting(false);

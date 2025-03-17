@@ -82,8 +82,7 @@ const HomeHero = () => {
       {/* Content */}
       <div className="relative flex h-full items-center justify-center text-center text-white">
         <div className="max-w-5xl px-4">
-          {/* <h1 className="mb-6 text-5xl font-bold">Plastique Recyclé : Créer, Innover, Préserver</h1>
-          <p className="mb-8 text-xl">Chaque bouteille, sac ou emballage devient une opportunité de créer l'extraordinaire. Découvrez comment nous valorisons le plastique autrement</p> */}
+          
               <>
                 <h1 className={`mb-12 text-5xl font-bold backdrop-opacity-95 ${currentImageIndex === 1?"text-sky-500": currentImageIndex === 2?"text-red-500":currentImageIndex === 3?"text-amber-400":"text-white" }`}>{HeroBlocs[currentImageIndex].department}</h1>
                 <p className="mb-8 text-xl">{HeroBlocs[currentImageIndex].description}</p>

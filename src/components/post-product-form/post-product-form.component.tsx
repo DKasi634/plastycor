@@ -45,9 +45,9 @@ const PostProductForm = ({ className = "", initialProduct }: PostFormProps) => {
     }, [error])
     useEffect(() => {
         const createProduct = async () => {
-            if (!thisProduct) { return };
+            if (!thisProduct) {setIsSubmitting(false); return };
             // console.log("\nThe product to create or update : ", thisProduct);
-            setIsSubmitting(false);
+            setIsSubmitting(true);
             const createdProduct = await createOrUpdateProduct(thisProduct);
             // console.log("The created or updated product : ", createdProduct)
             setIsSubmitting(false);

@@ -107,7 +107,7 @@ const ManageCategoriesPage: React.FC = () => {
   const handleDelete = (category: Category) => {
     setSelectedCategory(null)
     setIsDeleteModalOpen(false)
-    dispatch(updateCategoryStart({ ...category, disabled: false } as Category));
+    dispatch(updateCategoryStart({ ...category, disabled: true } as Category));
   };
 
   return (
