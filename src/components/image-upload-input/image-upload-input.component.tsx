@@ -106,7 +106,7 @@ const ImageUploadFormGroup = forwardRef<
             const blobUrl = URL.createObjectURL(new File([compressedFile], file.name, { type: file.type }));
             newSelectedImages.push({ file: new File([compressedFile], file.name, { type: file.type }), url: blobUrl });
           } catch (error) {
-            console.error("Compression failed:", error);
+            // console.error("Compression failed:", error);
             showErrorToast("Échec de la compression de l'image. Veuillez réessayer.");
           }
         } else {

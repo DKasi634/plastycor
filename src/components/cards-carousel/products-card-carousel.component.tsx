@@ -63,7 +63,7 @@ const ProductsCarousel = React.memo(({ className = '' }: ProductsCarouselProps) 
           }
       }
     } catch (error) {
-      console.error('Error fetching carousel products :', error);
+      // console.error('Error fetching carousel products :', error);
     } finally {
       setLoading(false);
     }

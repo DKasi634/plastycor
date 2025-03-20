@@ -92,7 +92,7 @@ export const ContactSection = () => {
                         <div className="flex flex-col items-start justify-start gap-2 ">
                             <div className="flex items-center justify-start gap-4"><HiOutlineMail className="text-xl text-blue-secondary" /> <h3 className="text-lg font-semibold">Email</h3></div>
                             <p className="text-dark-variant text-xs font-semibold">
-                                plastycor.rdc@gmail.com &nbsp; &nbsp;
+                            info@plastycor.org &nbsp; &nbsp;
                             </p>
                         </div>
                     </aside>
@@ -107,7 +107,7 @@ export const ContactSection = () => {
                                     name="name"
                                     value={formData.name}
                                     onChange={handleInputChange}
-                                    placeholder="Jean Dupont"
+                                    placeholder="Jordan Kibasu"
                                 />
                             </div>
 

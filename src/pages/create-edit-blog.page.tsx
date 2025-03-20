@@ -26,7 +26,7 @@ const CreateEditBlogPage = () => {
                         setBlogData(blog);
                     }
                 } catch (error) {
-                    console.error("Failed to fetch blog:", error);
+                    // console.error("Failed to fetch blog:", error);
                 } finally {
                     setLoading(false);
                 }

@@ -59,7 +59,7 @@ export const fetchFirestoreCoAdminsAndAdminsByChunk = async (queryLimit:number, 
     const docSnapshot = await getDocs(q);
     return docSnapshot.docs
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     return []
   }
 }

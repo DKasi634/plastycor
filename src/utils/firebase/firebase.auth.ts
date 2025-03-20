@@ -132,7 +132,7 @@ export const sendCustomVerificationEmail = async (email: string, displayName: st
     // console.log("Verification email sent successfully:", data);
     return true
   } catch (error) {
-    console.error("Failed to send verification email:", error);
+    // console.error("Failed to send verification email:", error);
     return false
   }
 };

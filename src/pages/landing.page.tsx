@@ -8,9 +8,16 @@ import TeamSection from '@/components/team-section/team-section.component'
 import TestimonialsSection from '@/components/testimonials-section/testimonials-section.component'
 import { YouTubePlayer } from '@/components/youtube-player/youtube-player.component'
 import { productsTestimonials } from '@/constants/data'
+import { useEffect } from 'react'
 
 
 const LandingPage = () => {
+
+  useEffect(()=>{
+    scrollTo({
+      top:0, behavior:"smooth"
+    })
+  }, [])
 
     const youtubeVideoId = "Ln09F8ElLT4"
   return (

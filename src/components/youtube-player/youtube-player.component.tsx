@@ -16,8 +16,8 @@ export const YouTubePlayer = ({ videoId, className = "" }: YouTubePlayerProps) =
         },
     };
 
-    const onError = (event: any) => {
-        console.error("YouTube Player Error:", event.data);
+    const onError = (_: any) => {
+        // console.error("YouTube Player Error:", event.data);
     };
 
     return (

@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
-import image1 from "@/assets/hero-min/image-fundraising.jpg"
-import image3 from "@/assets/hero-min/image-communication.jpg"
+
 import image4 from "@/assets/hero-min/image-network.jpg"
 import image5 from "@/assets/hero-min/hero-bins-street.jpg"
 import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
@@ -11,24 +10,24 @@ export type HeroBloc = {
 }
 
 export const HeroBlocs:HeroBloc[] = [
-    {
-    department:"Gestion, Collecte des Fonds et partenariats",
-    description:"Gérer efficacement les opérations, mobiliser des ressources financières stratégiques et établir des collaborations solides afin de maximiser l'impact et la durabilité des initiatives environnementales et sociales.",
-    slogan:"Innovation, Croissance et Impact pour un avenir durable",
-    image:image1
-},
+//     {
+//     department:"Gestion, Collecte des Fonds et partenariats",
+//     description:"Gérer efficacement les opérations, mobiliser des ressources financières stratégiques et établir des collaborations solides afin de maximiser l'impact et la durabilité des initiatives environnementales et sociales.",
+//     slogan:"Innovation, Croissance et Impact pour un avenir durable",
+//     image:image1
+// },
     {
     department:"Collecte, Surcyclage et Sensibilisation",
     description:"Rassembler efficacement les déchets, à les transformer en produits à forte valeur ajoutée et à sensibiliser les communautés à l'importance de la gestion durable des ressources pour un avenir plus respectueux de l’environnement",
     slogan:"Chaque déchet a une seconde chance",
         image:image5
 },
-    {
-    department:"Place de marché, marketing et communication",
-    description:"La promotion des produits et services issus de la valorisation des déchets, la création d'une plateforme de vente dynamique et le renforcement de la visibilité à travers des stratégies de communication innovantes.",
-    slogan:"Réinventons le marché ensemble pour un avenir durable",
-    image:image3
-},
+//     {
+//     department:"Place de marché, marketing et communication",
+//     description:"La promotion des produits et services issus de la valorisation des déchets, la création d'une plateforme de vente dynamique et le renforcement de la visibilité à travers des stratégies de communication innovantes.",
+//     slogan:"Réinventons le marché ensemble pour un avenir durable",
+//     image:image3
+// },
     {
     department:"Académie et réseau",
     description:"Former les communautés (femmes et jeunes) aux pratiques durables tout en renforçant un réseau d'acteurs engagés pour multiplier l'impact positif sur l'environnement et la société",

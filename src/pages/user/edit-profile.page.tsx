@@ -92,7 +92,7 @@ const EditProfilePage = () => {
             }
             setCanUpdate(true)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             setIsUpdating(false)
 
         } finally { }
