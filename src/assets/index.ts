@@ -66,7 +66,7 @@ import ActivityImage1 from "@/assets/activities/recyclage_2.jpg";
 import ActivityImage2 from "@/assets/activities/sensibilisation.jpg";
 import ActivityImage3 from "@/assets/activities/activity-3.jpg";
 import ActivityImage4 from "@/assets/activities/formation.jpg";
-import ActivityImage5 from "@/assets/activities/activity-5.jpg";
+import ActivityImage5 from "@/assets/activities/accompagnement.jpg";
 import TeamMember0 from "@/assets/team/team-ceo-1.jpg";
 import TeamMember1 from "@/assets/team/team--woman-1.jpg";
 import TeamMember2 from "@/assets/team/team--woman-2.jpg";
