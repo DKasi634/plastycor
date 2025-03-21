@@ -76,11 +76,12 @@ const ActivitiesCarousel: React.FC<ActivitiesCarouselCardProps> = ({ activities,
                         className="flex items-center justify-center w-full min-w-[100%] sm:min-w-[100%] lg:w-1/2 lg:min-w-[51%]" // Responsive width
                     >
                         <Card className="!w-full !max-w-[28rem]">
+                            <div className="w-full h-64 rounded-lg overflow-hidden">
                             <GenericImage
                                 src={activity.image}
                                 alt={activity.title}
-                                className="w-full object-cover object-center rounded-lg"
-                            />
+                                className="w-full h-full object-cover object-center"/>
+                            </div>
                             <h3 className="my-3 text-xl font-bold line-clamp-1 w-full text-center">
                                 {activity.title}
                             </h3>

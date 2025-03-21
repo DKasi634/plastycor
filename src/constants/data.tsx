@@ -3,7 +3,8 @@ import { ReactElement } from "react";
 import image4 from "@/assets/hero-min/image-network.jpg"
 import image5 from "@/assets/hero-min/hero-bins-street.jpg"
 import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
-import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTrash, FiBarChart, FiUser, GiSwapBag, HiOutlineLightBulb, PiCityBold, ProductImage1, ProductImage2, ProductImage3, ProductImage4, ProductImage5, RxTimer, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
+import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, 
+    AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTrash, FiBarChart,FiUser, GiSwapBag, HiOutlineLightBulb, PiCityBold, RxTimer, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
 
 export type HeroBloc = {
     department:string, description:string, slogan:string, image:string
@@ -217,96 +218,6 @@ export const LandingPageRoutes: routeType[] = [
 
 ]
 
-
-
-
-export const products: Product[] = [
-    {
-        id: '1',
-        name: "Recycled Plastic Chair",
-        image: ProductImage1,
-        category: "Mobilier",
-        owner: {
-            name: "John Doe",
-            image: TeamMember1,
-            organisation: "Eco Innovators",
-            location: { city: "London", country: "UK" },
-            bio: "Sustainability advocate and expert in environmental policy.",
-            skills: ["Policy Development", "Public Speaking", "Research"],
-            phoneNumber: "+44 123 456 789"
-        },
-        description: "Ergonomic outdoor chair made from 100% recycled plastic bottles. Weather-resistant and durable.",
-        price: 89.99
-    },
-    {
-        id: '2',
-        name: "Upcycled Art Sculpture",
-        image: ProductImage2,
-        category: "Mobilier",
-        owner: {
-            name: "Aminata Diallo",
-            image: TeamMember3,
-            organisation: "Clean Earth",
-            location: { city: "Dakar", country: "Senegal" },
-            bio: "Environmental activist focused on waste recovery and ocean conservation.",
-            skills: ["Ocean Cleanup", "Waste Recovery", "Advocacy"],
-            phoneNumber: "+221 33 123 456"
-        },
-        description: "Unique wall art crafted from reclaimed plastic waste. Each piece is one-of-a-kind.",
-        price: 149.99
-    },
-    {
-        id: '3',
-        name: "Eco-Friendly Side Table",
-        image: ProductImage3,
-        category: "Mobilier",
-        owner: {
-            name: "John Doe",
-            image: TeamMember1,
-            organisation: "Eco Innovators",
-            location: { city: "London", country: "UK" },
-            bio: "Sustainability advocate and expert in environmental policy.",
-            skills: ["Policy Development", "Public Speaking", "Research"],
-            phoneNumber: "+44 123 456 789"
-        },
-        description: "Modern side table made from recycled HDPE plastic. Lightweight yet sturdy.",
-        price: 129.99
-    },
-    {
-        id: '4',
-        name: "Recycled Plastic Lumber",
-        image: ProductImage4,
-        category: "Mobilier",
-        owner: {
-            name: "Aminata Diallo",
-            image: TeamMember3,
-            organisation: "Clean Earth",
-            location: { city: "Dakar", country: "Senegal" },
-            bio: "Environmental activist focused on waste recovery and ocean conservation.",
-            skills: ["Ocean Cleanup", "Waste Recovery", "Advocacy"],
-            phoneNumber: "+221 33 123 456"
-        },
-        description: "Durable building material made from post-consumer plastic. Perfect for outdoor projects.",
-        price: 24.99
-    },
-    {
-        id: '5',
-        name: "Ocean Plastic Bird Feeder",
-        image: ProductImage5,
-        category: "Mobilier",
-        owner: {
-            name: "John Doe",
-            image: TeamMember1,
-            organisation: "Eco Innovators",
-            location: { city: "London", country: "UK" },
-            bio: "Sustainability advocate and expert in environmental policy.",
-            skills: ["Policy Development", "Public Speaking", "Research"],
-            phoneNumber: "+44 123 456 789"
-        },
-        description: "Eco-friendly bird feeder made from collected ocean plastics. Helps support marine cleanup.",
-        price: 39.99
-    },
-];
 
 export const activities: Activity[] = [
     {
