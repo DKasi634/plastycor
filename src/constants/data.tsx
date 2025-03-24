@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
-import image4 from "@/assets/hero-min/image-network.jpg"
-import image5 from "@/assets/hero-min/hero-bins-street.jpg"
+import heroAcademyImage from "@/assets/hero-min/academy_network.jpg"
+import heroUpcyclingImage from "@/assets/hero-min/upcycling.jpg"
 import { Activity, Creator, DashBoardRoute, MenuItem, Testimonial } from "@/types";
 import { ActivityImage1, ActivityImage2, ActivityImage3, ActivityImage4, ActivityImage5, AiOutlineInbox, 
     AiOutlineUnorderedList, AiOutlineUser, BsPeopleFill, FaRecycle, FaTrash, FiBarChart,FiUser, GiSwapBag, HiOutlineLightBulb, PiCityBold, RxTimer, SiTarget, TbBulb, TeamMember0, TeamMember1, TeamMember2, TeamMember3, TeamMember4 } from "@/assets";
@@ -21,7 +21,7 @@ export const HeroBlocs:HeroBloc[] = [
     department:"Collecte, Surcyclage et Sensibilisation",
     description:"Rassembler efficacement les déchets, à les transformer en produits à forte valeur ajoutée et à sensibiliser les communautés à l'importance de la gestion durable des ressources pour un avenir plus respectueux de l’environnement",
     slogan:"Chaque déchet a une seconde chance",
-        image:image5
+        image:heroUpcyclingImage
 },
 //     {
 //     department:"Place de marché, marketing et communication",
@@ -33,7 +33,7 @@ export const HeroBlocs:HeroBloc[] = [
     department:"Académie et réseau",
     description:"Former les communautés (femmes et jeunes) aux pratiques durables tout en renforçant un réseau d'acteurs engagés pour multiplier l'impact positif sur l'environnement et la société",
     slogan:"Apprendre, Innover, Valoriser, Partager",
-    image:image4
+    image:heroAcademyImage
 },
 ]
 

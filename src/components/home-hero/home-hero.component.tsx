@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback, TouchEvent } from 'react';
-// import image1 from "@/assets/hero-min/hero-bins-street.jpg"
-// import image2 from "@/assets/hero-min/hero-bottles.jpg"
-// import image3 from "@/assets/hero-min/hero-red-covered-bottles.jpg"
+
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import BaseButton, { buttonType } from '../base-button/base-button.component';
 import { GoArrowUpRight } from 'react-icons/go';
@@ -9,16 +7,10 @@ import { LandingHeroSection } from '@/styles/globals.styles';
 import { HeroBlocs } from '@/constants/data';
 
 
-// Define image URLs (replace with your own)
-// const HeroBlocs = [
-//     image1,image2, image3
-// ];
-
 const HomeHero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
-  // Auto-cycle images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HeroBlocs.length);
@@ -71,7 +63,7 @@ const HomeHero = () => {
             key={index}
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100  backdrop-contrast-200' : 'opacity-0'
               }`}
-            style={{ backgroundImage: `url(${bloc.image})` }}
+            style={{ backgroundImage: `url(${bloc.image})`, backgroundPosition:"center", backgroundSize:"cover" }}
           />
         ))}
       </div>
