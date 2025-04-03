@@ -2,6 +2,7 @@
 import GenericImage from "../generic-image/generic-image.component"
 import { Blog } from "@/api/types"
 import { getFullDateFromIsostring } from "@/utils/index.utils"
+import DOMPurify from 'dompurify'
 
 
 type BlogCardProps = {
@@ -11,6 +12,8 @@ type BlogCardProps = {
 
 const BlogCard = ({ className = "", blog }: BlogCardProps) => {
 
+    const blogContent = DOMPurify.sanitize(blog.content)
+
     return (
         <div className={`${className} md:max-w-[20rem] flex flex-col items-start justify-start min-h-fit max-h-max p-[2px] rounded-lg border border-gray shadow-sm shadow-dark-transparent overflow-hidden pb-0`}>
             <div className="w-full h-[16rem] md:h-[20rem] mb-4 rounded-lg overflow-hidden"> <GenericImage loading="lazy" src={blog.image} alt={blog.title} className="w-full h-full object-cover object-center" /> </div>
@@ -18,7 +21,7 @@ const BlogCard = ({ className = "", blog }: BlogCardProps) => {
             <div className="flex flex-col items-center justify-start gap-3 p-4">
                 <div className="flex flex-col w-full h-fit gap-3 ">
                     <h3 className="text-lg font-semibold text-left w-full line-clamp-1 ">{blog.title}</h3>
-                    <p className="text-sm font-normal text-left w-full line-clamp-3 min-h-[max-content]">{blog.content}</p>
+                    <div className="text-sm font-normal text-left w-full line-clamp-3 min-h-[max-content]" dangerouslySetInnerHTML={{__html:blogContent}}/>
                 </div>
             </div>
             {/* <div className="flex items-center justify-start gap-1 w-fit">

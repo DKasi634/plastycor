@@ -14,6 +14,7 @@ const CreateEditBlogPage = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+  
 
     // Fetch blog data if in edit mode
     useEffect(() => {
@@ -51,11 +52,10 @@ const CreateEditBlogPage = () => {
         <div className="min-h-screen flex justify-center bg-gray-100 px-8 py-16">
             <div className="max-w-4xl w-full space-y-8 mx-auto">
                 <h1 className="text-3xl font-bold text-dark/70 w-full text-center">
-                    {blogId ? "Edit Blog" : "Create New Blog"}
+                    {blogId ? "Modifier un Blog" : "Créer un Blog"}
                 </h1>
                 <div className="flex flex-col gap-8">
                     <BlogForm initialData={blogData} onSubmit={handleSave} />
-                    {/* <BlogPreview blog={blogData} /> */}
                 </div>
             </div>
             { loading && <LoaderLayout/> }

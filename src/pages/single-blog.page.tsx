@@ -5,6 +5,7 @@ import LoaderLayout from "@/components/loader/loader-layout.component";
 import { selectCurrentUser, selectAuthLoading } from "@/store/auth/auth.selector";
 import { setErrorToast } from "@/store/toast/toast.actions";
 import { getFirestoreUserByEmail, getBlogById } from "@/utils/firebase/firestore.utils";
+import DOMPurify from 'dompurify'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ import { CiEdit } from "react-icons/ci";
 import { getFullDateFromIsostring } from "@/utils/index.utils";
 import { selectReadBlogsIds } from "@/store/blogs/blogs.selector";
 import { readBlogStart } from "@/store/blogs/blogs.actions";
+
 
 
 const SingleBlogPage = () => {
@@ -32,7 +34,6 @@ const SingleBlogPage = () => {
     // const readBlogsIdsLoading = useSelector(selectReadBlogsLoading);
 
     const setErrorMessage = (error: string) => dispatch(setErrorToast(error));
-
 
     // Call to fetch blog data
     const fetchBlog = async (id: string) => {
@@ -84,9 +85,9 @@ const SingleBlogPage = () => {
                             />
                         </div>
 
-                        <p className="text-dark/80 text-sm font-semibold py-3 w-full text-center leading-7">{blog.content}</p>
+                        <div className="text-dark/80 text-sm font-semibold py-3 w-full leading-6" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(blog.content)}}/>
 
-                        <div className="flex items-center justify-start gap-4 mb-4 mt-2 w-full">
+                        <div className="flex items-center justify-start gap-4 mt-8 w-full">
                             <div className="flex items-center justify-start gap-1 w-fit">
                                 <div className="rounded-full aspect-square w-[1.5rem] overflow-hidden">
                                     <GenericImage loading="lazy" src={blogPublisher?.profilePicture} className="object-cover object-center w-full h-full" alt="" />
