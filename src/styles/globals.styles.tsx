@@ -48,7 +48,7 @@ export const GridContainerSm = styled.div`
 `
 export const GridContainerMd = styled.div`
     display: grid;
-    gap: 2rem 1rem;
+    gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); 
 `
 export const GridContainerLg = styled.div`

@@ -1,4 +1,4 @@
-import { SectionContainer, GridContainerMd } from '@/styles/globals.styles'
+import { SectionContainer } from '@/styles/globals.styles'
 import BlogCard from '../blog-card/blog-card.component'
 
 import BaseButton from '../base-button/base-button.component'
@@ -53,16 +53,16 @@ const BlogsContainer: React.FC<ISection> = ({ className = "" }) => {
                 <h3 className="text-4xl font-bold text-dark w-full text-center my-[3rem]">Nos derniers articles</h3>
                 <p className="text-lg text-dark w-full text-center my-[2rem]">Actualités et innovations en matière de recyclage créatif</p>
 
-                <GridContainerMd className="pb-4 !h-min">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:flex items-center justify-start flex-wrap gap-4 pb-4 !h-min">
                     {blogs.length ?
                         blogs.map(blog => (
-                            <Link className='w-fit h-fit' to={`/blogs/${blog.id}`} key={blog.id}>
-                                <BlogCard blog={blog} />
+                            <Link className='w-full lg:max-w-[18rem] h-fit ' to={`/blogs/${blog.id}`} key={blog.id}>
+                                <BlogCard className='!w-full !min-w-full' blog={blog} />
                             </Link>
                         )) :
                         <></>
                     }
-                </GridContainerMd>
+                </div>
                 {loading && <div className="w-full flex items-center justify-center py-4"> <LoaderItem /> </div>}
                 {hasMore &&
                     <div className="w-full flex items-center justify-center py-2"> <BaseButton clickHandler={fetchBlogs}> Voir plus ... </BaseButton> </div>
