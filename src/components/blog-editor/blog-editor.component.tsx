@@ -22,12 +22,12 @@ const BlogEditor= ({onChange, initialContent=""}:BlogEditorProps) => {
         height: 500,
         menubar: true,
         plugins: [
-          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount'
         ],
         toolbar:
           'undo redo | formatselect | bold italic backcolor | \
           alignleft aligncenter alignright alignjustify | \
-          bullist numlist outdent indent | removeformat | help',
+          bullist numlist outdent indent | removeformat ',
       }}
     
       onEditorChange={handleEditorChange}
