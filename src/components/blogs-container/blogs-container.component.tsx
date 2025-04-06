@@ -53,7 +53,7 @@ const BlogsContainer: React.FC<ISection> = ({ className = "" }) => {
                 <h3 className="text-4xl font-bold text-dark w-full text-center my-[3rem]">Nos derniers articles</h3>
                 <p className="text-lg text-dark w-full text-center my-[2rem]">Actualités et innovations en matière de recyclage créatif</p>
 
-                <div className=" grid grid-cols-1 md:grid-cols-2 lg:flex items-center justify-start flex-wrap gap-4 pb-4 !h-min">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:flex items-center justify-center flex-wrap gap-4 pb-4 !h-min">
                     {blogs.length ?
                         blogs.map(blog => (
                             <Link className='w-full lg:max-w-[18rem] h-fit ' to={`/blogs/${blog.id}`} key={blog.id}>

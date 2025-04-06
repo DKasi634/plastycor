@@ -71,7 +71,7 @@ const InnovationsContainer = ({ className = "", OwnerEmail, adminView=false}: In
 
     return (
         <div className={`${className} flex flex-col`}>
-            <GridContainerSm className="md:!flex md:!items-center md:!justify-start md:!flex-wrap">
+            <GridContainerSm className="md:!flex md:!items-center md:!justify-center md:!flex-wrap">
             {(!isLoading && innovations.length) ?
                     innovations.map((innovation) => (
                         <InnovationCard className="md:!max-w-[17rem] lg:!max-w-[18rem]"

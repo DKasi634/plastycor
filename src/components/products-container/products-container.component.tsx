@@ -82,7 +82,7 @@ const ProductsContainer = ({ className = "", OwnerView = false }: ProductsContai
 
     return (
         <div className={`${className} flex flex-col`}>
-            <GridContainerSm className="md:!flex md:!items-center md:!justify-start md:!flex-wrap">
+            <GridContainerSm className="md:!flex md:!items-center md:!justify-center md:!flex-wrap">
             {(!isLoading && products.length) ?
                     products.map((product) => (
                         <ProductCard className="md:!max-w-[17rem] lg:!max-w-[18rem]"
